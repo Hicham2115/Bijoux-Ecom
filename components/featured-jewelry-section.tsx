@@ -75,7 +75,7 @@ export function FeaturedJewelrySection() {
             <span aria-hidden="true" className="h-px w-10 bg-[#b99045] sm:w-14" />
             <h2
               id="featured-jewelry-title"
-              className="text-[10px] font-semibold uppercase tracking-[0.2em] sm:text-[12px]"
+              className="orelia-eyebrow"
             >
               Featured jewelry
             </h2>
@@ -120,11 +120,11 @@ export function FeaturedJewelrySection() {
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transition-none"
                   />
                 </div>
-                <h3 className="mt-3 text-[10px] font-semibold uppercase tracking-[0.12em] sm:mt-4 sm:text-[11px]">
+                <h3 className="orelia-eyebrow mt-3 sm:mt-4">
                   {product.name}
                 </h3>
               </div>
-              <p className="mt-1 font-serif text-[13px] text-[#5f5a51] sm:text-[14px]">
+              <p className="mt-1 font-serif text-[13px] leading-[1.5] text-[#5f5a51] sm:text-[14px]">
                 {product.detail}
               </p>
               <div className="mt-2 flex items-center justify-between gap-2 sm:mt-3">

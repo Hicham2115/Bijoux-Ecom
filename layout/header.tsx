@@ -24,7 +24,6 @@ export function Header() {
             ))}
           </div>
         </div>
-        <button className="shrink-0">United States (USD)⌄</button>
       </div>
       <Navbar />
     </>

@@ -2,6 +2,75 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+html {
+  scrollbar-color: #aa874b #eee8df;
+  scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #eee8df;
+}
+
+html::-webkit-scrollbar-thumb {
+  border: 2px solid #eee8df;
+  border-radius: 999px;
+  background: #aa874b;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #80622f;
+}
+
+@layer components {
+  .orelia-eyebrow {
+    @apply font-sans text-[10px] font-semibold uppercase tracking-[0.2em];
+    line-height: 1.4;
+  }
+
+  .orelia-heading {
+    @apply font-serif tracking-[-0.025em];
+    line-height: 1.02;
+  }
+
+  .orelia-copy {
+    @apply font-serif;
+    font-size: clamp(1rem, 1.3vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  .orelia-action {
+    @apply font-sans text-[10px] font-semibold uppercase tracking-[0.16em];
+  }
+
+  .footer-link {
+    position: relative;
+    display: inline-block;
+    transition: color 250ms ease;
+  }
+
+  .footer-link::after {
+    position: absolute;
+    right: 0;
+    bottom: -4px;
+    left: 0;
+    height: 1px;
+    background: #d0b36f;
+    content: "";
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 300ms ease;
+  }
+
+  .footer-link:hover::after,
+  .footer-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
 @keyframes announcement-marquee {
   to {
     transform: translateX(-50%);
@@ -43,6 +112,31 @@
   scroll-snap-align: start;
 }
 
+.faq-answer-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 280ms ease;
+}
+
+.faq-answer-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  transform: translateY(-5px);
+  transition: padding-bottom 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+details[open] .faq-answer-grid {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+details[open] .faq-answer-inner {
+  padding-bottom: 1.5rem;
+  transform: translateY(0);
+}
+
 @media (min-width: 640px) {
   .featured-jewelry-card {
     flex-basis: calc((100% - 2.5rem) / 3);
@@ -62,6 +156,16 @@
 
   .announcement-track > p:nth-child(2) {
     display: none;
+  }
+
+  .faq-answer-grid,
+  .faq-answer-inner {
+    transition: none;
+  }
+
+  .footer-link,
+  .footer-link::after {
+    transition: none;
   }
 }
 

@@ -79,12 +79,6 @@ export default function Component() {
       </a>
 
       <div className="flex items-center gap-3 sm:gap-5">
-        <a
-          href="#maison"
-          className="hidden text-[11px] font-medium uppercase tracking-[0.12em] text-white/90 transition-colors hover:text-[#d7b878] sm:block"
-        >
-          Maison
-        </a>
         <Button
           render={<a href="#collection" />}
           nativeButton={false}
@@ -95,16 +89,7 @@ export default function Component() {
         >
           <Search className="size-5" strokeWidth={1.5} />
         </Button>
-        <Button
-          render={<a href="#account" />}
-          nativeButton={false}
-          variant="ghost"
-          size="icon"
-          aria-label="Your account"
-          className="hidden size-8 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:inline-flex"
-        >
-          <UserRound className="size-5" strokeWidth={1.5} />
-        </Button>
+
         <Button
           render={<a href="#wishlist" />}
           nativeButton={false}
