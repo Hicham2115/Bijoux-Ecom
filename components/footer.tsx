@@ -75,7 +75,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-5 border-t border-[#f4f0e7]/20 py-7 text-[11px] text-[#f4f0e7]/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Orélia. All rights reserved.</p>
+          <p>© 2026 Orélia. All rights reserved.</p>
           <a
             href="mailto:concierge@orelia.com"
             className="hidden text-[#f4f0e7]/75 transition-colors hover:text-[#d0b36f] sm:inline"

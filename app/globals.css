@@ -78,7 +78,7 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .announcement-track {
-  animation: announcement-marquee 28s linear infinite;
+  animation: announcement-marquee 150s linear infinite;
 }
 
 .featured-jewelry-carousel {
@@ -154,7 +154,7 @@ details[open] .faq-answer-inner {
     animation: none;
   }
 
-  .announcement-track > p:nth-child(2) {
+  .announcement-track > div:nth-child(2) {
     display: none;
   }
 
