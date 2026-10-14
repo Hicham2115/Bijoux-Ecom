@@ -7,7 +7,7 @@ export function Header() {
         <div
           className="min-w-0 flex-1 overflow-hidden"
           role="region"
-          aria-label="Complimentary shipping and returns, lifetime care, a more inclusive luxury"
+          aria-label="Livraison et retours offerts, entretien à vie, un luxe plus inclusif"
         >
           <div
             className="announcement-track flex w-max items-center hover:[animation-play-state:paused]"
@@ -20,11 +20,11 @@ export function Header() {
                     key={repeat}
                     className="flex shrink-0 items-center gap-5 pr-10 sm:gap-8 sm:pr-16"
                   >
-                    <span>Complimentary shipping & returns</span>
+                    <span>Livraison et retours offerts</span>
                     <span>|</span>
-                    <span>Lifetime care</span>
+                    <span>Entretien à vie</span>
                     <span>|</span>
-                    <span>A more inclusive luxury</span>
+                    <span>Un luxe plus inclusif</span>
                     <span>|</span>
                   </p>
                 ))}

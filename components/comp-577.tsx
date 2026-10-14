@@ -4,6 +4,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Heart, Menu, Search, ShoppingBag, X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCommerceStore } from "@/lib/commerce-store";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -20,18 +21,18 @@ import {
 } from "@/components/ui/sheet";
 
 const navigationLinks = [
-  { href: "#women", label: "Women" },
-  { href: "#men", label: "Men" },
-  { href: "#categories", label: "Categories" },
+  { href: "#women", label: "Femme" },
+  { href: "#men", label: "Homme" },
+  { href: "#categories", label: "Catégories" },
   { href: "/products", label: "Collections" },
-  { href: "#maison", label: "Our Maison" },
+  { href: "#maison", label: "La Maison" },
   { href: "#services", label: "Services" },
-  { href: "#faq", label: "FAQs" },
+  { href: "#faq", label: "FAQ" },
   { href: "#contact", label: "Contact" },
 ];
 
 const desktopNavigationLinks = navigationLinks.filter(({ label }) =>
-  ["Women", "Men", "Collections"].includes(label),
+  ["Femme", "Homme", "Collections"].includes(label),
 );
 
 function scrollToSectionAfterClose(href: string, closeDrawer: () => void) {
@@ -60,6 +61,11 @@ function scrollToSectionAfterClose(href: string, closeDrawer: () => void) {
 export default function Component() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const favoritesCount = useCommerceStore((state) => state.favorites.length);
+  const cartCount = useCommerceStore((state) =>
+    state.cartItems.reduce((sum, item) => sum + item.quantity, 0),
+  );
+  const openCart = useCommerceStore((state) => state.openCart);
   const sectionHref = (href: string) =>
     href.startsWith("/") || pathname === "/" ? href : `/${href}`;
 
@@ -71,7 +77,7 @@ export default function Component() {
             className="size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] md:hidden"
             size="icon"
             variant="ghost"
-            aria-label="Open navigation"
+            aria-label="Ouvrir le menu"
           >
             <Menu className="size-5" strokeWidth={1.5} />
           </Button>
@@ -83,21 +89,21 @@ export default function Component() {
                 ORÉLIA
               </SheetTitle>
               <SheetDescription className="mt-2 font-sans text-[9px] uppercase tracking-[0.2em] text-white/50">
-                Fine jewelry, considered
+                Des bijoux précieux, pensés avec soin
               </SheetDescription>
             </div>
             <SheetClose asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                aria-label="Close navigation"
+                aria-label="Fermer le menu"
                 className="size-10 text-white/75 hover:bg-white/10 hover:text-[#e5cf9f]"
               >
                 <X className="size-5" strokeWidth={1.5} />
               </Button>
             </SheetClose>
           </div>
-          <nav aria-label="Main navigation" className="shrink-0 py-6">
+          <nav aria-label="Navigation principale" className="shrink-0 py-6">
             <ul className="divide-y divide-white/10">
               {navigationLinks.map((link, index) => (
                 <li key={link.href}>
@@ -127,7 +133,7 @@ export default function Component() {
           </nav>
           <div className="border-t border-white/15 pt-5">
             <p className="font-serif text-[18px] italic text-white/75">
-              A little more personal.
+              Une attention toute personnelle.
             </p>
             <SheetClose asChild>
               <a
@@ -140,7 +146,7 @@ export default function Component() {
                 }}
                 className="mt-4 inline-flex min-h-11 items-center border-b border-[#d7b878]/70 font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-[#e5cf9f]"
               >
-                Speak with our concierge <ArrowUpRight className="ml-3 size-4" />
+                Parler à notre équipe <ArrowUpRight className="ml-3 size-4" />
               </a>
             </SheetClose>
           </div>
@@ -164,7 +170,7 @@ export default function Component() {
 
       <a
         href={sectionHref("#top")}
-        aria-label="Orélia home"
+        aria-label="Accueil Orélia"
         className="absolute left-1/2 -translate-x-1/2 font-serif text-[23px] tracking-[0.18em] text-[#e5cf9f] sm:text-[32px] sm:tracking-[0.24em]"
       >
         ORÉLIA
@@ -176,31 +182,33 @@ export default function Component() {
           nativeButton={false}
           variant="ghost"
           size="icon"
-          aria-label="Search"
+          aria-label="Rechercher"
           className="hidden size-8 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:inline-flex"
         >
           <Search className="size-5" strokeWidth={1.5} />
         </Button>
 
         <Button
-          render={<a href="/products" />}
+          render={<a href="/favorites" />}
           nativeButton={false}
           variant="ghost"
           size="icon"
-          aria-label="Your wishlist"
-          className="size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:size-8"
+          aria-label="Vos favoris"
+          className="relative size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:size-8"
         >
           <Heart className="size-5" strokeWidth={1.5} />
+          {favoritesCount > 0 && <span className="absolute -right-1 -top-1 grid min-w-4 place-items-center rounded-full bg-[#d7b878] px-1 font-sans text-[9px] leading-4 text-[#171714]">{favoritesCount}</span>}
         </Button>
         <Button
-          render={<a href="/products" />}
-          nativeButton={false}
+          type="button"
+          onClick={openCart}
           variant="ghost"
           size="icon"
-          aria-label="Your shopping bag"
-          className="size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:size-8"
+          aria-label="Votre panier"
+          className="relative size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:size-8"
         >
           <ShoppingBag className="size-5" strokeWidth={1.5} />
+          {cartCount > 0 && <span className="absolute -right-1 -top-1 grid min-w-4 place-items-center rounded-full bg-[#d7b878] px-1 font-sans text-[9px] leading-4 text-[#171714]">{cartCount}</span>}
         </Button>
       </div>
     </header>

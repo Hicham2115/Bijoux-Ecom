@@ -4,31 +4,31 @@ import { Button } from "@/components/ui/button";
 
 const services = [
   {
-    title: "Personalized service",
+    title: "Un service personnalisé",
     description:
-      "From custom engravings to expert care, our specialists help you create jewelry that’s uniquely yours.",
+      "De la gravure personnalisée à l’entretien expert, nos spécialistes vous aident à créer un bijou qui vous ressemble.",
     image: "/maison-personalized-service.webp",
-    alt: "Gold rings and a chain bracelet worn against emerald velvet",
+    alt: "Bagues en or et bracelet chaîne sur du velours émeraude",
     link: "#services",
-    action: "Discover",
+    action: "Découvrir",
   },
   {
-    title: "Our craft",
+    title: "Notre savoir-faire",
     description:
-      "Rooted in tradition, shaped for today. Discover the artistry and innovation behind every piece.",
+      "Ancré dans la tradition et pensé pour aujourd’hui. Découvrez l’art et l’innovation qui se cachent derrière chaque création.",
     image: "/maison-craft.webp",
-    alt: "A jeweler setting an emerald into a gold ring",
+    alt: "Un joaillier sertissant une émeraude sur une bague en or",
     link: "#maison",
-    action: "Our Maison",
+    action: "Notre Maison",
   },
   {
-    title: "Visit a boutique",
+    title: "Visitez une boutique",
     description:
-      "Experience our collections in person and receive personalized guidance from our team.",
+      "Découvrez nos collections et profitez des conseils personnalisés de notre équipe.",
     image: "/maison-boutique.webp",
-    alt: "An elegant jewelry boutique with emerald marble and brass displays",
+    alt: "Une élégante boutique de joaillerie avec du marbre émeraude et des présentoirs en laiton",
     link: "#boutique",
-    action: "Find a location",
+    action: "Trouver une boutique",
   },
 ];
 
@@ -36,7 +36,7 @@ export function MaisonServicesSection() {
   return (
     <section
       id="services"
-      aria-label="Maison services and experiences"
+      aria-label="Services et expériences de la Maison"
       className="bg-[#f5f1e9] px-5 py-7 text-[#171714] sm:px-[2.2%] sm:py-8"
     >
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">

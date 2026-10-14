@@ -3,35 +3,35 @@ import { Star } from "lucide-react";
 const reviews = [
   {
     quote:
-      "The emerald is even more luminous in person. It feels like a piece I’ll treasure for years.",
+      "L’émeraude est encore plus lumineuse en vrai. C’est une pièce que je garderai précieusement pendant des années.",
     name: "Amira",
     location: "Casablanca",
     initials: "A",
   },
   {
     quote:
-      "Every detail feels considered. It has become the piece I reach for every morning.",
+      "Chaque détail est pensé avec soin. C’est le bijou que je porte chaque matin.",
     name: "Lina",
     location: "Paris",
     initials: "L",
   },
   {
     quote:
-      "A beautiful gift, wrapped with such care. The whole experience felt special.",
+      "Un magnifique cadeau, emballé avec tant de soin. Toute l’expérience était spéciale.",
     name: "Sofia",
     location: "London",
     initials: "S",
   },
   {
     quote:
-      "Elegant without feeling precious. I love how easily it fits into everyday life.",
+      "Élégant sans être précieux. J’aime qu’il s’intègre si naturellement à mon quotidien.",
     name: "Nadia",
     location: "Rabat",
     initials: "N",
   },
   {
     quote:
-      "The gold catches the light beautifully. Exactly the quiet statement I wanted.",
+      "L’or capte magnifiquement la lumière. C’est exactement la touche discrète que je recherchais.",
     name: "Maya",
     location: "Montreal",
     initials: "M",
@@ -45,15 +45,15 @@ export function ReviewsSection() {
       className="overflow-hidden border-y border-[#e4ddcf] bg-[#f5f1e9] py-14 text-[#171714] sm:py-18"
     >
       <div className="mx-auto mb-9 max-w-3xl px-5 text-center sm:mb-12">
-        <p className="orelia-eyebrow text-[#8c7043]">The Orélia community</p>
+        <p className="orelia-eyebrow text-[#8c7043]">La communauté Orélia</p>
         <h2
           id="reviews-title"
           className="orelia-heading mt-3 text-[clamp(2rem,4vw,3.5rem)] text-[#101710]"
         >
-          What our clients are saying
+          Ce que nos clientes en pensent
         </h2>
         <p className="mt-4 font-serif text-[15px] leading-relaxed text-[#6d665b] sm:text-[17px]">
-          Personal notes on the pieces they love and keep close.
+          Quelques mots sur les bijoux qu’elles aiment et gardent près d’elles.
         </p>
       </div>
 
@@ -76,7 +76,7 @@ export function ReviewsSection() {
                   >
                     <div
                       className="flex gap-1 text-[#a98442]"
-                      aria-label="Rated 5 out of 5"
+                      aria-label="Note de 5 sur 5"
                     >
                       {Array.from({ length: 5 }, (_, star) => (
                         <Star

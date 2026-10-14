@@ -18,10 +18,10 @@ const fieldStyle = {
 };
 
 const contactSchema = z.object({
-  firstName: z.string().trim().min(1, "Enter your first name").max(80),
+  firstName: z.string().trim().min(1, "Saisissez votre prénom").max(80),
   lastName: z.string().trim().max(80),
-  email: z.string().trim().email("Enter a valid email address").max(254),
-  message: z.string().trim().min(1, "Tell us how we can help").max(1200),
+  email: z.string().trim().email("Saisissez une adresse e-mail valide").max(254),
+  message: z.string().trim().min(1, "Dites-nous comment nous pouvons vous aider").max(1200),
 });
 
 function firstError(errors: readonly unknown[]) {
@@ -46,14 +46,14 @@ export function ContactSection() {
     },
     onSubmit: ({ value }) => {
       const body = [
-        "Name: " + value.firstName.trim() + " " + value.lastName.trim(),
-        "Email: " + value.email.trim(),
+        "Nom : " + value.firstName.trim() + " " + value.lastName.trim(),
+        "E-mail : " + value.email.trim(),
         "",
         value.message.trim(),
       ].join("\n");
       window.location.href =
         "mailto:concierge@orelia.com?subject=" +
-        encodeURIComponent("Orélia concierge inquiry") +
+        encodeURIComponent("Demande de renseignements Orélia") +
         "&body=" +
         encodeURIComponent(body);
     },
@@ -78,35 +78,35 @@ export function ContactSection() {
               }}
               className="contact-script relative z-10 text-[clamp(3.6rem,6.4vw,7rem)] leading-[0.95] text-[#2c8b91]"
             >
-              A note to our Maison
+              Un mot pour notre Maison
             </p>
             <h2
               id="contact-title"
               className="orelia-heading -mt-1 text-[clamp(2.2rem,3.8vw,4.15rem)] leading-[1.04] text-[#07261b]"
             >
-              We would love to hear from you.
+              Nous serions ravis d’échanger avec vous.
             </h2>
             <p className="mx-auto mt-6 max-w-[540px] font-serif text-[15px] leading-[1.55] text-[#5f5a51] sm:text-[16px]">
-              Every piece has a story. From finding the right piece or size to
-              caring for a favorite or choosing a thoughtful gift, our
-              specialists are here to help.
+              Chaque bijou a son histoire. Pour trouver la pièce ou la taille
+              idéale, prendre soin de votre bijou préféré ou choisir un cadeau
+              attentionné, nos spécialistes sont là pour vous guider.
             </p>
             <div className="mx-auto mt-9 grid w-full max-w-[680px] grid-cols-1 border-y border-[#9b845d]/40 sm:grid-cols-3">
               {[
                 {
                   icon: Gem,
-                  title: "Personal advice",
-                  detail: "Find a piece that feels like you.",
+                  title: "Conseil personnalisé",
+                  detail: "Trouvez le bijou qui vous ressemble.",
                 },
                 {
                   icon: Ruler,
-                  title: "Size & care",
-                  detail: "Thoughtful help for every piece.",
+                  title: "Taille et entretien",
+                  detail: "Des conseils pour chaque bijou.",
                 },
                 {
                   icon: Gift,
-                  title: "Meaningful gifts",
-                  detail: "Make their moment memorable.",
+                  title: "Cadeaux précieux",
+                  detail: "Rendez son moment inoubliable.",
                 },
               ].map(({ icon: Icon, title, detail }) => (
                 <a
@@ -137,9 +137,9 @@ export function ContactSection() {
             </div>
           </div>
           <div className="mt-14 border-t border-[#9b845d]/45 pt-5 lg:mt-0">
-            <p className="orelia-eyebrow text-[#927342]">The Orélia promise</p>
+            <p className="orelia-eyebrow text-[#927342]">La promesse Orélia</p>
             <p className="mt-3 font-serif text-[clamp(1.15rem,1.7vw,1.55rem)] italic leading-snug text-[#52665a]">
-              Considered care, at every step.
+              Une attention particulière, à chaque étape.
             </p>
           </div>
         </div>
@@ -172,7 +172,7 @@ export function ContactSection() {
                       htmlFor={field.name}
                       className="block font-sans text-[15px] text-[#31463a]"
                     >
-                      First name <span aria-hidden="true">*</span>
+                      Prénom <span aria-hidden="true">*</span>
                     </label>
                     <input
                       id={field.name}
@@ -213,7 +213,7 @@ export function ContactSection() {
                       htmlFor={field.name}
                       className="block font-sans text-[15px] text-[#31463a]"
                     >
-                      Last name
+                      Nom
                     </label>
                     <input
                       id={field.name}
@@ -253,7 +253,7 @@ export function ContactSection() {
                       htmlFor={field.name}
                       className="block font-sans text-[15px] text-[#31463a]"
                     >
-                      Email <span aria-hidden="true">*</span>
+                      E-mail <span aria-hidden="true">*</span>
                     </label>
                     <input
                       id={field.name}
@@ -294,7 +294,7 @@ export function ContactSection() {
                       htmlFor={field.name}
                       className="block font-sans text-[15px] text-[#31463a]"
                     >
-                      How can we help? <span aria-hidden="true">*</span>
+                      Comment pouvons-nous vous aider ? <span aria-hidden="true">*</span>
                     </label>
                     <textarea
                       id={field.name}
@@ -330,10 +330,10 @@ export function ContactSection() {
                 type="submit"
                 className="orelia-action orelia-button inline-flex h-[50px] items-center justify-center self-end rounded-[12px] border border-[#07261b] bg-transparent px-8 text-[#07261b] hover:bg-[#07261b] hover:text-[#f4eee3]"
               >
-                Send message
+                Envoyer le message
               </button>
               <p className="text-right font-sans text-[11px] text-[#667064]">
-                Opens your email app to send.
+                Votre application de messagerie s’ouvrira pour l’envoi.
               </p>
             </div>
           </form>

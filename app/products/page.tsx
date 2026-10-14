@@ -9,9 +9,9 @@ import { getShopifyProducts } from "@/lib/shopify";
 import type { ShopifyProduct } from "@/lib/shopify";
 
 export const metadata: Metadata = {
-  title: "Fine Jewelry | Orélia",
+  title: "Joaillerie | Orélia",
   description:
-    "Explore thoughtful gold jewelry from the Orélia collection, made to become part of your story.",
+    "Découvrez les bijoux en or de la collection Orélia, pensés pour faire partie de votre histoire.",
 };
 
 async function ProductCollection() {
@@ -23,7 +23,7 @@ async function ProductCollection() {
     products = await getShopifyProducts();
   } catch {
     catalogError =
-      "We couldn’t load the collection. Please check the Shopify connection and try again.";
+      "Impossible de charger la collection. Vérifiez la connexion à Shopify et réessayez.";
   }
 
   return (
@@ -44,7 +44,7 @@ export default function ProductsRoute() {
         fallback={
           <main
             className="min-h-[70vh] bg-[#f5f1e9]"
-            aria-label="Loading jewelry collection"
+            aria-label="Chargement de la collection de bijoux"
           />
         }
       >

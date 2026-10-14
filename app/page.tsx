@@ -44,7 +44,7 @@ export default function Home() {
           fallback={
             <section
               id="collection"
-              aria-label="Featured jewelry"
+              aria-label="Sélection de bijoux"
               className="min-h-[280px] bg-[#f5f1e9]"
             />
           }

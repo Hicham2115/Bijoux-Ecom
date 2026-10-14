@@ -61,7 +61,7 @@ export function Toaster() {
               </ToastPrimitive.Description>
             )}
           </div>
-          <ToastPrimitive.Close aria-label="Dismiss notification" className="absolute right-3 top-3 grid size-8 place-items-center text-white/55 transition-colors hover:text-white">
+          <ToastPrimitive.Close aria-label="Fermer la notification" className="absolute right-3 top-3 grid size-8 place-items-center text-white/55 transition-colors hover:text-white">
             <X className="size-4" />
           </ToastPrimitive.Close>
         </ToastPrimitive.Root>

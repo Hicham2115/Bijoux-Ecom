@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Gift, Gem, Ruler } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { CurrentYear } from "@/components/current-year";
 import { usePathname } from "next/navigation";
 
@@ -8,27 +8,27 @@ const footerLinks = [
   {
     title: "Collections",
     links: [
-      { label: "Shop by category", href: "#categories" },
-      { label: "Featured jewelry", href: "#collection" },
-      { label: "Women's jewelry", href: "#women" },
-      { label: "Men's jewelry", href: "#men" },
+      { label: "Nos catégories", href: "#categories" },
+      { label: "Nos bijoux à découvrir", href: "#collection" },
+      { label: "Bijoux pour femme", href: "#women" },
+      { label: "Bijoux pour homme", href: "#men" },
     ],
   },
   {
-    title: "The Maison",
+    title: "La Maison",
     links: [
-      { label: "Our story", href: "#maison" },
-      { label: "The craft", href: "#craft" },
-      { label: "Our services", href: "#services" },
-      { label: "Visit a boutique", href: "#boutique" },
+      { label: "Notre histoire", href: "#maison" },
+      { label: "Notre savoir-faire", href: "#craft" },
+      { label: "Nos services", href: "#services" },
+      { label: "Visiter une boutique", href: "#boutique" },
     ],
   },
   {
     title: "Assistance",
     links: [
-      { label: "Frequently asked questions", href: "#faq" },
-      { label: "Care & sizing", href: "#faq" },
-      { label: "Contact us", href: "#contact" },
+      { label: "Questions fréquentes", href: "#faq" },
+      { label: "Entretien et tailles", href: "#faq" },
+      { label: "Nous contacter", href: "#contact" },
     ],
   },
 ];
@@ -37,24 +37,6 @@ export function Footer() {
   const pathname = usePathname();
   const sectionHref = (href: string) =>
     href.startsWith("/") || pathname === "/" ? href : `/${href}`;
-  const conciergeLinks = [
-    {
-      icon: Gem,
-      title: "Personal advice",
-      detail: "Find a piece that feels like you.",
-    },
-    {
-      icon: Ruler,
-      title: "Size & care",
-      detail: "Thoughtful help for every piece.",
-    },
-    {
-      icon: Gift,
-      title: "Meaningful gifts",
-      detail: "Make their moment memorable.",
-    },
-  ];
-
   return (
     <footer className="overflow-hidden bg-[#07261b] text-[#f4f0e7]">
       <div className="mx-auto max-w-[1500px] px-6 pt-12 sm:px-[5.5%] sm:pt-20">
@@ -62,20 +44,19 @@ export function Footer() {
 
         <div className="grid gap-14 py-11 sm:py-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,2fr)] lg:gap-20">
           <div className="max-w-[430px]">
-            <p className="orelia-eyebrow text-[#d0b36f]">The world of Orélia</p>
+            <p className="orelia-eyebrow text-[#d0b36f]">L’univers Orélia</p>
             <h2 className="orelia-heading mt-5 text-[clamp(2rem,8vw,3rem)] lg:text-[clamp(2.25rem,3.2vw,3.7rem)]">
-              Beauty to live in.
+              La beauté au quotidien.
               <br />
-              Pieces to keep.
+              Des bijoux à garder.
             </h2>
             <p className="orelia-copy mt-6 max-w-[350px] text-[#f4f0e7]/70">
-              Jewelry shaped by craft, made for the moments that become your
-              own.
+              Des bijoux façonnés avec soin, pour les moments qui vous ressemblent.
             </p>
           </div>
 
           <nav
-            aria-label="Footer navigation"
+            aria-label="Navigation de pied de page"
             className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 sm:gap-x-10"
           >
             {footerLinks.map((group) => (
@@ -96,7 +77,7 @@ export function Footer() {
               </div>
             ))}
             <div className="sm:hidden">
-              <h3 className="orelia-eyebrow text-[#d0b36f]">Concierge</h3>
+              <h3 className="orelia-eyebrow text-[#d0b36f]">Notre équipe</h3>
               <a
                 href="mailto:concierge@orelia.com"
                 className="mt-5 block break-words font-serif text-[16px] text-[#f4f0e7]/82"
@@ -109,7 +90,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-5 border-t border-[#f4f0e7]/20 py-7 text-[11px] text-[#f4f0e7]/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © <CurrentYear /> Orélia. All rights reserved.
+            © <CurrentYear /> Orélia. Tous droits réservés.
           </p>
           <a
             href="mailto:concierge@orelia.com"
@@ -121,7 +102,7 @@ export function Footer() {
             href={sectionHref("#top")}
             className="inline-flex items-center gap-2 self-start font-semibold uppercase tracking-[0.16em] text-[#d0b36f] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#d0b36f]"
           >
-            Back to top
+            Retour en haut
             <ArrowUpRight
               aria-hidden="true"
               className="size-4"
@@ -139,7 +120,7 @@ export function Footer() {
       </div>
 
       <p className="mx-auto max-w-[1440px] px-6 py-4 text-center text-[12px] text-white/70 sm:px-8 lg:px-12">
-        Designed &amp; developed by{" "}
+        Conçu et développé par{" "}
         <a
           href="https://www.stallionadvertising.ma/"
           target="_blank"

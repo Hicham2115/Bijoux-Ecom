@@ -8,8 +8,8 @@ import { ShopifyProductPage } from "@/components/shopify-product-page";
 import { getShopifyProduct, getShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 
 export const metadata: Metadata = {
-  title: "Fine Jewelry | Orélia",
-  description: "Discover fine jewelry from the Orélia collection.",
+  title: "Joaillerie | Orélia",
+  description: "Découvrez les bijoux précieux de la collection Orélia.",
 };
 
 async function ProductDetails({ params }: { params: PageProps<"/products/[handle]">["params"] }) {
@@ -35,7 +35,7 @@ export default function ProductRoute({ params }: PageProps<"/products/[handle]">
       <Suspense fallback={<div id="top" className="min-h-[110px] bg-[#080907]" />}>
         <div id="top"><Header /></div>
       </Suspense>
-      <Suspense fallback={<main className="min-h-[75vh] bg-[#f5f1e9]" aria-label="Loading product" />}>
+      <Suspense fallback={<main className="min-h-[75vh] bg-[#f5f1e9]" aria-label="Chargement du produit" />}>
         <ProductDetails params={params} />
       </Suspense>
       <Suspense fallback={<div className="min-h-[240px] bg-[#080907]" />}>

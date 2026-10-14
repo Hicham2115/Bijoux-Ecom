@@ -1,3 +1,11 @@
+export type ShopifyVariant = {
+  id: string;
+  title: string;
+  availableForSale: boolean;
+  selectedOptions: { name: string; value: string }[];
+  price: { amount: string; currencyCode: string };
+};
+
 export type ShopifyProduct = {
   id: string;
   handle: string;
@@ -9,18 +17,11 @@ export type ShopifyProduct = {
   priceRange: {
     minVariantPrice: { amount: string; currencyCode: string };
   };
+  variants: { nodes: ShopifyVariant[] };
 };
 
 export type ShopifyProductDetails = ShopifyProduct & {
   images: { nodes: { url: string; altText: string | null }[] };
-  variants: {
-    nodes: {
-      id: string;
-      title: string;
-      availableForSale: boolean;
-      selectedOptions: { name: string; value: string }[];
-    }[];
-  };
 };
 
 type ShopifyResponse<T> = {
@@ -30,7 +31,7 @@ type ShopifyResponse<T> = {
 
 async function shopifyQuery<T>(
   query: string,
-  variables?: Record<string, string>,
+  variables?: Record<string, unknown>,
 ) {
   const storeDomain = process.env.SHOPIFY_STORE_DOMAIN;
   const token = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN;
@@ -85,6 +86,37 @@ async function shopifyQuery<T>(
   return result.data;
 }
 
+export async function createShopifyCheckout(
+  lines: { merchandiseId: string; quantity: number }[],
+) {
+  const data = await shopifyQuery<{
+    cartCreate: {
+      cart: { checkoutUrl: string } | null;
+      userErrors: { message: string }[];
+    };
+  }>(
+    `mutation OreliaCartCreate($lines: [CartLineInput!]!) {
+      cartCreate(input: { lines: $lines }) {
+        cart { checkoutUrl }
+        userErrors { message }
+      }
+    }`,
+    { lines },
+  );
+
+  const result = data.cartCreate;
+  if (result.userErrors.length || !result.cart?.checkoutUrl) {
+    throw new Error("Shopify could not create a checkout for this cart.");
+  }
+
+  const checkoutUrl = new URL(result.cart.checkoutUrl);
+  if (checkoutUrl.protocol !== "https:") {
+    throw new Error("Shopify returned an invalid checkout URL.");
+  }
+
+  return checkoutUrl.toString();
+}
+
 export async function getShopifyProducts() {
   const data = await shopifyQuery<{ products: { nodes: ShopifyProduct[] } }>(
     `query OreliaProducts {
@@ -98,6 +130,15 @@ export async function getShopifyProducts() {
           availableForSale
           featuredImage { url altText }
           priceRange { minVariantPrice { amount currencyCode } }
+          variants(first: 100) {
+            nodes {
+              id
+              title
+              availableForSale
+              selectedOptions { name value }
+              price { amount currencyCode }
+            }
+          }
         }
       }
     }`,
@@ -126,6 +167,7 @@ export async function getShopifyProduct(handle: string) {
             title
             availableForSale
             selectedOptions { name value }
+            price { amount currencyCode }
           }
         }
         priceRange { minVariantPrice { amount currencyCode } }

@@ -7,40 +7,40 @@ import { Button } from "@/components/ui/button";
 
 const categories = [
   {
-    name: "Rings",
-    detail: "Signatures made to stay with you.",
+    name: "Bagues",
+    detail: "Des créations faites pour vous accompagner.",
     image: "/products/solis-ring.webp",
-    alt: "Gold ring with a deep green emerald",
+    alt: "Bague en or ornée d’une émeraude vert profond",
   },
   {
-    name: "Necklaces",
-    detail: "Fine chains, made for layering.",
+    name: "Colliers",
+    detail: "Des chaînes délicates à porter en superposition.",
     image: "/products/atlas-chain.webp",
-    alt: "Gold chain necklace arranged in a circle",
+    alt: "Collier chaîne en or disposé en cercle",
   },
   {
     name: "Bracelets",
-    detail: "Sculptural forms for every day.",
+    detail: "Des formes sculpturales pour le quotidien.",
     image: "/products/forma-cuff.webp",
-    alt: "Polished gold cuff bracelet",
+    alt: "Manchette en or poli",
   },
   {
-    name: "Earrings",
-    detail: "A little light for every occasion.",
+    name: "Boucles d’oreilles",
+    detail: "Une touche de lumière pour chaque occasion.",
     image: "/products/lumiere-earrings.webp",
-    alt: "Pair of polished gold hoop earrings",
+    alt: "Paire de créoles en or poli",
   },
   {
-    name: "Men's jewelry",
-    detail: "Modern pieces, without rules.",
+    name: "Bijoux pour homme",
+    detail: "Des créations modernes, sans règles.",
     image: "/orelia-mens-campaign.webp",
-    alt: "Model wearing Orélia men's jewelry",
+    alt: "Mannequin portant des bijoux Orélia pour homme",
   },
   {
-    name: "Women's jewelry",
-    detail: "Personal icons in every form.",
+    name: "Bijoux pour femme",
+    detail: "Des pièces iconiques, sous toutes leurs formes.",
     image: "/orelia-womens-campaign.webp",
-    alt: "Model wearing Orélia women's jewelry",
+    alt: "Mannequin portant des bijoux Orélia pour femme",
   },
 ];
 
@@ -78,7 +78,7 @@ export function CategorySection() {
               id="categories-title"
               className="orelia-eyebrow max-[360px]:tracking-[0.14em]"
             >
-              Shop by category
+              Nos catégories
             </h2>
           </div>
 
@@ -86,7 +86,7 @@ export function CategorySection() {
             <Button
               variant="outline"
               size="icon"
-              aria-label="Show previous categories"
+              aria-label="Voir les catégories précédentes"
               onClick={() => scrollCategories(-1)}
               className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#07261b] hover:text-white"
             >
@@ -95,7 +95,7 @@ export function CategorySection() {
             <Button
               variant="outline"
               size="icon"
-              aria-label="Show more categories"
+              aria-label="Voir plus de catégories"
               onClick={() => scrollCategories(1)}
               className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#07261b] hover:text-white"
             >
@@ -107,7 +107,7 @@ export function CategorySection() {
         <div
           ref={carouselRef}
           className="category-carousel flex gap-4 overflow-x-auto pb-3 sm:gap-5"
-          aria-label="Jewelry categories"
+          aria-label="Catégories de bijoux"
         >
           {categories.map((category) => (
             <article key={category.name} data-scroll-reveal-item className="category-card min-w-0">
