@@ -10,6 +10,7 @@ import { ContactSection } from "@/components/contact-section";
 import { ClosingCtaSection } from "@/components/closing-cta-section";
 import { Footer } from "@/components/footer";
 import { Header } from "@/layout/header";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <Header />
       </div>
       <main className="min-h-screen bg-[#080907] text-white">
+        <ScrollReveal />
         <Hero />
         <CategorySection />
         <MenCampaignSection />

@@ -42,8 +42,6 @@ export function ContactSection() {
       message: "",
     },
     validators: {
-      onChange: contactSchema,
-      onBlur: contactSchema,
       onSubmit: contactSchema,
     },
     onSubmit: ({ value }) => {
@@ -117,9 +115,7 @@ export function ContactSection() {
           >
             <form.Field name="firstName">
               {(field) => {
-                const error = field.state.meta.isTouched
-                  ? firstError(field.state.meta.errors)
-                  : undefined;
+                const error = firstError(field.state.meta.errors);
                 return (
                   <div>
                     <label
@@ -160,9 +156,7 @@ export function ContactSection() {
             </form.Field>
             <form.Field name="lastName">
               {(field) => {
-                const error = field.state.meta.isTouched
-                  ? firstError(field.state.meta.errors)
-                  : undefined;
+                const error = firstError(field.state.meta.errors);
                 return (
                   <div>
                     <label
@@ -202,9 +196,7 @@ export function ContactSection() {
             </form.Field>
             <form.Field name="email">
               {(field) => {
-                const error = field.state.meta.isTouched
-                  ? firstError(field.state.meta.errors)
-                  : undefined;
+                const error = firstError(field.state.meta.errors);
                 return (
                   <div>
                     <label
@@ -245,9 +237,7 @@ export function ContactSection() {
             </form.Field>
             <form.Field name="message">
               {(field) => {
-                const error = field.state.meta.isTouched
-                  ? firstError(field.state.meta.errors)
-                  : undefined;
+                const error = firstError(field.state.meta.errors);
                 return (
                   <div>
                     <label
