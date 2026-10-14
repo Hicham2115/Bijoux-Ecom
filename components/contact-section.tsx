@@ -8,7 +8,7 @@ import { z } from "zod";
 const paperStyle = {
   backgroundColor: "#f5efe3",
   backgroundImage:
-    'linear-gradient(rgba(245, 239, 227, 0.64), rgba(245, 239, 227, 0.64)), url("/orelia-contact-paper.png")',
+    'linear-gradient(rgba(245, 239, 227, 0.64), rgba(245, 239, 227, 0.64)), url("/orelia-contact-paper.webp")',
   backgroundSize: "600px 600px",
 };
 
@@ -146,7 +146,7 @@ export function ContactSection() {
 
         <div className="border-t border-dashed border-[#647267] px-7 pb-10 pt-8 sm:px-10 sm:pb-12 sm:pt-10 lg:border-l lg:border-t-0 lg:px-[8%] lg:py-10">
           <Image
-            src="/orelia-contact-stamps.png"
+            src="/orelia-contact-stamps.webp"
             alt=""
             aria-hidden="true"
             width={2022}

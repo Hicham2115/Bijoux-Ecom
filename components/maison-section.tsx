@@ -10,7 +10,7 @@ export function MaisonSection() {
     >
       <div className="relative h-[260px] w-full sm:h-[360px] md:absolute md:inset-0 md:-z-20 md:h-auto">
         <Image
-          src="/orelia-maison.png"
+          src="/orelia-maison.webp"
           alt="A golden stone arch set into a deep emerald wall"
           fill
           sizes="100vw"

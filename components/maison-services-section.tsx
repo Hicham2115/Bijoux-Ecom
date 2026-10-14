@@ -7,7 +7,7 @@ const services = [
     title: "Personalized service",
     description:
       "From custom engravings to expert care, our specialists help you create jewelry that’s uniquely yours.",
-    image: "/maison-personalized-service.png",
+    image: "/maison-personalized-service.webp",
     alt: "Gold rings and a chain bracelet worn against emerald velvet",
     link: "#services",
     action: "Discover",
@@ -16,7 +16,7 @@ const services = [
     title: "Our craft",
     description:
       "Rooted in tradition, shaped for today. Discover the artistry and innovation behind every piece.",
-    image: "/maison-craft.png",
+    image: "/maison-craft.webp",
     alt: "A jeweler setting an emerald into a gold ring",
     link: "#maison",
     action: "Our Maison",
@@ -25,7 +25,7 @@ const services = [
     title: "Visit a boutique",
     description:
       "Experience our collections in person and receive personalized guidance from our team.",
-    image: "/maison-boutique.png",
+    image: "/maison-boutique.webp",
     alt: "An elegant jewelry boutique with emerald marble and brass displays",
     link: "#boutique",
     action: "Find a location",

@@ -9,37 +9,37 @@ const categories = [
   {
     name: "Rings",
     detail: "Signatures made to stay with you.",
-    image: "/products/solis-ring.png",
+    image: "/products/solis-ring.webp",
     alt: "Gold ring with a deep green emerald",
   },
   {
     name: "Necklaces",
     detail: "Fine chains, made for layering.",
-    image: "/products/atlas-chain.png",
+    image: "/products/atlas-chain.webp",
     alt: "Gold chain necklace arranged in a circle",
   },
   {
     name: "Bracelets",
     detail: "Sculptural forms for every day.",
-    image: "/products/forma-cuff.png",
+    image: "/products/forma-cuff.webp",
     alt: "Polished gold cuff bracelet",
   },
   {
     name: "Earrings",
     detail: "A little light for every occasion.",
-    image: "/products/lumiere-earrings.png",
+    image: "/products/lumiere-earrings.webp",
     alt: "Pair of polished gold hoop earrings",
   },
   {
     name: "Men's jewelry",
     detail: "Modern pieces, without rules.",
-    image: "/orelia-mens-campaign.png",
+    image: "/orelia-mens-campaign.webp",
     alt: "Model wearing Orélia men's jewelry",
   },
   {
     name: "Women's jewelry",
     detail: "Personal icons in every form.",
-    image: "/orelia-womens-campaign.png",
+    image: "/orelia-womens-campaign.webp",
     alt: "Model wearing Orélia women's jewelry",
   },
 ];

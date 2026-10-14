@@ -11,7 +11,7 @@ export function Hero() {
     >
       <div className="absolute inset-0 -z-20">
         <Image
-          src="/orelia-hero-mobile.png"
+          src="/orelia-hero-mobile.webp"
           alt="Two models in gold jewelry against a deep emerald backdrop"
           fill
           priority
@@ -19,7 +19,7 @@ export function Hero() {
           className="object-cover object-center md:hidden"
         />
         <Image
-          src="/orelia-hero.png"
+          src="/orelia-hero.webp"
           alt="Two models wearing gold jewelry against an emerald background"
           fill
           priority

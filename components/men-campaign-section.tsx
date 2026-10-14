@@ -10,7 +10,7 @@ export function MenCampaignSection() {
       className="relative isolate flex flex-col overflow-hidden border-y border-white/20 bg-[#27170f] text-white md:min-h-[min(590px,65vw)] md:flex-row md:items-center"
     >
       <Image
-        src="/orelia-mens-campaign.png"
+        src="/orelia-mens-campaign.webp"
         alt="A model wearing Orélia gold jewelry against a dark brown backdrop"
         fill
         sizes="100vw"
@@ -18,7 +18,7 @@ export function MenCampaignSection() {
       />
       <div className="relative h-[clamp(260px,62vw,420px)] w-full md:hidden">
         <Image
-          src="/orelia-mens-campaign.png"
+          src="/orelia-mens-campaign.webp"
           alt="A model wearing Orélia gold jewelry against a dark brown backdrop"
           fill
           sizes="(max-width: 768px) 100vw, 768px"
