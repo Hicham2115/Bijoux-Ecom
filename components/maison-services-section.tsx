@@ -43,6 +43,7 @@ export function MaisonServicesSection() {
         {services.map((service, index) => (
           <article
             key={service.title}
+            data-scroll-reveal-item
             id={index === 2 ? "boutique" : undefined}
             className="min-w-0"
           >

@@ -1,5 +1,8 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
 import { CurrentYear } from "@/components/current-year";
+import { usePathname } from "next/navigation";
 
 const footerLinks = [
   {
@@ -31,6 +34,9 @@ const footerLinks = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+  const sectionHref = (href: string) => (pathname === "/" ? href : `/${href}`);
+
   return (
     <footer className="overflow-hidden bg-[#07261b] text-[#f4f0e7]">
       <div className="mx-auto max-w-[1500px] px-6 pt-12 sm:px-[5.5%] sm:pt-20">
@@ -61,7 +67,7 @@ export function Footer() {
                   {group.links.map((link) => (
                     <li key={link.label}>
                       <a
-                        href={link.href}
+                        href={sectionHref(link.href)}
                         className="footer-link font-serif text-[16px] leading-[1.35] text-[#f4f0e7]/82 hover:text-[#d0b36f] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#d0b36f] sm:text-[17px]"
                       >
                         {link.label}
@@ -84,7 +90,9 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-5 border-t border-[#f4f0e7]/20 py-7 text-[11px] text-[#f4f0e7]/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© <CurrentYear /> Orélia. All rights reserved.</p>
+          <p>
+            © <CurrentYear /> Orélia. All rights reserved.
+          </p>
           <a
             href="mailto:concierge@orelia.com"
             className="hidden text-[#f4f0e7]/75 transition-colors hover:text-[#d0b36f] sm:inline"
@@ -92,7 +100,7 @@ export function Footer() {
             concierge@orelia.com
           </a>
           <a
-            href="#top"
+            href={sectionHref("#top")}
             className="inline-flex items-center gap-2 self-start font-semibold uppercase tracking-[0.16em] text-[#d0b36f] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#d0b36f]"
           >
             Back to top

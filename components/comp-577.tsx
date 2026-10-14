@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Heart, Menu, Search, ShoppingBag, X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,8 +35,13 @@ const desktopNavigationLinks = navigationLinks.filter(({ label }) =>
 );
 
 function scrollToSectionAfterClose(href: string, closeDrawer: () => void) {
-  const sectionId = href.slice(1);
   closeDrawer();
+  if (href.startsWith("/#")) {
+    window.location.assign(href);
+    return;
+  }
+
+  const sectionId = href.slice(1);
   window.history.pushState(null, "", href);
 
   window.setTimeout(() => {
@@ -53,6 +59,9 @@ function scrollToSectionAfterClose(href: string, closeDrawer: () => void) {
 
 export default function Component() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const sectionHref = (href: string) =>
+    pathname === "/" ? href : `/${href}`;
 
   return (
     <header className="relative z-10 flex h-[72px] items-center justify-between border-b border-white/10 bg-[#080907] px-5 sm:px-[5.5%]">
@@ -94,10 +103,10 @@ export default function Component() {
                 <li key={link.href}>
                   <SheetClose asChild>
                     <a
-                      href={link.href}
+                      href={sectionHref(link.href)}
                       onClick={(event) => {
                         event.preventDefault();
-                        scrollToSectionAfterClose(link.href, () =>
+                        scrollToSectionAfterClose(sectionHref(link.href), () =>
                           setMenuOpen(false),
                         );
                       }}
@@ -122,10 +131,10 @@ export default function Component() {
             </p>
             <SheetClose asChild>
               <a
-                href="#contact"
+                href={sectionHref("#contact")}
                 onClick={(event) => {
                   event.preventDefault();
-                  scrollToSectionAfterClose("#contact", () =>
+                  scrollToSectionAfterClose(sectionHref("#contact"), () =>
                     setMenuOpen(false),
                   );
                 }}
@@ -143,7 +152,7 @@ export default function Component() {
           {desktopNavigationLinks.map((link) => (
             <NavigationMenuItem key={link.label}>
               <NavigationMenuLink
-                href={link.href}
+                href={sectionHref(link.href)}
                 className="header-link p-0 text-[12px] font-medium uppercase tracking-[0.1em] text-white/90 hover:bg-transparent hover:text-[#d7b878] focus-visible:text-[#d7b878]"
               >
                 {link.label}
@@ -154,7 +163,7 @@ export default function Component() {
       </NavigationMenu>
 
       <a
-        href="#top"
+        href={sectionHref("#top")}
         aria-label="Orélia home"
         className="absolute left-1/2 -translate-x-1/2 font-serif text-[23px] tracking-[0.18em] text-[#e5cf9f] sm:text-[32px] sm:tracking-[0.24em]"
       >
@@ -179,7 +188,7 @@ export default function Component() {
           variant="ghost"
           size="icon"
           aria-label="Your wishlist"
-          className="hidden size-8 text-white hover:bg-white/10 hover:text-[#e5cf9f] lg:inline-flex"
+          className="size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:size-8"
         >
           <Heart className="size-5" strokeWidth={1.5} />
         </Button>

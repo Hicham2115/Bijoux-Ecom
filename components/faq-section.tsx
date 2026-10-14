@@ -61,6 +61,7 @@ export function FaqSection() {
           {questions.map((item) => (
             <details
               key={item.question}
+              data-scroll-reveal-item
               className="group border-b border-[#cfc6b8]"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 font-serif text-[18px] leading-[1.35] transition-colors duration-200 hover:text-[#8b7042] focus-visible:text-[#8b7042] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#aa874b] marker:content-none sm:py-6 sm:text-[20px] [&::-webkit-details-marker]:hidden">

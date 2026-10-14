@@ -114,6 +114,7 @@ export function FeaturedJewelrySection() {
           {products.map((product) => (
             <article
               key={product.name}
+              data-scroll-reveal-item
               className="category-card featured-jewelry-card min-w-0"
             >
               <div className="group block">
@@ -169,6 +170,14 @@ export function FeaturedJewelrySection() {
             ? `${addedProduct} added to your bag. ${addedProducts.length} ${addedProducts.length === 1 ? "item" : "items"} in your bag.`
             : ""}
         </p>
+        <div className="mt-5 flex justify-end">
+          <a
+            href="/products"
+            className="inline-flex min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#07261b] transition-colors hover:text-[#927342] sm:text-[11px]"
+          >
+            View all pieces <span aria-hidden="true" className="ml-3 text-base">↗</span>
+          </a>
+        </div>
       </div>
     </section>
   );

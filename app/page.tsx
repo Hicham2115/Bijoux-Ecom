@@ -24,10 +24,9 @@ export default function Home() {
         <CategorySection />
         <MenCampaignSection />
         <WomenCampaignSection />
-        <MaisonServicesSection />
         <FeaturedJewelrySection />
-
         <MaisonSection />
+        <MaisonServicesSection />
         <FaqSection />
         <ContactSection />
         <ClosingCtaSection />

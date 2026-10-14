@@ -7,7 +7,9 @@ export function ScrollReveal() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (reducedMotion.matches || !("IntersectionObserver" in window)) return;
 
-    const sections = document.querySelectorAll("main > section");
+    const sections = document.querySelectorAll(
+      'main > section:not([data-no-scroll-reveal]), main [data-scroll-reveal-item], body > footer',
+    );
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

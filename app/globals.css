@@ -149,17 +149,31 @@ html::-webkit-scrollbar-thumb:hover {
   animation: announcement-marquee 150s linear infinite;
 }
 
-main > section[data-scroll-reveal="pending"] {
+[data-scroll-reveal="pending"] {
   opacity: 0;
   transform: translateY(26px);
 }
 
-main > section[data-scroll-reveal="visible"] {
+[data-scroll-reveal="visible"] {
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-enter {
+  animation: hero-text-arrive 1050ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter--1 { animation-delay: 180ms; }
+.hero-enter--2 { animation-delay: 420ms; }
+.hero-enter--3 { animation-delay: 680ms; }
+[data-hero-enter="4"] { animation: hero-text-arrive 1050ms 900ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes hero-text-arrive {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .category-carousel,
@@ -247,13 +261,18 @@ details[open] .faq-answer-inner {
     animation: none;
   }
 
-  main > section[data-scroll-reveal="pending"] {
+  [data-scroll-reveal="pending"] {
     opacity: 1;
     transform: none;
   }
 
-  main > section[data-scroll-reveal="visible"] {
+  [data-scroll-reveal="visible"] {
     transition: none;
+  }
+
+  .hero-enter,
+  [data-hero-enter="4"] {
+    animation: none;
   }
 
   .announcement-track > div:nth-child(2) {

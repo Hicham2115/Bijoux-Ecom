@@ -6,6 +6,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
+      data-no-scroll-reveal
       className="relative isolate flex min-h-[640px] items-end overflow-hidden bg-[#07261b] md:min-h-[min(760px,calc(100svh-104px))] md:items-center"
     >
       <div className="absolute inset-0 -z-20">
@@ -27,20 +28,20 @@ export function Hero() {
         />
       </div>
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,38,27,0.06)_0%,rgba(7,38,27,0.06)_28%,rgba(7,38,27,0.58)_52%,#07261b_86%)] md:bg-[linear-gradient(90deg,rgba(7,38,27,0.6)_0%,rgba(7,38,27,0.15)_50%,transparent_80%)]" />
-      <div className="orelia-eyebrow absolute left-6 top-8 flex items-center gap-3 text-[#e8d09e] md:hidden">
+      <div className="hero-enter hero-enter--1 orelia-eyebrow absolute left-6 top-8 flex items-center gap-3 text-[#e8d09e] md:hidden">
         <span className="h-px w-8 bg-[#d5ad5c]" />
         <span>Jewelry for every expression</span>
       </div>
 
       <div className="relative mx-auto w-full max-w-[1600px] px-6 pb-12 pt-[clamp(250px,40svh,350px)] sm:px-[5.5%] md:py-20">
         <div className="max-w-[590px]">
-          <div className="orelia-eyebrow mb-8 hidden items-center gap-4 text-[#e8d09e] md:flex">
+          <div className="hero-enter hero-enter--1 orelia-eyebrow mb-8 hidden items-center gap-4 text-[#e8d09e] md:flex">
             <span className="h-px w-10 bg-[#d5ad5c]" />
             <span>Jewelry for a choice, a brighter you</span>
           </div>
           <h1
             id="hero-title"
-            className="orelia-heading text-[clamp(3.45rem,15vw,4.7rem)] leading-[0.88] tracking-[-0.045em] text-[#f8f5ee] md:text-[clamp(3.6rem,8vw,7.5rem)] md:leading-[0.84]"
+            className="hero-enter hero-enter--2 orelia-heading text-[clamp(3.45rem,15vw,4.7rem)] leading-[0.88] tracking-[-0.045em] text-[#f8f5ee] md:text-[clamp(3.6rem,8vw,7.5rem)] md:leading-[0.84]"
           >
             GOLD,
             <br />
@@ -48,12 +49,13 @@ export function Hero() {
             <br />
             <span className="italic text-[#d5ad5c]">RULES</span>
           </h1>
-          <p className="orelia-copy mt-6 max-w-[370px] text-white/85 md:mt-8">
+          <p className="hero-enter hero-enter--3 orelia-copy mt-6 max-w-[370px] text-white/85 md:mt-8">
             Modern jewelry for every expression. Timeless design. A more open
             world.
           </p>
           <Button
-            render={<a href="#collection" />}
+            data-hero-enter="4"
+            render={<a href="/products" />}
             nativeButton={false}
             variant="outline"
             className="orelia-action orelia-button group mt-8 h-[54px] gap-5 rounded-none border-[#d5ad5c] bg-[#07261b]/30 px-6 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] md:mt-10 md:border-white/75 md:bg-transparent"

@@ -110,7 +110,7 @@ export function CategorySection() {
           aria-label="Jewelry categories"
         >
           {categories.map((category) => (
-            <article key={category.name} className="category-card min-w-0">
+            <article key={category.name} data-scroll-reveal-item className="category-card min-w-0">
               <div className="group block">
                 <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
                   <Image
