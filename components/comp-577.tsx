@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Heart, Menu, Search, ShoppingBag, X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -32,10 +33,30 @@ const desktopNavigationLinks = navigationLinks.filter(({ label }) =>
   ["Women", "Men", "Collections"].includes(label),
 );
 
+function scrollToSectionAfterClose(href: string, closeDrawer: () => void) {
+  const sectionId = href.slice(1);
+  closeDrawer();
+  window.history.pushState(null, "", href);
+
+  window.setTimeout(() => {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    window.scrollTo({
+      top: section.getBoundingClientRect().top + window.scrollY,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  }, 300);
+}
+
 export default function Component() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="relative z-10 flex h-[72px] items-center justify-between border-b border-white/10 bg-[#080907] px-5 sm:px-[5.5%]">
-      <Sheet>
+      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
         <SheetTrigger asChild>
           <Button
             className="size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] md:hidden"
@@ -74,6 +95,12 @@ export default function Component() {
                   <SheetClose asChild>
                     <a
                       href={link.href}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        scrollToSectionAfterClose(link.href, () =>
+                          setMenuOpen(false),
+                        );
+                      }}
                       className="group flex min-h-[58px] items-center justify-between text-[13px] uppercase tracking-[0.14em] text-white/85 transition-colors hover:text-[#e5cf9f] focus-visible:text-[#e5cf9f] focus-visible:outline-none"
                     >
                       <span className="flex items-center gap-4">
@@ -96,6 +123,12 @@ export default function Component() {
             <SheetClose asChild>
               <a
                 href="#contact"
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollToSectionAfterClose("#contact", () =>
+                    setMenuOpen(false),
+                  );
+                }}
                 className="mt-4 inline-flex min-h-11 items-center border-b border-[#d7b878]/70 font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-[#e5cf9f]"
               >
                 Speak with our concierge <ArrowUpRight className="ml-3 size-4" />

@@ -70,7 +70,7 @@ export function ContactSection() {
         className="contact-paper mx-auto grid max-w-[1380px] overflow-hidden rounded-[18px] border border-[#e2d5bf] text-[#07261b] shadow-[0_24px_70px_rgba(0,0,0,0.18)] lg:grid-cols-[1.15fr_0.85fr]"
       >
         <div className="flex flex-col px-7 py-10 sm:px-12 sm:py-12 lg:min-h-[660px] lg:justify-between lg:px-[8%] lg:py-14">
-          <div className="mx-auto max-w-[700px] text-center lg:mt-6">
+          <div className="mx-auto max-w-[700px] text-center lg:mt-20">
             <p
               style={{
                 fontFamily:
@@ -90,6 +90,12 @@ export function ContactSection() {
               Every piece has a story. From finding the right piece or size to
               caring for a favorite or choosing a thoughtful gift, our
               specialists are here to help.
+            </p>
+          </div>
+          <div className="mt-14 border-t border-[#9b845d]/45 pt-5 lg:mt-0">
+            <p className="orelia-eyebrow text-[#927342]">The Orélia promise</p>
+            <p className="mt-3 font-serif text-[clamp(1.15rem,1.7vw,1.55rem)] italic leading-snug text-[#52665a]">
+              Considered care, at every step.
             </p>
           </div>
         </div>
