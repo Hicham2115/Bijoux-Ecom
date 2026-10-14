@@ -10,6 +10,7 @@ import { MaisonServicesSection } from "@/components/maison-services-section";
 import { FaqSection } from "@/components/faq-section";
 import { ContactSection } from "@/components/contact-section";
 import { ClosingCtaSection } from "@/components/closing-cta-section";
+import { ReviewsSection } from "@/components/reviews-section";
 import { Footer } from "@/components/footer";
 import { Header } from "@/layout/header";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -55,6 +56,7 @@ export default function Home() {
         <CategorySection />
         <MaisonSection />
         <MaisonServicesSection />
+        <ReviewsSection />
         <FaqSection />
         <ContactSection />
         <ClosingCtaSection />

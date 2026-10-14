@@ -23,7 +23,7 @@ const navigationLinks = [
   { href: "#women", label: "Women" },
   { href: "#men", label: "Men" },
   { href: "#categories", label: "Categories" },
-  { href: "#collection", label: "Collections" },
+  { href: "/products", label: "Collections" },
   { href: "#maison", label: "Our Maison" },
   { href: "#services", label: "Services" },
   { href: "#faq", label: "FAQs" },
@@ -36,7 +36,7 @@ const desktopNavigationLinks = navigationLinks.filter(({ label }) =>
 
 function scrollToSectionAfterClose(href: string, closeDrawer: () => void) {
   closeDrawer();
-  if (href.startsWith("/#")) {
+  if (href.startsWith("/")) {
     window.location.assign(href);
     return;
   }
@@ -61,7 +61,7 @@ export default function Component() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const sectionHref = (href: string) =>
-    pathname === "/" ? href : `/${href}`;
+    href.startsWith("/") || pathname === "/" ? href : `/${href}`;
 
   return (
     <header className="relative z-10 flex h-[72px] items-center justify-between border-b border-white/10 bg-[#080907] px-5 sm:px-[5.5%]">
@@ -172,7 +172,7 @@ export default function Component() {
 
       <div className="flex items-center gap-1.5 sm:gap-5">
         <Button
-          render={<a href="#collection" />}
+          render={<a href={sectionHref("#collection")} />}
           nativeButton={false}
           variant="ghost"
           size="icon"
@@ -183,7 +183,7 @@ export default function Component() {
         </Button>
 
         <Button
-          render={<a href="#wishlist" />}
+          render={<a href="/products" />}
           nativeButton={false}
           variant="ghost"
           size="icon"
@@ -193,7 +193,7 @@ export default function Component() {
           <Heart className="size-5" strokeWidth={1.5} />
         </Button>
         <Button
-          render={<a href="#cart" />}
+          render={<a href="/products" />}
           nativeButton={false}
           variant="ghost"
           size="icon"

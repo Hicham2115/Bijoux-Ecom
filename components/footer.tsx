@@ -35,11 +35,24 @@ const footerLinks = [
 
 export function Footer() {
   const pathname = usePathname();
-  const sectionHref = (href: string) => (pathname === "/" ? href : `/${href}`);
+  const sectionHref = (href: string) =>
+    href.startsWith("/") || pathname === "/" ? href : `/${href}`;
   const conciergeLinks = [
-    { icon: Gem, title: "Personal advice", detail: "Find a piece that feels like you." },
-    { icon: Ruler, title: "Size & care", detail: "Thoughtful help for every piece." },
-    { icon: Gift, title: "Meaningful gifts", detail: "Make their moment memorable." },
+    {
+      icon: Gem,
+      title: "Personal advice",
+      detail: "Find a piece that feels like you.",
+    },
+    {
+      icon: Ruler,
+      title: "Size & care",
+      detail: "Thoughtful help for every piece.",
+    },
+    {
+      icon: Gift,
+      title: "Meaningful gifts",
+      detail: "Make their moment memorable.",
+    },
   ];
 
   return (
@@ -142,6 +155,17 @@ export function Footer() {
           ))}
         </div>
       </nav>
+      <p className="mx-auto max-w-[1440px] px-6 py-4 text-center text-[12px] text-white/70 sm:px-8 lg:px-12">
+        Designed &amp; developed by{" "}
+        <a
+          href="https://www.stallionadvertising.ma/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-20 underline decoration-transparent underline-offset-2 transition-colors duration-200 hover:text-white hover:decoration-teal-400"
+        >
+          Stallion Advertising
+        </a>
+      </p>
     </footer>
   );
 }

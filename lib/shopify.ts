@@ -28,7 +28,10 @@ type ShopifyResponse<T> = {
   errors?: { message: string }[];
 };
 
-async function shopifyQuery<T>(query: string, variables?: Record<string, string>) {
+async function shopifyQuery<T>(
+  query: string,
+  variables?: Record<string, string>,
+) {
   const storeDomain = process.env.SHOPIFY_STORE_DOMAIN;
   const token = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN;
   const version = process.env.SHOPIFY_STOREFRONT_API_VERSION;
@@ -42,7 +45,9 @@ async function shopifyQuery<T>(query: string, variables?: Record<string, string>
 
   let storeUrl: URL;
   try {
-    storeUrl = new URL(storeDomain.startsWith("http") ? storeDomain : `https://${storeDomain}`);
+    storeUrl = new URL(
+      storeDomain.startsWith("http") ? storeDomain : `https://${storeDomain}`,
+    );
   } catch {
     throw new Error("The Shopify store domain is invalid.");
   }
@@ -51,15 +56,18 @@ async function shopifyQuery<T>(query: string, variables?: Record<string, string>
     throw new Error("The Shopify store domain must be a myshopify.com domain.");
   }
 
-  const response = await fetch(`https://${storeUrl.host}/api/${version}/graphql.json`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Shopify-Storefront-Private-Token": token,
+  const response = await fetch(
+    `https://${storeUrl.host}/api/${version}/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Shopify-Storefront-Private-Token": token,
+      },
+      body: JSON.stringify({ query, variables }),
+      cache: "no-store",
     },
-    body: JSON.stringify({ query, variables }),
-    cache: "no-store",
-  });
+  );
 
   if (!response.ok) {
     throw new Error(`Shopify returned status ${response.status}.`);

@@ -104,7 +104,7 @@ export function ShopifyProductPage({
             {optionGroups.map((group) => {
               const isSizeOption = group.name.toLowerCase().includes("size");
               const label = isRing && isSizeOption ? "Ring size" : group.name;
-              return <div key={group.name} className="mt-7 border-t border-[#d7cebf] pt-6 sm:mt-8">
+              return <div key={group.name} id={isRing && isSizeOption ? "size-guide" : undefined} className="mt-7 border-t border-[#d7cebf] pt-6 sm:mt-8">
                 <div className="flex items-center justify-between">
                   <span className="orelia-eyebrow text-[#4b493f]">{label}</span>
                   {isRing && isSizeOption && <a href="#size-guide" className="inline-flex min-h-10 items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#07261b]">Find your size</a>}

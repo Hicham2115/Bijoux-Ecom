@@ -60,7 +60,7 @@ export function SolisRingPage() {
             <div className="mt-7 border-t border-[#d7cebf] pt-6 sm:mt-8">
               <div className="flex items-center justify-between">
                 <label className="orelia-eyebrow text-[#4b493f]" htmlFor="ring-size">Ring size</label>
-                <a href="#size-guide" className="min-h-10 inline-flex items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#07261b]">Find your size</a>
+                <a href="#ring-size" className="min-h-10 inline-flex items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#07261b]">Find your size</a>
               </div>
               <div id="ring-size" className="mt-3 grid grid-cols-5 gap-2" role="group" aria-label="Choose ring size">
                 {sizes.map((size) => (
