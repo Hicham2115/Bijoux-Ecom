@@ -28,6 +28,10 @@ const navigationLinks = [
   { href: "#contact", label: "Contact" },
 ];
 
+const desktopNavigationLinks = navigationLinks.filter(({ label }) =>
+  ["Women", "Men", "Collections"].includes(label),
+);
+
 export default function Component() {
   return (
     <header className="relative z-10 flex h-[72px] items-center justify-between border-b border-white/10 bg-[#080907] px-5 sm:px-[5.5%]">
@@ -63,7 +67,7 @@ export default function Component() {
               </Button>
             </SheetClose>
           </div>
-          <nav aria-label="Main navigation" className="flex-1 py-6">
+          <nav aria-label="Main navigation" className="shrink-0 py-6">
             <ul className="divide-y divide-white/10">
               {navigationLinks.map((link, index) => (
                 <li key={link.href}>
@@ -103,7 +107,7 @@ export default function Component() {
 
       <NavigationMenu viewport={false} className="max-md:hidden">
         <NavigationMenuList className="gap-7">
-          {navigationLinks.map((link) => (
+          {desktopNavigationLinks.map((link) => (
             <NavigationMenuItem key={link.label}>
               <NavigationMenuLink
                 href={link.href}

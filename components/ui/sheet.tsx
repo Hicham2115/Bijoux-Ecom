@@ -36,7 +36,7 @@ function SheetContent({
       <DialogPrimitive.Content
         data-slot="sheet-content"
         className={cn(
-          "fixed inset-y-0 z-50 flex w-[min(88vw,390px)] flex-col border-[#d7b878]/25 bg-[#080907] px-7 py-8 text-[#f4f0e8] shadow-[24px_0_80px_rgba(0,0,0,0.4)] outline-none data-[state=closed]:animate-out data-[state=open]:animate-in",
+          "fixed inset-y-0 z-50 flex max-h-dvh w-[min(88vw,390px)] flex-col overflow-y-auto overscroll-y-contain touch-pan-y border-[#d7b878]/25 bg-[#080907] px-7 py-8 text-[#f4f0e8] shadow-[24px_0_80px_rgba(0,0,0,0.4)] outline-none data-[state=closed]:animate-out data-[state=open]:animate-in",
           side === "left"
             ? "left-0 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left"
             : "right-0 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
