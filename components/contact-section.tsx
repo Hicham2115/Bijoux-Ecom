@@ -1,113 +1,302 @@
+"use client";
+
 import Image from "next/image";
+import { Gem } from "lucide-react";
+import { useForm } from "@tanstack/react-form";
+import { z } from "zod";
+
+const paperStyle = {
+  backgroundColor: "#f5efe3",
+  backgroundImage:
+    'linear-gradient(rgba(245, 239, 227, 0.64), rgba(245, 239, 227, 0.64)), url("/orelia-contact-paper.png")',
+  backgroundSize: "600px 600px",
+};
+
+const fieldStyle = {
+  color: "#07261b",
+  borderBottom: "1px solid #788478",
+};
+
+const contactSchema = z.object({
+  firstName: z.string().trim().min(1, "Enter your first name").max(80),
+  lastName: z.string().trim().max(80),
+  email: z.string().trim().email("Enter a valid email address").max(254),
+  message: z.string().trim().min(1, "Tell us how we can help").max(1200),
+});
+
+function firstError(errors: readonly unknown[]) {
+  const error = errors[0];
+  if (typeof error === "string") return error;
+  if (error && typeof error === "object" && "message" in error) {
+    return String(error.message);
+  }
+  return undefined;
+}
 
 export function ContactSection() {
+  const form = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      message: "",
+    },
+    validators: {
+      onChange: contactSchema,
+      onBlur: contactSchema,
+      onSubmit: contactSchema,
+    },
+    onSubmit: ({ value }) => {
+      const body = [
+        "Name: " + value.firstName.trim() + " " + value.lastName.trim(),
+        "Email: " + value.email.trim(),
+        "",
+        value.message.trim(),
+      ].join("\n");
+      window.location.href =
+        "mailto:concierge@orelia.com?subject=" +
+        encodeURIComponent("Orélia concierge inquiry") +
+        "&body=" +
+        encodeURIComponent(body);
+    },
+  });
+
   return (
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="bg-[radial-gradient(ellipse_at_50%_0%,#123b2e_0%,#06291f_58%)] px-3 py-10 sm:px-[4%] sm:py-16"
+      className="bg-[#07261b] px-3 py-10 sm:px-[4%] sm:py-16"
     >
-      <div className="mx-auto grid max-w-[1380px] overflow-hidden rounded-[20px] border border-[#d0b36f]/45 bg-[#f5f1e9] text-[#171714] shadow-[0_28px_90px_rgba(0,0,0,0.28)] md:min-h-[590px] md:grid-cols-[0.88fr_1.12fr] lg:rounded-[28px]">
-        <div className="relative min-h-[300px] overflow-hidden bg-[#e6dfd3] md:min-h-full">
-          <Image
-            src="/maison-personalized-service.png"
-            alt="A selection of Orélia jewelry against emerald velvet"
-            fill
-            sizes="(max-width: 768px) 100vw, 45vw"
-            className="object-cover object-center transition-transform duration-700 hover:scale-[1.025] motion-reduce:transition-none"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#071c15]/65 via-[#071c15]/5 to-transparent" />
-          <div className="absolute inset-x-5 bottom-5 border border-white/35 p-4 text-[#fffaf0] sm:inset-x-8 sm:bottom-8 sm:p-6">
-            <p className="orelia-eyebrow text-[#e1c887]">
-              The Orélia promise
+      <div
+        style={paperStyle}
+        className="contact-paper mx-auto grid max-w-[1380px] overflow-hidden rounded-[18px] border border-[#e2d5bf] text-[#07261b] shadow-[0_24px_70px_rgba(0,0,0,0.18)] lg:grid-cols-[1.15fr_0.85fr]"
+      >
+        <div className="flex flex-col px-7 py-10 sm:px-12 sm:py-12 lg:min-h-[660px] lg:justify-between lg:px-[8%] lg:py-14">
+          <div className="mx-auto max-w-[700px] text-center lg:mt-6">
+            <p
+              style={{
+                fontFamily:
+                  '"Snell Roundhand", "Apple Chancery", "URW Chancery L", "Brush Script MT", cursive',
+              }}
+              className="contact-script relative z-10 text-[clamp(3.6rem,6.4vw,7rem)] leading-[0.95] text-[#2c8b91]"
+            >
+              A note to our Maison
             </p>
-            <p className="orelia-heading mt-2 max-w-[320px] text-[20px] sm:text-[25px]">
-              Considered care, at every step.
+            <h2
+              id="contact-title"
+              className="orelia-heading -mt-1 text-[clamp(2.2rem,3.8vw,4.15rem)] leading-[1.04] text-[#07261b]"
+            >
+              We would love to hear from you.
+            </h2>
+            <p className="mx-auto mt-6 max-w-[540px] font-serif text-[15px] leading-[1.55] text-[#5f5a51] sm:text-[16px]">
+              Every piece has a story. From finding the right piece or size to
+              caring for a favorite or choosing a thoughtful gift, our
+              specialists are here to help.
             </p>
           </div>
         </div>
 
-        <div className="flex items-center px-6 py-10 sm:px-10 sm:py-14 lg:px-[12%] lg:py-16">
-          <div className="w-full max-w-[620px]">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-[#aa874b]" />
-              <p className="orelia-eyebrow text-[#8b7042]">
-                Personal assistance
+        <div className="border-t border-dashed border-[#647267] px-7 pb-10 pt-8 sm:px-10 sm:pb-12 sm:pt-10 lg:border-l lg:border-t-0 lg:px-[8%] lg:py-10">
+          <Image
+            src="/orelia-contact-stamps.png"
+            alt=""
+            aria-hidden="true"
+            width={2022}
+            height={778}
+            sizes="(max-width: 1024px) 90vw, 540px"
+            className="mx-auto h-auto w-full max-w-[490px]"
+          />
+
+          <form
+            noValidate
+            onSubmit={(event) => {
+              event.preventDefault();
+              void form.handleSubmit();
+            }}
+            className="mt-8 space-y-5 sm:mt-10"
+          >
+            <form.Field name="firstName">
+              {(field) => {
+                const error = field.state.meta.isTouched
+                  ? firstError(field.state.meta.errors)
+                  : undefined;
+                return (
+                  <div>
+                    <label
+                      htmlFor={field.name}
+                      className="block font-sans text-[15px] text-[#31463a]"
+                    >
+                      First name <span aria-hidden="true">*</span>
+                    </label>
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      type="text"
+                      autoComplete="given-name"
+                      aria-required="true"
+                      aria-invalid={Boolean(error)}
+                      aria-describedby={
+                        error ? "contact-first-name-error" : undefined
+                      }
+                      maxLength={80}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(event) =>
+                        field.handleChange(event.target.value)
+                      }
+                      className="contact-line-field h-8"
+                      style={fieldStyle}
+                    />
+                    <p
+                      id="contact-first-name-error"
+                      role={error ? "alert" : undefined}
+                      className="mt-1 min-h-4 text-[12px] leading-4 text-[#a43c08]"
+                    >
+                      {error ?? "\u00a0"}
+                    </p>
+                  </div>
+                );
+              }}
+            </form.Field>
+            <form.Field name="lastName">
+              {(field) => {
+                const error = field.state.meta.isTouched
+                  ? firstError(field.state.meta.errors)
+                  : undefined;
+                return (
+                  <div>
+                    <label
+                      htmlFor={field.name}
+                      className="block font-sans text-[15px] text-[#31463a]"
+                    >
+                      Last name
+                    </label>
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      type="text"
+                      autoComplete="family-name"
+                      aria-invalid={Boolean(error)}
+                      aria-describedby={
+                        error ? "contact-last-name-error" : undefined
+                      }
+                      maxLength={80}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(event) =>
+                        field.handleChange(event.target.value)
+                      }
+                      className="contact-line-field h-8"
+                      style={fieldStyle}
+                    />
+                    <p
+                      id="contact-last-name-error"
+                      role={error ? "alert" : undefined}
+                      className="mt-1 min-h-4 text-[12px] leading-4 text-[#a43c08]"
+                    >
+                      {error ?? "\u00a0"}
+                    </p>
+                  </div>
+                );
+              }}
+            </form.Field>
+            <form.Field name="email">
+              {(field) => {
+                const error = field.state.meta.isTouched
+                  ? firstError(field.state.meta.errors)
+                  : undefined;
+                return (
+                  <div>
+                    <label
+                      htmlFor={field.name}
+                      className="block font-sans text-[15px] text-[#31463a]"
+                    >
+                      Email <span aria-hidden="true">*</span>
+                    </label>
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      type="email"
+                      autoComplete="email"
+                      aria-required="true"
+                      aria-invalid={Boolean(error)}
+                      aria-describedby={
+                        error ? "contact-email-error" : undefined
+                      }
+                      maxLength={254}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(event) =>
+                        field.handleChange(event.target.value)
+                      }
+                      className="contact-line-field h-8"
+                      style={fieldStyle}
+                    />
+                    <p
+                      id="contact-email-error"
+                      role={error ? "alert" : undefined}
+                      className="mt-1 min-h-4 text-[12px] leading-4 text-[#a43c08]"
+                    >
+                      {error ?? "\u00a0"}
+                    </p>
+                  </div>
+                );
+              }}
+            </form.Field>
+            <form.Field name="message">
+              {(field) => {
+                const error = field.state.meta.isTouched
+                  ? firstError(field.state.meta.errors)
+                  : undefined;
+                return (
+                  <div>
+                    <label
+                      htmlFor={field.name}
+                      className="block font-sans text-[15px] text-[#31463a]"
+                    >
+                      How can we help? <span aria-hidden="true">*</span>
+                    </label>
+                    <textarea
+                      id={field.name}
+                      name={field.name}
+                      rows={2}
+                      aria-required="true"
+                      aria-invalid={Boolean(error)}
+                      aria-describedby={
+                        error ? "contact-message-error" : undefined
+                      }
+                      maxLength={1200}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(event) =>
+                        field.handleChange(event.target.value)
+                      }
+                      className="contact-line-field min-h-[72px] resize-y pt-2 leading-relaxed"
+                      style={fieldStyle}
+                    />
+                    <p
+                      id="contact-message-error"
+                      role={error ? "alert" : undefined}
+                      className="mt-1 min-h-4 text-[12px] leading-4 text-[#a43c08]"
+                    >
+                      {error ?? "\u00a0"}
+                    </p>
+                  </div>
+                );
+              }}
+            </form.Field>
+            <div className="flex flex-col gap-3 pt-2 sm:items-end">
+              <button
+                type="submit"
+                className="orelia-action orelia-button inline-flex h-[50px] items-center justify-center self-end rounded-[12px] border border-[#07261b] bg-transparent px-8 text-[#07261b] hover:bg-[#07261b] hover:text-[#f4eee3]"
+              >
+                Send message
+              </button>
+              <p className="text-right font-sans text-[11px] text-[#667064]">
+                Opens your email app to send.
               </p>
             </div>
-            <h2
-              id="contact-title"
-              className="orelia-heading mt-4 max-w-[500px] text-[clamp(2.35rem,4.3vw,4rem)]"
-            >
-              Need a little <span className="text-[#8b7042]">guidance?</span>
-            </h2>
-            <p className="orelia-copy mt-3 max-w-[440px] text-[#5d574f]">
-              Contact us and our jewelry specialists will be happy to help.
-            </p>
-
-            <form action="mailto:concierge@orelia.com" method="post" encType="text/plain" className="mt-7 space-y-4 sm:mt-9 sm:space-y-5">
-              <div>
-                <label
-                  htmlFor="contact-name"
-                  className="orelia-eyebrow mb-2 block text-[#4b463f]"
-                >
-                  Name and surname
-                </label>
-                <input
-                  id="contact-name"
-                  name="name"
-                  autoComplete="name"
-                  required
-                  className="h-11 w-full border border-[#e5dcd2] bg-[#eee8e2] px-3 text-[14px] outline-none transition-colors focus:border-[#aa874b] focus:bg-white"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="contact-email"
-                  className="orelia-eyebrow mb-2 block text-[#4b463f]"
-                >
-                  Email
-                </label>
-                <input
-                  id="contact-email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="h-11 w-full border border-[#e5dcd2] bg-[#eee8e2] px-3 text-[14px] outline-none transition-colors focus:border-[#aa874b] focus:bg-white"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="contact-message"
-                  className="orelia-eyebrow mb-2 block text-[#4b463f]"
-                >
-                  How can we help?
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="w-full resize-y border border-[#e5dcd2] bg-[#eee8e2] px-3 py-3 text-[14px] leading-relaxed outline-none transition-colors focus:border-[#aa874b] focus:bg-white"
-                />
-              </div>
-              <div className="flex flex-col-reverse gap-5 border-t border-[#d8d0c4] pt-5 sm:flex-row sm:items-center sm:justify-between">
-                <a
-                  href="tel:+18005550148"
-                  className="orelia-action text-[#5d574f] underline decoration-[#aa874b]/60 underline-offset-4 transition-colors hover:text-[#8b7042]"
-                >
-                  Or call +1 (800) 555-0148
-                </a>
-                <button
-                  type="submit"
-                  className="orelia-action orelia-button inline-flex h-12 w-full items-center justify-center bg-[#aa874b] px-8 text-white hover:bg-[#866632] sm:w-auto"
-                >
-                  Send message
-                </button>
-              </div>
-            </form>
-          </div>
+          </form>
         </div>
       </div>
     </section>

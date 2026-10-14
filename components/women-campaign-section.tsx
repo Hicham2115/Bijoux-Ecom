@@ -47,10 +47,10 @@ export function WomenCampaignSection() {
           <Button
             render={<a href="#collection" />}
             nativeButton={false}
-            className="orelia-action orelia-button group mt-9 h-[54px] w-full justify-between rounded-none border border-[#06402e] bg-[#06402e] px-7 text-white hover:border-[#0b563e] hover:bg-[#0b563e] sm:mt-10 sm:w-auto sm:min-w-[260px]"
+            className="orelia-action orelia-button group mt-9 h-[54px] gap-5 rounded-none border border-[#06402e] bg-[#06402e] px-6 text-white hover:border-[#0b563e] hover:bg-[#0b563e] sm:mt-10"
           >
             Shop women&apos;s{" "}
-            <ArrowRight className="ml-8 size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" strokeWidth={1.5} />
+            <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" strokeWidth={1.5} />
           </Button>
         </div>
       </div>

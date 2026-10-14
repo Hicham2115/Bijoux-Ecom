@@ -5,6 +5,7 @@
 html {
   scrollbar-color: #aa874b #eee8df;
   scrollbar-width: thin;
+  scroll-behavior: smooth;
 }
 
 html::-webkit-scrollbar {
@@ -54,6 +55,31 @@ html::-webkit-scrollbar-thumb:hover {
   .orelia-button:focus-visible {
     outline: 2px solid #d0b36f;
     outline-offset: 4px;
+  }
+
+  .contact-paper {
+    background-color: #f5efe3;
+    background-image: url("/orelia-contact-paper.png");
+    background-size: 600px 600px;
+  }
+
+  .contact-script {
+    font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", "Brush Script MT", cursive;
+  }
+
+  .contact-line-field {
+    @apply w-full rounded-none bg-transparent px-0 font-sans text-[16px] text-[#07261b] outline-none transition-[border-color,box-shadow] duration-200;
+    border: 0;
+    border-bottom: 1px solid #788478;
+  }
+
+  .contact-line-field:hover {
+    border-bottom-color: #2c8b91;
+  }
+
+  .contact-line-field:focus {
+    border-bottom-color: #2c8b91;
+    box-shadow: 0 1px 0 #2c8b91;
   }
 
   .header-link {
@@ -123,32 +149,38 @@ html::-webkit-scrollbar-thumb:hover {
   animation: announcement-marquee 150s linear infinite;
 }
 
+.category-carousel,
 .featured-jewelry-carousel {
   scrollbar-width: auto;
   scrollbar-color: #aa874b #e5dfd4;
   scroll-snap-type: x mandatory;
 }
 
+.category-carousel::-webkit-scrollbar,
 .featured-jewelry-carousel::-webkit-scrollbar {
   height: 9px;
 }
 
+.category-carousel::-webkit-scrollbar-track,
 .featured-jewelry-carousel::-webkit-scrollbar-track {
   border: 2px solid #f5f1e9;
   border-radius: 999px;
   background: #e5dfd4;
 }
 
+.category-carousel::-webkit-scrollbar-thumb,
 .featured-jewelry-carousel::-webkit-scrollbar-thumb {
   border-radius: 999px;
   border: 2px solid #e5dfd4;
   background: #aa874b;
 }
 
+.category-carousel::-webkit-scrollbar-thumb:hover,
 .featured-jewelry-carousel::-webkit-scrollbar-thumb:hover {
   background: #80622f;
 }
 
+.category-card,
 .featured-jewelry-card {
   flex: 0 0 72%;
   scroll-snap-align: start;
@@ -180,18 +212,24 @@ details[open] .faq-answer-inner {
 }
 
 @media (min-width: 640px) {
+  .category-card,
   .featured-jewelry-card {
     flex-basis: calc((100% - 2.5rem) / 3);
   }
 }
 
 @media (min-width: 1024px) {
+  .category-card,
   .featured-jewelry-card {
     flex-basis: calc((100% - 6.25rem) / 6);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .announcement-track {
     animation: none;
   }

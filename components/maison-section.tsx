@@ -40,7 +40,7 @@ export function MaisonSection() {
           render={<a href="#maison" />}
           nativeButton={false}
           variant="outline"
-          className="orelia-action orelia-button mt-7 h-[50px] min-w-[210px] rounded-none border-white/75 bg-transparent px-6 text-white hover:border-[#d0b36f] hover:bg-[#d0b36f] hover:text-[#10251d] sm:mt-8"
+          className="orelia-action orelia-button mt-7 h-[50px] rounded-none border-white/75 bg-transparent px-6 text-white hover:border-[#d0b36f] hover:bg-[#d0b36f] hover:text-[#10251d] sm:mt-8"
         >
           Our commitment
         </Button>

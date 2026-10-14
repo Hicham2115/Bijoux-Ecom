@@ -1,4 +1,5 @@
 import { Hero } from "@/components/hero";
+import { CategorySection } from "@/components/category-section";
 import { FeaturedJewelrySection } from "@/components/featured-jewelry-section";
 import { MenCampaignSection } from "@/components/men-campaign-section";
 import { WomenCampaignSection } from "@/components/women-campaign-section";
@@ -18,11 +19,13 @@ export default function Home() {
       </div>
       <main className="min-h-screen bg-[#080907] text-white">
         <Hero />
-        <FeaturedJewelrySection />
+        <CategorySection />
         <MenCampaignSection />
         <WomenCampaignSection />
-        <MaisonSection />
         <MaisonServicesSection />
+        <FeaturedJewelrySection />
+
+        <MaisonSection />
         <FaqSection />
         <ContactSection />
         <ClosingCtaSection />

@@ -56,10 +56,13 @@ export function Hero() {
             render={<a href="#collection" />}
             nativeButton={false}
             variant="outline"
-            className="orelia-action orelia-button group mt-8 h-[54px] w-full justify-between rounded-none border-[#d5ad5c] bg-[#07261b]/30 px-7 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] sm:w-auto sm:min-w-[290px] md:mt-10 md:border-white/75 md:bg-transparent"
+            className="orelia-action orelia-button group mt-8 h-[54px] gap-5 rounded-none border-[#d5ad5c] bg-[#07261b]/30 px-6 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] md:mt-10 md:border-white/75 md:bg-transparent"
           >
             Shop the collection{" "}
-            <ArrowRight className="ml-4 size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" strokeWidth={1.5} />
+            <ArrowRight
+              className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+              strokeWidth={1.5}
+            />
           </Button>
         </div>
       </div>

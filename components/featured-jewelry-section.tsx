@@ -72,7 +72,10 @@ export function FeaturedJewelrySection() {
       <div className="mx-auto w-full px-5 sm:px-[3.6%]">
         <div className="mb-7 flex items-center justify-between gap-4 sm:mb-8">
           <div className="flex items-center gap-3 sm:gap-8">
-            <span aria-hidden="true" className="h-px w-6 bg-[#b99045] sm:w-14" />
+            <span
+              aria-hidden="true"
+              className="h-px w-6 bg-[#b99045] sm:w-14"
+            />
             <h2
               id="featured-jewelry-title"
               className="orelia-eyebrow max-[360px]:tracking-[0.14em]"
@@ -109,7 +112,10 @@ export function FeaturedJewelrySection() {
           aria-label="Featured jewelry products"
         >
           {products.map((product) => (
-            <article key={product.name} className="featured-jewelry-card min-w-0">
+            <article
+              key={product.name}
+              className="category-card featured-jewelry-card min-w-0"
+            >
               <div className="group block">
                 <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
                   <Image
@@ -120,9 +126,7 @@ export function FeaturedJewelrySection() {
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transition-none"
                   />
                 </div>
-                <h3 className="orelia-eyebrow mt-3 sm:mt-4">
-                  {product.name}
-                </h3>
+                <h3 className="orelia-eyebrow mt-3 sm:mt-4">{product.name}</h3>
               </div>
               <p className="mt-1 font-serif text-[13px] leading-[1.5] text-[#5f5a51] sm:text-[14px]">
                 {product.detail}

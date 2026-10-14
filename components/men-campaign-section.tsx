@@ -48,10 +48,13 @@ export function MenCampaignSection() {
             render={<a href="#collection" />}
             nativeButton={false}
             variant="outline"
-            className="orelia-action orelia-button group mt-9 h-[54px] w-full justify-between rounded-none border-white/75 bg-transparent px-7 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] sm:mt-10 sm:w-auto sm:min-w-[245px]"
+            className="orelia-action orelia-button group mt-9 h-[54px] gap-5 rounded-none border-white/75 bg-transparent px-6 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] sm:mt-10"
           >
             Shop men&apos;s{" "}
-            <ArrowRight className="ml-8 size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" strokeWidth={1.5} />
+            <ArrowRight
+              className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+              strokeWidth={1.5}
+            />
           </Button>
         </div>
       </div>
