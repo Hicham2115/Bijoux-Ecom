@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Footer } from "@/components/footer";
 import { Header } from "@/layout/header";
 import { SolisRingPage } from "@/components/solis-ring-page";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   description: "Une émeraude lumineuse sertie dans de l’or 18 carats. Découvrez la bague Solis d’Orélia.",
 };
 
-export default async function SolisRingRoute() {
+async function SolisRingContent() {
   await connection();
   let product = null;
   try {
@@ -19,10 +20,16 @@ export default async function SolisRingRoute() {
     product = null;
   }
 
+  return <SolisRingPage product={product} />;
+}
+
+export default function SolisRingRoute() {
   return (
     <>
       <div id="top"><Header /></div>
-      <SolisRingPage product={product} />
+      <Suspense fallback={<main className="min-h-[75vh] bg-[#f5f1e9]" aria-label="Chargement du produit" />}>
+        <SolisRingContent />
+      </Suspense>
       <Footer />
     </>
   );
