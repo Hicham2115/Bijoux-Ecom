@@ -1,30 +1,46 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
     <section
-      id="top"
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-[680px] items-center overflow-hidden sm:min-h-[min(760px,calc(100svh-104px))]"
+      className="relative isolate flex min-h-[640px] items-end overflow-hidden bg-[#07261b] md:min-h-[min(760px,calc(100svh-104px))] md:items-center"
     >
-      <div className="absolute inset-0 -z-20 bg-[#073b2a]" />
-      <div
-        className="absolute inset-0 -z-10 bg-cover bg-[center_35%] sm:bg-center"
-        style={{ backgroundImage: "url('/orelia-hero.png')" }}
-        role="img"
-        aria-label="Two models wearing gold jewelry against an emerald background"
-      />
+      <div className="absolute inset-0 -z-20">
+        <Image
+          src="/orelia-hero-mobile.png"
+          alt="Two models in gold jewelry against a deep emerald backdrop"
+          fill
+          priority
+          sizes="(max-width: 767px) 100vw, 1px"
+          className="object-cover object-center md:hidden"
+        />
+        <Image
+          src="/orelia-hero.png"
+          alt="Two models wearing gold jewelry against an emerald background"
+          fill
+          priority
+          sizes="(min-width: 768px) 100vw, 1px"
+          className="hidden object-cover object-[center_35%] md:block"
+        />
+      </div>
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,38,27,0.06)_0%,rgba(7,38,27,0.06)_28%,rgba(7,38,27,0.58)_52%,#07261b_86%)] md:bg-[linear-gradient(90deg,rgba(7,38,27,0.6)_0%,rgba(7,38,27,0.15)_50%,transparent_80%)]" />
+      <div className="orelia-eyebrow absolute left-6 top-8 flex items-center gap-3 text-[#e8d09e] md:hidden">
+        <span className="h-px w-8 bg-[#d5ad5c]" />
+        <span>Jewelry for every expression</span>
+      </div>
 
-      <div className="mx-auto w-full max-w-[1600px] px-6 pb-16 pt-20 sm:px-[5.5%] sm:py-20">
+      <div className="relative mx-auto w-full max-w-[1600px] px-6 pb-12 pt-[clamp(250px,40svh,350px)] sm:px-[5.5%] md:py-20">
         <div className="max-w-[590px]">
-          <div className="orelia-eyebrow mb-8 flex items-center gap-4 text-[#e8d09e]">
+          <div className="orelia-eyebrow mb-8 hidden items-center gap-4 text-[#e8d09e] md:flex">
             <span className="h-px w-10 bg-[#d5ad5c]" />
             <span>Jewelry for a choice, a brighter you</span>
           </div>
           <h1
             id="hero-title"
-            className="orelia-heading text-[clamp(3.6rem,8vw,7.5rem)] leading-[0.84] tracking-[-0.045em] text-[#f8f5ee]"
+            className="orelia-heading text-[clamp(3.45rem,15vw,4.7rem)] leading-[0.88] tracking-[-0.045em] text-[#f8f5ee] md:text-[clamp(3.6rem,8vw,7.5rem)] md:leading-[0.84]"
           >
             GOLD,
             <br />
@@ -32,7 +48,7 @@ export function Hero() {
             <br />
             <span className="italic text-[#d5ad5c]">RULES</span>
           </h1>
-          <p className="orelia-copy mt-8 max-w-[370px] text-white/85">
+          <p className="orelia-copy mt-6 max-w-[370px] text-white/85 md:mt-8">
             Modern jewelry for every expression. Timeless design. A more open
             world.
           </p>
@@ -40,10 +56,10 @@ export function Hero() {
             render={<a href="#collection" />}
             nativeButton={false}
             variant="outline"
-            className="orelia-action mt-10 h-[54px] rounded-none border-white/75 bg-transparent px-7 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] sm:min-w-[290px]"
+            className="orelia-action orelia-button group mt-8 h-[54px] w-full justify-between rounded-none border-[#d5ad5c] bg-[#07261b]/30 px-7 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] sm:w-auto sm:min-w-[290px] md:mt-10 md:border-white/75 md:bg-transparent"
           >
             Shop the collection{" "}
-            <ArrowRight className="ml-4 size-4" strokeWidth={1.5} />
+            <ArrowRight className="ml-4 size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" strokeWidth={1.5} />
           </Button>
         </div>
       </div>

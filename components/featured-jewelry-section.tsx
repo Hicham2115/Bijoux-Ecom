@@ -71,11 +71,11 @@ export function FeaturedJewelrySection() {
     >
       <div className="mx-auto w-full px-5 sm:px-[3.6%]">
         <div className="mb-7 flex items-center justify-between gap-4 sm:mb-8">
-          <div className="flex items-center gap-5 sm:gap-8">
-            <span aria-hidden="true" className="h-px w-10 bg-[#b99045] sm:w-14" />
+          <div className="flex items-center gap-3 sm:gap-8">
+            <span aria-hidden="true" className="h-px w-6 bg-[#b99045] sm:w-14" />
             <h2
               id="featured-jewelry-title"
-              className="orelia-eyebrow"
+              className="orelia-eyebrow max-[360px]:tracking-[0.14em]"
             >
               Featured jewelry
             </h2>
@@ -87,7 +87,7 @@ export function FeaturedJewelrySection() {
               size="icon"
               aria-label="Show previous jewelry"
               onClick={() => scrollProducts(-1)}
-              className="size-9 rounded-full border-[#c9c3b8] bg-transparent hover:bg-white sm:size-11"
+              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#07261b] hover:text-white"
             >
               <ArrowLeft className="size-4" strokeWidth={1.5} />
             </Button>
@@ -96,7 +96,7 @@ export function FeaturedJewelrySection() {
               size="icon"
               aria-label="Show more jewelry"
               onClick={() => scrollProducts(1)}
-              className="size-9 rounded-full border-[#c9c3b8] bg-transparent hover:bg-white sm:size-11"
+              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#07261b] hover:text-white"
             >
               <ArrowRight className="size-4" strokeWidth={1.5} />
             </Button>
@@ -148,7 +148,7 @@ export function FeaturedJewelrySection() {
                     );
                     setAddedProduct(product.name);
                   }}
-                  className="size-8 shrink-0 rounded-full hover:bg-[#e8e1d5]"
+                  className="size-11 shrink-0 rounded-full transition-colors hover:bg-[#07261b] hover:text-white sm:size-8"
                 >
                   {addedProducts.includes(product.name) ? (
                     <Check className="size-[18px]" strokeWidth={1.5} />

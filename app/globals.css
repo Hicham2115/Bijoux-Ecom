@@ -43,12 +43,47 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .orelia-action {
-    @apply font-sans text-[10px] font-semibold uppercase tracking-[0.16em];
+    @apply font-sans text-[13px] font-semibold uppercase tracking-[0.1em] sm:text-[14px];
+    line-height: 1.3;
+  }
+
+  .orelia-button {
+    transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+  }
+
+  .orelia-button:focus-visible {
+    outline: 2px solid #d0b36f;
+    outline-offset: 4px;
+  }
+
+  .header-link {
+    position: relative;
+    transition: color 250ms ease;
+  }
+
+  .header-link::after {
+    position: absolute;
+    right: 0;
+    bottom: -7px;
+    left: 0;
+    height: 1px;
+    background: #d7b878;
+    content: "";
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 250ms ease;
+  }
+
+  .header-link:hover::after,
+  .header-link:focus-visible::after {
+    transform: scaleX(1);
   }
 
   .footer-link {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
     transition: color 250ms ease;
   }
 
@@ -68,6 +103,13 @@ html::-webkit-scrollbar-thumb:hover {
   .footer-link:hover::after,
   .footer-link:focus-visible::after {
     transform: scaleX(1);
+  }
+}
+
+@media (hover: hover) {
+  .orelia-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgb(7 38 27 / 18%);
   }
 }
 
@@ -164,8 +206,15 @@ details[open] .faq-answer-inner {
   }
 
   .footer-link,
-  .footer-link::after {
+  .footer-link::after,
+  .header-link,
+  .header-link::after,
+  .orelia-button {
     transition: none;
+  }
+
+  .orelia-button:hover {
+    transform: none;
   }
 }
 

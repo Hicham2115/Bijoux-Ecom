@@ -101,7 +101,7 @@ export function ContactSection() {
                 </a>
                 <button
                   type="submit"
-                  className="orelia-action inline-flex h-12 items-center justify-center bg-[#aa874b] px-8 text-white transition-colors hover:bg-[#866632] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b7042]"
+                  className="orelia-action orelia-button inline-flex h-12 w-full items-center justify-center bg-[#aa874b] px-8 text-white hover:bg-[#866632] sm:w-auto"
                 >
                   Send message
                 </button>

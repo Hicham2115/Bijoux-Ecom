@@ -9,11 +9,17 @@ export function Header() {
           role="region"
           aria-label="Complimentary shipping and returns, lifetime care, a more inclusive luxury"
         >
-          <div className="announcement-track flex w-max items-center hover:[animation-play-state:paused]" aria-hidden="true">
+          <div
+            className="announcement-track flex w-max items-center hover:[animation-play-state:paused]"
+            aria-hidden="true"
+          >
             {[0, 1].map((copy) => (
               <div key={copy} className="flex shrink-0 items-center">
                 {Array.from({ length: 8 }, (_, repeat) => (
-                  <p key={repeat} className="flex shrink-0 items-center gap-5 pr-10 sm:gap-8 sm:pr-16">
+                  <p
+                    key={repeat}
+                    className="flex shrink-0 items-center gap-5 pr-10 sm:gap-8 sm:pr-16"
+                  >
                     <span>Complimentary shipping & returns</span>
                     <span>|</span>
                     <span>Lifetime care</span>

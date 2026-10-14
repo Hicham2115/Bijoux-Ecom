@@ -1,6 +1,7 @@
 "use client";
 
-import { Heart, Menu, Search, ShoppingBag, UserRound } from "lucide-react";
+import { useState } from "react";
+import { Heart, Menu, Search, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -15,18 +16,20 @@ import {
 } from "@/components/ui/popover";
 
 const navigationLinks = [
-  { href: "#collection", label: "Women" },
-  { href: "#collection", label: "Men" },
+  { href: "#women", label: "Women" },
+  { href: "#men", label: "Men" },
   { href: "#collection", label: "Collections" },
 ];
 
 export default function Component() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="relative z-10 flex h-[72px] items-center justify-between border-b border-white/10 bg-[#080907] px-5 sm:px-[5.5%]">
-      <Popover>
+      <Popover open={menuOpen} onOpenChange={setMenuOpen}>
         <PopoverTrigger asChild>
           <Button
-            className="size-8 text-white hover:bg-white/10 hover:text-[#e5cf9f] md:hidden"
+            className="size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] md:hidden"
             size="icon"
             variant="ghost"
             aria-label="Open navigation"
@@ -44,7 +47,8 @@ export default function Component() {
                 <NavigationMenuItem key={link.label}>
                   <NavigationMenuLink
                     href={link.href}
-                    className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/90 hover:bg-white/10 hover:text-[#d7b878]"
+                    onClick={() => setMenuOpen(false)}
+                    className="min-h-11 justify-center text-[12px] font-medium uppercase tracking-[0.1em] text-white/90 hover:bg-white/10 hover:text-[#d7b878]"
                   >
                     {link.label}
                   </NavigationMenuLink>
@@ -61,7 +65,7 @@ export default function Component() {
             <NavigationMenuItem key={link.label}>
               <NavigationMenuLink
                 href={link.href}
-                className="p-0 text-[11px] font-medium uppercase tracking-[0.12em] text-white/90 hover:bg-transparent hover:text-[#d7b878]"
+                className="header-link p-0 text-[12px] font-medium uppercase tracking-[0.1em] text-white/90 hover:bg-transparent hover:text-[#d7b878] focus-visible:text-[#d7b878]"
               >
                 {link.label}
               </NavigationMenuLink>
@@ -73,19 +77,19 @@ export default function Component() {
       <a
         href="#top"
         aria-label="Orélia home"
-        className="absolute left-1/2 -translate-x-1/2 font-serif text-[26px] tracking-[0.24em] text-[#e5cf9f] sm:text-[32px]"
+        className="absolute left-1/2 -translate-x-1/2 font-serif text-[23px] tracking-[0.18em] text-[#e5cf9f] sm:text-[32px] sm:tracking-[0.24em]"
       >
         ORÉLIA
       </a>
 
-      <div className="flex items-center gap-3 sm:gap-5">
+      <div className="flex items-center gap-1.5 sm:gap-5">
         <Button
           render={<a href="#collection" />}
           nativeButton={false}
           variant="ghost"
           size="icon"
           aria-label="Search"
-          className="size-8 text-white hover:bg-white/10 hover:text-[#e5cf9f]"
+          className="hidden size-8 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:inline-flex"
         >
           <Search className="size-5" strokeWidth={1.5} />
         </Button>
@@ -106,7 +110,7 @@ export default function Component() {
           variant="ghost"
           size="icon"
           aria-label="Your shopping bag"
-          className="size-8 text-white hover:bg-white/10 hover:text-[#e5cf9f]"
+          className="size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:size-8"
         >
           <ShoppingBag className="size-5" strokeWidth={1.5} />
         </Button>

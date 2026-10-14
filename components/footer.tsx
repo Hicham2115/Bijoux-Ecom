@@ -37,7 +37,7 @@ export function Footer() {
         <div className="grid gap-14 py-11 sm:py-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,2fr)] lg:gap-20">
           <div className="max-w-[430px]">
             <p className="orelia-eyebrow text-[#d0b36f]">The world of Orélia</p>
-            <h2 className="orelia-heading mt-5 text-[clamp(2.25rem,3.2vw,3.7rem)]">
+            <h2 className="orelia-heading mt-5 text-[clamp(2rem,8vw,3rem)] lg:text-[clamp(2.25rem,3.2vw,3.7rem)]">
               Beauty to live in.
               <br />
               Pieces to keep.

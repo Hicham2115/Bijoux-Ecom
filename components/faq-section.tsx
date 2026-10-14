@@ -51,7 +51,7 @@ export function FaqSection() {
           </p>
           <a
             href="#services"
-            className="orelia-action mt-7 inline-flex items-center border-b border-[#aa874b] pb-2 text-[#25241f] transition-colors hover:text-[#8b7042]"
+            className="orelia-action mt-7 inline-flex min-h-11 items-center border-b border-[#aa874b] text-[#25241f] transition-colors hover:text-[#8b7042]"
           >
             Speak with a specialist
           </a>
@@ -63,7 +63,7 @@ export function FaqSection() {
               key={item.question}
               className="group border-b border-[#cfc6b8]"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 font-serif text-[18px] leading-[1.35] marker:content-none sm:py-6 sm:text-[20px] [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 font-serif text-[18px] leading-[1.35] transition-colors duration-200 hover:text-[#8b7042] focus-visible:text-[#8b7042] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#aa874b] marker:content-none sm:py-6 sm:text-[20px] [&::-webkit-details-marker]:hidden">
                 <span>{item.question}</span>
                 <Plus
                   aria-hidden="true"
