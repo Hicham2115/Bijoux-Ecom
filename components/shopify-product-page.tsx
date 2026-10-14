@@ -8,6 +8,15 @@ import type { ShopifyProduct, ShopifyProductDetails } from "@/lib/shopify";
 
 const ringSizes = ["5", "6", "7", "8", "9"];
 
+function getCategory(productType: string) {
+  const type = productType.toLowerCase();
+  if (type.includes("ring")) return "Rings";
+  if (type.includes("necklace")) return "Necklaces";
+  if (type.includes("bracelet") || type.includes("cuff")) return "Bracelets";
+  if (type.includes("earring")) return "Earrings";
+  return productType || "Fine jewelry";
+}
+
 export function ShopifyProductPage({
   product,
   relatedProducts,
@@ -15,16 +24,40 @@ export function ShopifyProductPage({
   product: ShopifyProductDetails;
   relatedProducts: ShopifyProduct[];
 }) {
-  const images = product.images.nodes.length > 0
+  const productImages = product.images.nodes.length > 0
     ? product.images.nodes
     : product.featuredImage ? [product.featuredImage] : [];
+  const images = productImages.length === 1
+    ? [productImages[0], productImages[0], productImages[0]]
+    : productImages;
+  const isRing = product.productType.toLowerCase().includes("ring");
+  const optionGroups = (() => {
+    const valuesByName = new Map<string, Set<string>>();
+    product.variants.nodes.forEach((variant) => {
+      variant.selectedOptions.forEach(({ name, value }) => {
+        if (value.toLowerCase() === "default title") return;
+        const values = valuesByName.get(name) ?? new Set<string>();
+        values.add(value);
+        valuesByName.set(name, values);
+      });
+    });
+    const groups = Array.from(valuesByName, ([name, values]) => ({ name, values: Array.from(values) }));
+    if (groups.length > 0) return groups;
+    return isRing
+      ? [{ name: "Ring size", values: ringSizes }]
+      : [{ name: "Size", values: ["One size"] }];
+  })();
+  const initialOptions = Object.fromEntries(optionGroups.map(({ name, values }) => {
+    const firstAvailableVariant = product.variants.nodes.find((variant) => variant.availableForSale);
+    const firstAvailableValue = firstAvailableVariant?.selectedOptions.find((option) => option.name === name)?.value;
+    return [name, firstAvailableValue ?? values[0]];
+  }));
   const [selectedImage, setSelectedImage] = useState(0);
-  const [selectedSize, setSelectedSize] = useState("7");
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(initialOptions);
   const [saved, setSaved] = useState(false);
   const [added, setAdded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const isRing = product.productType.toLowerCase().includes("ring");
   const price = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: product.priceRange.minVariantPrice.currencyCode,
@@ -38,6 +71,8 @@ export function ShopifyProductPage({
           <Link href="/" className="transition-colors hover:text-[#927342]">Home</Link>
           <span className="mx-2 text-[#b99045]">/</span>
           <Link href="/products" className="transition-colors hover:text-[#927342]">Jewelry</Link>
+          <span className="mx-2 text-[#b99045]">/</span>
+          <span>{getCategory(product.productType)}</span>
           <span className="mx-2 text-[#b99045]">/</span>
           <span aria-current="page">{product.title}</span>
         </nav>
@@ -60,23 +95,33 @@ export function ShopifyProductPage({
           </section>
 
           <section aria-labelledby="product-title" className="flex flex-col lg:sticky lg:top-8 lg:self-start">
-            <p className="orelia-eyebrow text-[#8c7043]">The {product.productType || "Orélia"} collection</p>
+            <p className="orelia-eyebrow text-[#8c7043]">The {product.title.split(" ")[0]} collection</p>
             <h1 id="product-title" className="orelia-heading mt-3 text-[clamp(2.35rem,4.2vw,4.25rem)] text-[#101710]">{product.title}</h1>
             {product.description && <p className="mt-3 font-serif text-[16px] leading-relaxed text-[#625d53] sm:text-[18px]">{product.description}</p>}
             <p className="mt-6 font-sans text-[14px] font-medium tracking-[0.04em] text-[#242721] sm:mt-8 sm:text-[15px]">{price}</p>
             <p className="mt-1 font-sans text-[11px] text-[#746d60]">{product.availableForSale ? "Taxes included · Complimentary delivery" : "Currently unavailable"}</p>
 
-            {isRing && <div className="mt-7 border-t border-[#d7cebf] pt-6 sm:mt-8">
-              <div className="flex items-center justify-between">
-                <span className="orelia-eyebrow text-[#4b493f]">Ring size</span>
-                <a href="#size-guide" className="inline-flex min-h-10 items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#07261b]">Find your size</a>
-              </div>
-              <div className="mt-3 grid grid-cols-5 gap-2" role="group" aria-label="Choose ring size">
-                {ringSizes.map((size) => (
-                  <button key={size} type="button" onClick={() => setSelectedSize(size)} aria-pressed={selectedSize === size} className={`min-h-12 border font-serif text-[15px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] ${selectedSize === size ? "border-[#07261b] bg-[#07261b] text-white" : "border-[#c9c0b1] hover:border-[#927342]"}`}>{size}</button>
-                ))}
-              </div>
-            </div>}
+            {optionGroups.map((group) => {
+              const isSizeOption = group.name.toLowerCase().includes("size");
+              const label = isRing && isSizeOption ? "Ring size" : group.name;
+              return <div key={group.name} className="mt-7 border-t border-[#d7cebf] pt-6 sm:mt-8">
+                <div className="flex items-center justify-between">
+                  <span className="orelia-eyebrow text-[#4b493f]">{label}</span>
+                  {isRing && isSizeOption && <a href="#size-guide" className="inline-flex min-h-10 items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#07261b]">Find your size</a>}
+                </div>
+                <div className={`mt-3 grid gap-2 ${group.values.length > 5 ? "grid-cols-3 sm:grid-cols-5" : ""}`} style={group.values.length <= 5 ? { gridTemplateColumns: `repeat(${group.values.length}, minmax(0, 1fr))` } : undefined} role="group" aria-label={`Choose ${label.toLowerCase()}`}>
+                  {group.values.map((value) => {
+                    const matchingVariants = product.variants.nodes.filter((variant) =>
+                      variant.selectedOptions.some((option) => option.name === group.name && option.value === value)
+                      && Object.entries(selectedOptions).every(([name, selectedValue]) => name === group.name || variant.selectedOptions.some((option) => option.name === name && option.value === selectedValue)),
+                    );
+                    const unavailable = product.variants.nodes.length > 0 && matchingVariants.length > 0 && !matchingVariants.some((variant) => variant.availableForSale);
+                    const selected = selectedOptions[group.name] === value;
+                    return <button key={value} type="button" disabled={unavailable} onClick={() => setSelectedOptions((current) => ({ ...current, [group.name]: value }))} aria-pressed={selected} className={`min-h-12 border font-serif text-[15px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] disabled:cursor-not-allowed disabled:opacity-40 ${selected ? "border-[#07261b] bg-[#07261b] text-white" : "border-[#c9c0b1] hover:border-[#927342]"}`}>{value}</button>;
+                  })}
+                </div>
+              </div>;
+            })}
 
             <div className="mt-7 flex items-center gap-3 sm:mt-8">
               <div className="inline-flex h-14 items-center border border-[#c9c0b1]" aria-label="Quantity">
@@ -89,7 +134,7 @@ export function ShopifyProductPage({
               </button>
               <button type="button" onClick={() => setSaved((current) => !current)} aria-label={saved ? "Remove from wishlist" : "Save to wishlist"} aria-pressed={saved} className={`grid size-14 shrink-0 place-items-center border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] ${saved ? "border-[#927342] text-[#927342]" : "border-[#c9c0b1] hover:border-[#927342] hover:text-[#927342]"}`}><Heart className="size-5" strokeWidth={1.4} fill={saved ? "currentColor" : "none"} /></button>
             </div>
-            <p className="sr-only" aria-live="polite">{added ? `${quantity} ${product.title}${isRing ? `, size ${selectedSize},` : ","} added to your bag.` : ""}</p>
+            <p className="sr-only" aria-live="polite">{added ? `${quantity} ${product.title}${isRing && selectedOptions[optionGroups[0]?.name] ? `, size ${selectedOptions[optionGroups[0].name]},` : ","} added to your bag.` : ""}</p>
 
             <div className="mt-6 grid grid-cols-2 gap-3 border-y border-[#d7cebf] py-4">
               <div className="flex items-center gap-3 font-serif text-[13px] text-[#5f5a51]"><Truck className="size-4 text-[#8c7043]" strokeWidth={1.4} /> Complimentary delivery</div>

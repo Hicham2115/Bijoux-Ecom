@@ -13,6 +13,14 @@ export type ShopifyProduct = {
 
 export type ShopifyProductDetails = ShopifyProduct & {
   images: { nodes: { url: string; altText: string | null }[] };
+  variants: {
+    nodes: {
+      id: string;
+      title: string;
+      availableForSale: boolean;
+      selectedOptions: { name: string; value: string }[];
+    }[];
+  };
 };
 
 type ShopifyResponse<T> = {
@@ -104,6 +112,14 @@ export async function getShopifyProduct(handle: string) {
         availableForSale
         featuredImage { url altText }
         images(first: 8) { nodes { url altText } }
+        variants(first: 100) {
+          nodes {
+            id
+            title
+            availableForSale
+            selectedOptions { name value }
+          }
+        }
         priceRange { minVariantPrice { amount currencyCode } }
       }
     }`,
