@@ -137,24 +137,7 @@ export function Footer() {
       >
         ORÉLIA
       </div>
-      <nav aria-label="Concierge services" className="mx-auto max-w-[1500px] border-t border-[#f4f0e7]/20 px-6 sm:px-[5.5%]">
-        <div className="grid sm:grid-cols-3">
-          {conciergeLinks.map(({ icon: Icon, title, detail }) => (
-            <a
-              key={title}
-              href={sectionHref("#contact")}
-              className="group flex min-h-[88px] items-center gap-4 border-b border-[#f4f0e7]/15 py-5 transition-colors hover:text-[#d0b36f] last:border-b-0 sm:border-b-0 sm:border-r sm:px-5 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0"
-            >
-              <Icon aria-hidden="true" className="size-5 shrink-0 text-[#d0b36f]" strokeWidth={1.4} />
-              <span className="min-w-0">
-                <span className="block font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#d0b36f]">{title}</span>
-                <span className="mt-1 block font-serif text-[14px] leading-snug text-[#f4f0e7]/65 transition-colors group-hover:text-[#f4f0e7]/90">{detail}</span>
-              </span>
-              <ArrowUpRight aria-hidden="true" className="ml-auto size-4 shrink-0 text-[#d0b36f] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.4} />
-            </a>
-          ))}
-        </div>
-      </nav>
+
       <p className="mx-auto max-w-[1440px] px-6 py-4 text-center text-[12px] text-white/70 sm:px-8 lg:px-12">
         Designed &amp; developed by{" "}
         <a
