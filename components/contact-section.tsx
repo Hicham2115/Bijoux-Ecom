@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Gem } from "lucide-react";
+import { ArrowUpRight, Gift, Gem, Ruler } from "lucide-react";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 
@@ -70,7 +70,7 @@ export function ContactSection() {
         className="contact-paper mx-auto grid max-w-[1380px] overflow-hidden rounded-[18px] border border-[#e2d5bf] text-[#07261b] shadow-[0_24px_70px_rgba(0,0,0,0.18)] lg:grid-cols-[1.15fr_0.85fr]"
       >
         <div className="flex flex-col px-7 py-10 sm:px-12 sm:py-12 lg:min-h-[660px] lg:justify-between lg:px-[8%] lg:py-14">
-          <div className="mx-auto max-w-[700px] text-center lg:mt-20">
+          <div className="mx-auto max-w-[700px] text-center lg:mt-10">
             <p
               style={{
                 fontFamily:
@@ -91,6 +91,50 @@ export function ContactSection() {
               caring for a favorite or choosing a thoughtful gift, our
               specialists are here to help.
             </p>
+            <div className="mx-auto mt-9 grid w-full max-w-[680px] grid-cols-1 border-y border-[#9b845d]/40 sm:grid-cols-3">
+              {[
+                {
+                  icon: Gem,
+                  title: "Personal advice",
+                  detail: "Find a piece that feels like you.",
+                },
+                {
+                  icon: Ruler,
+                  title: "Size & care",
+                  detail: "Thoughtful help for every piece.",
+                },
+                {
+                  icon: Gift,
+                  title: "Meaningful gifts",
+                  detail: "Make their moment memorable.",
+                },
+              ].map(({ icon: Icon, title, detail }) => (
+                <a
+                  key={title}
+                  href="#message"
+                  className="group flex min-h-[82px] items-center gap-3 border-b border-[#9b845d]/25 px-1 py-4 text-left transition-colors hover:bg-[#fffaf0]/45 last:border-b-0 sm:min-h-[140px] sm:flex-col sm:items-start sm:justify-center sm:border-b-0 sm:border-r sm:px-4 sm:last:border-r-0 lg:px-5"
+                >
+                  <Icon
+                    aria-hidden="true"
+                    className="size-[18px] shrink-0 text-[#927342] transition-transform group-hover:-translate-y-0.5"
+                    strokeWidth={1.4}
+                  />
+                  <span>
+                    <span className="block font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-[#31463a]">
+                      {title}
+                    </span>
+                    <span className="mt-1 block font-serif text-[13px] leading-snug text-[#6d685d]">
+                      {detail}
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    aria-hidden="true"
+                    className="ml-auto size-4 shrink-0 text-[#927342] opacity-60 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 sm:hidden"
+                    strokeWidth={1.4}
+                  />
+                </a>
+              ))}
+            </div>
           </div>
           <div className="mt-14 border-t border-[#9b845d]/45 pt-5 lg:mt-0">
             <p className="orelia-eyebrow text-[#927342]">The Orélia promise</p>

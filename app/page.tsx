@@ -39,9 +39,6 @@ export default function Home() {
       <main className="min-h-screen bg-[#080907] text-white">
         <ScrollReveal />
         <Hero />
-        <CategorySection />
-        <MenCampaignSection />
-        <WomenCampaignSection />
         <Suspense
           fallback={
             <section
@@ -53,6 +50,9 @@ export default function Home() {
         >
           <FeaturedProducts />
         </Suspense>
+        <MenCampaignSection />
+        <WomenCampaignSection />
+        <CategorySection />
         <MaisonSection />
         <MaisonServicesSection />
         <FaqSection />
