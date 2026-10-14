@@ -1,53 +1,26 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, ShoppingBag } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/toaster";
+import type { ShopifyProduct } from "@/lib/shopify";
 
-const products = [
-  {
-    name: "Solis Ring",
-    detail: "18K gold, emerald",
-    price: "$2,450",
-    image: "/products/solis-ring.png",
-  },
-  {
-    name: "Atlas Chain",
-    detail: "18K gold",
-    price: "$3,800",
-    image: "/products/atlas-chain.png",
-  },
-  {
-    name: "Forma Cuff",
-    detail: "18K gold",
-    price: "$4,200",
-    image: "/products/forma-cuff.png",
-  },
-  {
-    name: "Lumière Earrings",
-    detail: "18K gold",
-    price: "$1,950",
-    image: "/products/lumiere-earrings.png",
-  },
-  {
-    name: "Noir Signet",
-    detail: "18K gold, onyx",
-    price: "$2,100",
-    image: "/products/noir-signet.png",
-  },
-  {
-    name: "Éclat Ring",
-    detail: "18K gold, diamonds",
-    price: "$3,600",
-    image: "/products/eclat-ring.png",
-  },
-];
-
-export function FeaturedJewelrySection() {
+export function FeaturedJewelrySection({ products, catalogError }: { products: ShopifyProduct[]; catalogError: boolean }) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [addedProduct, setAddedProduct] = useState<string | null>(null);
   const [addedProducts, setAddedProducts] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (catalogError) {
+      toast({
+        title: "Collection unavailable",
+        description: "We couldn’t load the collection. Please try again later.",
+      });
+    }
+  }, [catalogError]);
 
   function scrollProducts(direction: -1 | 1) {
     const carousel = carouselRef.current;
@@ -106,56 +79,62 @@ export function FeaturedJewelrySection() {
           </div>
         </div>
 
-        <div
+        {products.length > 0 ? <div
           ref={carouselRef}
           className="featured-jewelry-carousel flex gap-4 overflow-x-auto pb-3 sm:gap-5"
           aria-label="Featured jewelry products"
         >
           {products.map((product) => (
             <article
-              key={product.name}
+              key={product.id}
               data-scroll-reveal-item
               className="category-card featured-jewelry-card min-w-0"
             >
-              <div className="group block">
+              <Link href={`/products/${product.handle}`} className="group block">
                 <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 640px) 72vw, (max-width: 1024px) 30vw, 16vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transition-none"
-                  />
+                  {product.featuredImage ? (
+                    <Image
+                      src={product.featuredImage.url}
+                      alt={product.featuredImage.altText || product.title}
+                      fill
+                      sizes="(max-width: 640px) 72vw, (max-width: 1024px) 30vw, 16vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transition-none"
+                    />
+                  ) : <div className="grid size-full place-items-center font-serif text-[13px] text-[#8c8579]">Image coming soon</div>}
                 </div>
-                <h3 className="orelia-eyebrow mt-3 sm:mt-4">{product.name}</h3>
-              </div>
-              <p className="mt-1 font-serif text-[13px] leading-[1.5] text-[#5f5a51] sm:text-[14px]">
-                {product.detail}
-              </p>
+                <h3 className="orelia-eyebrow mt-3 sm:mt-4">{product.title}</h3>
+              </Link>
+              <Link href={`/products/${product.handle}`} className="mt-1 block font-serif text-[13px] leading-[1.5] text-[#5f5a51] hover:text-[#927342] sm:text-[14px]">
+                {product.description || product.productType || "Fine jewelry"}
+              </Link>
               <div className="mt-2 flex items-center justify-between gap-2 sm:mt-3">
-                <p className="text-[14px] font-semibold sm:text-[16px]">
-                  {product.price}
-                </p>
+                <Link href={`/products/${product.handle}`} className="text-[14px] font-semibold hover:text-[#927342] sm:text-[16px]">
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: product.priceRange.minVariantPrice.currencyCode,
+                    maximumFractionDigits: 2,
+                  }).format(Number(product.priceRange.minVariantPrice.amount))}
+                </Link>
                 <Button
                   variant="ghost"
                   size="icon"
                   aria-label={
-                    addedProducts.includes(product.name)
-                      ? `${product.name} is in your bag`
-                      : `Add ${product.name} to your bag`
+                    addedProducts.includes(product.id)
+                      ? `${product.title} is in your bag`
+                      : `Add ${product.title} to your bag`
                   }
-                  aria-pressed={addedProducts.includes(product.name)}
+                  aria-pressed={addedProducts.includes(product.id)}
                   onClick={() => {
                     setAddedProducts((current) =>
-                      current.includes(product.name)
+                      current.includes(product.id)
                         ? current
-                        : [...current, product.name],
+                        : [...current, product.id],
                     );
-                    setAddedProduct(product.name);
+                    setAddedProduct(product.id);
                   }}
                   className="size-11 shrink-0 rounded-full transition-colors hover:bg-[#07261b] hover:text-white sm:size-8"
                 >
-                  {addedProducts.includes(product.name) ? (
+                  {addedProducts.includes(product.id) ? (
                     <Check className="size-[18px]" strokeWidth={1.5} />
                   ) : (
                     <ShoppingBag className="size-[18px]" strokeWidth={1.5} />
@@ -164,19 +143,19 @@ export function FeaturedJewelrySection() {
               </div>
             </article>
           ))}
-        </div>
+        </div> : catalogError ? null : <p className="py-10 text-center font-serif text-[16px] text-[#746d60]">Our collection is being prepared.</p>}
         <p className="sr-only" role="status" aria-live="polite">
           {addedProduct
-            ? `${addedProduct} added to your bag. ${addedProducts.length} ${addedProducts.length === 1 ? "item" : "items"} in your bag.`
+            ? `${products.find((product) => product.id === addedProduct)?.title ?? "Product"} added to your bag. ${addedProducts.length} ${addedProducts.length === 1 ? "item" : "items"} in your bag.`
             : ""}
         </p>
         <div className="mt-5 flex justify-end">
-          <a
+          <Link
             href="/products"
             className="inline-flex min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#07261b] transition-colors hover:text-[#927342] sm:text-[11px]"
           >
             View all pieces <span aria-hidden="true" className="ml-3 text-base">↗</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

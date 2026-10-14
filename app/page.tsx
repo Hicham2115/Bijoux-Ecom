@@ -11,8 +11,17 @@ import { ClosingCtaSection } from "@/components/closing-cta-section";
 import { Footer } from "@/components/footer";
 import { Header } from "@/layout/header";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { getShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 
-export default function Home() {
+export default async function Home() {
+  let products: ShopifyProduct[] = [];
+  let catalogError = false;
+  try {
+    products = await getShopifyProducts();
+  } catch {
+    catalogError = true;
+  }
+
   return (
     <>
       <div id="top">
@@ -24,7 +33,10 @@ export default function Home() {
         <CategorySection />
         <MenCampaignSection />
         <WomenCampaignSection />
-        <FeaturedJewelrySection />
+        <FeaturedJewelrySection
+          products={products}
+          catalogError={catalogError}
+        />
         <MaisonSection />
         <MaisonServicesSection />
         <FaqSection />

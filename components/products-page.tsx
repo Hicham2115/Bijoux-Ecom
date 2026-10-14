@@ -1,110 +1,98 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Check, ChevronDown, ShoppingBag } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { toast } from "@/components/ui/toaster";
+import type { ShopifyProduct } from "@/lib/shopify";
 
-const products = [
-  {
-    name: "Solis Ring",
-    category: "Rings",
-    detail: "18K gold · emerald",
-    price: 2450,
-    image: "/products/solis-ring.png",
-  },
-  {
-    name: "Atlas Chain",
-    category: "Necklaces",
-    detail: "18K gold",
-    price: 3800,
-    image: "/products/atlas-chain.png",
-  },
-  {
-    name: "Forma Cuff",
-    category: "Bracelets",
-    detail: "18K gold",
-    price: 4200,
-    image: "/products/forma-cuff.png",
-  },
-  {
-    name: "Lumière Earrings",
-    category: "Earrings",
-    detail: "18K gold",
-    price: 1950,
-    image: "/products/lumiere-earrings.png",
-  },
-  {
-    name: "Noir Signet",
-    category: "Rings",
-    detail: "18K gold · onyx",
-    price: 2100,
-    image: "/products/noir-signet.png",
-  },
-  {
-    name: "Éclat Ring",
-    category: "Rings",
-    detail: "18K gold · diamonds",
-    price: 3600,
-    image: "/products/eclat-ring.png",
-  },
-];
-
-const categories = [
-  "All pieces",
-  "Rings",
-  "Necklaces",
-  "Bracelets",
-  "Earrings",
-];
 const sortOptions = [
-  "Featured",
-  "Price: low to high",
-  "Price: high to low",
+  { value: "Featured", label: "Recommended" },
+  { value: "Price: low to high", label: "Price low to high" },
+  { value: "Price: high to low", label: "Price high to low" },
 ] as const;
-type SortOption = (typeof sortOptions)[number];
+type SortOption = (typeof sortOptions)[number]["value"];
 
-const priceFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
+function PlaceholderFilterGroup({ title, options, idPrefix }: { title: string; options: string[]; idPrefix: string }) {
+  return (
+    <details open className="group border-t border-[#d7cebf] py-5">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-[13px] font-medium uppercase tracking-[0.12em] text-[#22231f] marker:content-none [&::-webkit-details-marker]:hidden">
+        {title}
+        <ChevronDown aria-hidden="true" className="size-4 transition-transform duration-200 group-open:rotate-180" strokeWidth={1.5} />
+      </summary>
+      <fieldset disabled className="mt-5 space-y-4">
+        <legend className="sr-only">{title} filters coming soon</legend>
+        {options.map((option, index) => {
+          const id = `${idPrefix}-${index + 1}`;
+          return (
+            <label key={id} htmlFor={id} className="flex cursor-not-allowed items-center gap-4 font-sans text-[13px] uppercase tracking-[0.08em] text-[#363832]">
+              <input id={id} type="checkbox" className="size-[17px] shrink-0 appearance-none border border-[#353630] bg-transparent disabled:opacity-100" />
+              {option}
+            </label>
+          );
+        })}
+      </fieldset>
+    </details>
+  );
+}
 
-export function ProductsPage() {
+function getCategory(productType: string) {
+  const type = productType.toLowerCase();
+  if (type.includes("ring")) return "Rings";
+  if (type.includes("necklace")) return "Necklaces";
+  if (type.includes("bracelet") || type.includes("cuff")) return "Bracelets";
+  if (type.includes("earring")) return "Earrings";
+  return productType || "Jewelry";
+}
+
+export function ProductsPage({
+  products,
+  catalogError,
+}: {
+  products: ShopifyProduct[];
+  catalogError: string | null;
+}) {
   const [category, setCategory] = useState("All pieces");
   const [sort, setSort] = useState<SortOption>("Featured");
-  const [sortOpen, setSortOpen] = useState(false);
   const [addedProducts, setAddedProducts] = useState<string[]>([]);
 
+  useEffect(() => {
+    if (catalogError) {
+      toast({
+        title: "Collection unavailable",
+        description: catalogError,
+      });
+    }
+  }, [catalogError]);
+
+  const categories = useMemo(
+    () => ["All pieces", ...new Set(products.map((product) => getCategory(product.productType)))],
+    [products],
+  );
   const visibleProducts = useMemo(() => {
     const filtered = products.filter(
-      (product) => category === "All pieces" || product.category === category,
+      (product) => category === "All pieces" || getCategory(product.productType) === category,
     );
-    if (sort === "Price: low to high")
-      return [...filtered].sort((a, b) => a.price - b.price);
-    if (sort === "Price: high to low")
-      return [...filtered].sort((a, b) => b.price - a.price);
+    if (sort === "Price: low to high") {
+      return [...filtered].sort(
+        (a, b) => Number(a.priceRange.minVariantPrice.amount) - Number(b.priceRange.minVariantPrice.amount),
+      );
+    }
+    if (sort === "Price: high to low") {
+      return [...filtered].sort(
+        (a, b) => Number(b.priceRange.minVariantPrice.amount) - Number(a.priceRange.minVariantPrice.amount),
+      );
+    }
     return filtered;
-  }, [category, sort]);
+  }, [category, products, sort]);
 
   return (
     <main className="min-h-screen bg-[#f5f1e9] text-[#171714]">
-      <section
-        aria-labelledby="products-title"
-        className="px-5 pb-8 pt-7 sm:px-[5.5%] sm:pb-10 sm:pt-10"
-      >
-        <nav
-          aria-label="Breadcrumb"
-          className="font-serif text-[13px] text-[#746d60]"
-        >
-          <a className="transition-colors hover:text-[#07261b]" href="/">
-            Home
-          </a>
+      <section aria-labelledby="products-title" className="px-5 pb-8 pt-7 sm:px-[5.5%] sm:pb-10 sm:pt-10">
+        <nav aria-label="Breadcrumb" className="font-serif text-[13px] text-[#746d60]">
+          <Link className="transition-colors hover:text-[#07261b]" href="/">Home</Link>
           <span className="mx-2 text-[#b99045]">›</span>
           <span>Jewelry</span>
           <span className="mx-2 text-[#b99045]">›</span>
@@ -113,153 +101,105 @@ export function ProductsPage() {
 
         <div className="mx-auto mt-10 max-w-[760px] text-center sm:mt-14">
           <p className="orelia-eyebrow text-[#8c7043]">The Orélia collection</p>
-          <h1
-            id="products-title"
-            className="orelia-heading mt-4 text-[clamp(2.5rem,6vw,4.75rem)] text-[#101710]"
-          >
-            Fine jewelry, for every expression
-          </h1>
-          <p className="mx-auto mt-4 max-w-[480px] font-serif text-[16px] leading-relaxed text-[#5f5a51] sm:text-[18px]">
-            Thoughtful pieces, made to become part of your story.
-          </p>
+          <h1 id="products-title" className="orelia-heading mt-4 text-[clamp(2.5rem,6vw,4.75rem)] text-[#101710]">Fine jewelry, for every expression</h1>
+          <p className="mx-auto mt-4 max-w-[480px] font-serif text-[16px] leading-relaxed text-[#5f5a51] sm:text-[18px]">Thoughtful pieces, made to become part of your story.</p>
         </div>
       </section>
 
-      <section
-        aria-label="Browse the Orélia collection"
-        className="px-5 pb-14 sm:px-[5.5%] sm:pb-20"
-      >
+      <section aria-label="Browse the Orélia collection" className="px-5 pb-14 sm:px-[5.5%] sm:pb-20">
         <div className="mx-auto max-w-[1500px]">
-          <div className="flex flex-col gap-5 border-y border-[#d7cebf] py-4 sm:flex-row sm:items-center sm:justify-between">
-            <div
-              className="flex flex-wrap gap-2"
-              aria-label="Filter by category"
-            >
-              {categories.map((item) => {
-                const selected = category === item;
+          <div className="grid gap-9 lg:grid-cols-[245px_minmax(0,1fr)] xl:gap-14">
+            <aside aria-label="Product filters" className="border-b border-[#d7cebf] pb-7 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-8">
+              <fieldset className="border-t border-[#d7cebf] py-5">
+                <legend className="mb-5 font-sans text-[13px] font-semibold uppercase tracking-[0.12em] text-[#22231f]">Sort by</legend>
+                <div className="space-y-4">
+                  {sortOptions.map((option, index) => {
+                    const id = `products-sort-${index + 1}`;
+                    return (
+                      <label key={option.value} htmlFor={id} className="flex cursor-pointer items-center gap-4 font-sans text-[13px] uppercase tracking-[0.08em] text-[#292a26]">
+                        <input id={id} type="radio" name="products-sort" value={option.value} checked={sort === option.value} onChange={() => setSort(option.value)} className="size-[17px] shrink-0 appearance-none rounded-full border border-[#353630] checked:border-[5px] checked:border-[#07261b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442]" />
+                        {option.label}
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
+
+              <details open className="group border-t border-[#d7cebf] py-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between font-sans text-[13px] font-medium uppercase tracking-[0.12em] text-[#22231f] marker:content-none [&::-webkit-details-marker]:hidden">
+                  Category
+                  <ChevronDown aria-hidden="true" className="size-4 transition-transform duration-200 group-open:rotate-180" strokeWidth={1.5} />
+                </summary>
+                <fieldset className="mt-5 space-y-4">
+                  <legend className="sr-only">Filter by category</legend>
+                  {categories.map((item, index) => {
+                    const id = `products-category-${index + 1}`;
+                    return (
+                      <label key={item} htmlFor={id} className="flex cursor-pointer items-center gap-4 font-sans text-[13px] uppercase tracking-[0.08em] text-[#363832]">
+                        <input id={id} type="radio" name="products-category" value={item} checked={category === item} onChange={() => setCategory(item)} className="size-[17px] shrink-0 appearance-none rounded-full border border-[#353630] checked:border-[5px] checked:border-[#07261b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442]" />
+                        {item}
+                      </label>
+                    );
+                  })}
+                </fieldset>
+              </details>
+
+              <PlaceholderFilterGroup title="Filter by" options={["Available online", "New"]} idPrefix="products-status" />
+              <PlaceholderFilterGroup title="Selection for" options={["Her", "Him"]} idPrefix="products-selection" />
+              <PlaceholderFilterGroup title="Metal" options={["White gold", "Rose gold", "Yellow gold", "Platinum"]} idPrefix="products-metal" />
+              <PlaceholderFilterGroup title="Gemstone" options={["Diamond", "Emerald", "Onyx", "Sapphire"]} idPrefix="products-gemstone" />
+              <PlaceholderFilterGroup title="Pavé" options={["With pavé", "Without pavé"]} idPrefix="products-pave" />
+            </aside>
+
+            <div>
+              <p className="mb-5 font-serif text-[13px] text-[#5f5a51]" aria-live="polite">Showing {visibleProducts.length} pieces</p>
+
+          {catalogError ? null : (
+            visibleProducts.length === 0 ? (
+            <p className="mt-10 border-y border-[#d7cebf] py-8 text-center font-serif text-[16px] text-[#746d60]">No jewelry is available in the collection yet.</p>
+            ) : (
+            <div className="grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 xl:grid-cols-4 xl:gap-x-7">
+              {visibleProducts.map((product) => {
+                const isAdded = addedProducts.includes(product.id);
+                const price = new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: product.priceRange.minVariantPrice.currencyCode,
+                  maximumFractionDigits: 2,
+                }).format(Number(product.priceRange.minVariantPrice.amount));
+                const productImage = (
+                  <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
+                    {product.featuredImage ? (
+                      <Image src={product.featuredImage.url} alt={product.featuredImage.altText || product.title} fill sizes="(max-width: 640px) 46vw, (max-width: 1280px) 30vw, 23vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.035] motion-reduce:transition-none" />
+                    ) : <div className="grid size-full place-items-center font-serif text-[13px] text-[#8c8579]">Image coming soon</div>}
+                  </div>
+                );
+
                 return (
-                  <button
-                    key={item}
-                    type="button"
-                    aria-pressed={selected}
-                    onClick={() => setCategory(item)}
-                    className={`min-h-10 rounded-full border px-5 text-[13px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] ${selected ? "border-[#07261b] bg-[#07261b] text-[#f5f1e9]" : "border-[#c9c0b1] bg-transparent text-[#242721] hover:border-[#8e744b] hover:text-[#07261b]"}`}
-                  >
-                    {item}
-                  </button>
+                  <article key={product.id} data-scroll-reveal-item className="group min-w-0">
+                    <Link href={`/products/${product.handle}`} aria-label={`View ${product.title}`}>
+                      {productImage}
+                    </Link>
+                    <div className="mt-3 flex items-start justify-between gap-2 sm:mt-4">
+                      <Link href={`/products/${product.handle}`} className="min-w-0">
+                        <h2 className="orelia-eyebrow text-[9px] sm:text-[10px]">{product.title}</h2>
+                        <p className="mt-1.5 line-clamp-2 font-serif text-[13px] text-[#746d60] sm:text-[15px]">{product.description || getCategory(product.productType)}</p>
+                        <p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:mt-3 sm:text-[17px]">{price}</p>
+                      </Link>
+                      <Button type="button" variant="ghost" size="icon" aria-label={isAdded ? `${product.title} is in your bag` : `Add ${product.title} to your bag`} aria-pressed={isAdded} onClick={() => setAddedProducts((current) => current.includes(product.id) ? current : [...current, product.id])} className="-mr-2 mt-1 size-10 shrink-0 rounded-full text-[#171714] hover:bg-[#07261b] hover:text-white sm:mr-0">
+                        {isAdded ? <Check className="size-[18px]" strokeWidth={1.5} /> : <ShoppingBag className="size-[18px]" strokeWidth={1.5} />}
+                      </Button>
+                    </div>
+                  </article>
                 );
               })}
             </div>
-
-            <div className="flex items-center justify-between gap-5 font-serif text-[13px] text-[#5f5a51] sm:justify-end">
-              <p aria-live="polite">Showing {visibleProducts.length} pieces</p>
-              <span aria-hidden="true" className="h-6 w-px bg-[#d7cebf]" />
-              <Popover open={sortOpen} onOpenChange={setSortOpen}>
-                <PopoverTrigger asChild>
-                  <button
-                    type="button"
-                    className="inline-flex min-h-10 items-center gap-2 text-[#242721] transition-colors hover:text-[#8c7043] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442]"
-                    aria-label={`Sort products. Current order: ${sort}`}
-                  >
-                    Sort: {sort}
-                    <ChevronDown className="size-4" strokeWidth={1.5} />
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent
-                  align="end"
-                  className="w-52 border-[#d7cebf] bg-[#f5f1e9] p-1 text-[#171714]"
-                >
-                  {sortOptions.map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      role="menuitemradio"
-                      aria-checked={sort === option}
-                      onClick={() => {
-                        setSort(option);
-                        setSortOpen(false);
-                      }}
-                      className="flex min-h-10 w-full items-center justify-between px-3 text-left font-serif text-[13px] hover:bg-[#eae3d7] focus-visible:bg-[#eae3d7] focus-visible:outline-none"
-                    >
-                      {option}
-                      {sort === option && (
-                        <Check className="size-4 text-[#8c7043]" />
-                      )}
-                    </button>
-                  ))}
-                </PopoverContent>
-              </Popover>
+            )
+          )}
+          <p className="sr-only" role="status" aria-live="polite">
+            {addedProducts.length > 0 ? `${products.find((product) => product.id === addedProducts.at(-1))?.title ?? "Product"} added to your bag.` : ""}
+          </p>
             </div>
           </div>
-
-          <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 xl:grid-cols-4 xl:gap-x-7">
-            {visibleProducts.map((product) => {
-              const isAdded = addedProducts.includes(product.name);
-              return (
-                <article
-                  key={product.name}
-                  data-scroll-reveal-item
-                  className="group min-w-0"
-                >
-                  <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      sizes="(max-width: 640px) 46vw, (max-width: 1280px) 30vw, 23vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.035] motion-reduce:transition-none"
-                    />
-                  </div>
-                  <div className="mt-3 flex items-start justify-between gap-2 sm:mt-4">
-                    <div>
-                      <h2 className="orelia-eyebrow text-[9px] sm:text-[10px]">
-                        {product.name}
-                      </h2>
-                      <p className="mt-1.5 font-serif text-[13px] text-[#746d60] sm:text-[15px]">
-                        {product.detail}
-                      </p>
-                      <p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:mt-3 sm:text-[17px]">
-                        {priceFormatter.format(product.price)}
-                      </p>
-                    </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      aria-label={
-                        isAdded
-                          ? `${product.name} is in your bag`
-                          : `Add ${product.name} to your bag`
-                      }
-                      aria-pressed={isAdded}
-                      onClick={() =>
-                        setAddedProducts((current) =>
-                          current.includes(product.name)
-                            ? current
-                            : [...current, product.name],
-                        )
-                      }
-                      className="-mr-2 mt-1 size-10 shrink-0 rounded-full text-[#171714] hover:bg-[#07261b] hover:text-white sm:mr-0"
-                    >
-                      {isAdded ? (
-                        <Check className="size-[18px]" strokeWidth={1.5} />
-                      ) : (
-                        <ShoppingBag
-                          className="size-[18px]"
-                          strokeWidth={1.5}
-                        />
-                      )}
-                    </Button>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-          <p className="sr-only" role="status" aria-live="polite">
-            {addedProducts.length > 0
-              ? `${addedProducts.at(-1)} added to your bag.`
-              : ""}
-          </p>
         </div>
       </section>
     </main>
