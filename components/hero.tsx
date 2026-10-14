@@ -10,7 +10,7 @@ export function Hero() {
       className="relative isolate flex min-h-[640px] items-end overflow-hidden bg-[#07261b] md:min-h-[min(760px,calc(100svh-104px))] md:items-center"
     >
       <div className="absolute inset-0 -z-20">
-        <Image quality={90}
+        <Image quality={98}
           src="/orelia-hero-mobile.webp"
           alt="Two models in gold jewelry against a deep emerald backdrop"
           fill
@@ -18,7 +18,7 @@ export function Hero() {
           sizes="(max-width: 767px) 100vw, 1px"
           className="object-cover object-center md:hidden"
         />
-        <Image quality={90}
+        <Image quality={98}
           src="/orelia-hero.webp"
           alt="Two models wearing gold jewelry against an emerald background"
           fill
