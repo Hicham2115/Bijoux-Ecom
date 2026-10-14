@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Check, ChevronDown, ShoppingBag, SlidersHorizontal, X } from "lucide-react";
+import {
+  Check,
+  ChevronDown,
+  ShoppingBag,
+  SlidersHorizontal,
+  X,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toaster";
@@ -126,22 +132,29 @@ export function ProductsPage({
       >
         <nav
           aria-label="Breadcrumb"
-          className="-mx-5 mb-0 border-b border-[#e4ddcf] bg-[#f5f1e9] px-5 py-2.5 font-serif text-[13px] text-[#746d60] sm:-mx-[5.5vw] sm:px-[5.5vw] sm:py-3"
+          className="-mx-5 mb-0 border-b border-[#e4ddcf] bg-[#f5f1e9] px-5 py-2.5 font-serif text-[13px] text-[#746d60] sm:-mx-[5.5%] sm:px-[5.5%] sm:py-3"
         >
           <Link className="transition-colors hover:text-[#07261b]" href="/">
             Home
           </Link>
           <span className="mx-2 text-[#b99045]">›</span>
-          <Link className="transition-colors hover:text-[#07261b]" href="/products">
+          <Link
+            className="transition-colors hover:text-[#07261b]"
+            href="/products"
+          >
             Jewelry
           </Link>
           <span className="mx-2 text-[#b99045]">›</span>
-          <Link className="transition-colors hover:text-[#07261b]" href="/products" aria-current="page">
+          <Link
+            className="transition-colors hover:text-[#07261b]"
+            href="/products"
+            aria-current="page"
+          >
             The Orélia Collection
           </Link>
         </nav>
 
-        <div className="collection-hero -mx-5 grid w-auto grid-cols-[44%_56%] overflow-hidden bg-[#eee7dc] sm:-mx-[5.5vw] lg:min-h-[450px] lg:grid-cols-2">
+        <div className="collection-hero relative isolate -mx-5 grid w-auto grid-cols-[44%_56%] overflow-hidden bg-[#eee7dc] sm:-mx-[5.5%] lg:min-h-[450px] lg:grid-cols-2">
           <div className="relative min-h-[250px] overflow-hidden sm:min-h-[380px] lg:min-h-[450px]">
             <Image
               src="/orelia-collection-model-covered.png"
@@ -155,11 +168,8 @@ export function ProductsPage({
               aria-hidden="true"
               className="absolute inset-0 bg-gradient-to-t from-[#07261b]/20 via-transparent to-transparent"
             />
-            <span className="absolute bottom-2 left-2 font-sans text-[6px] font-medium uppercase tracking-[0.12em] text-white drop-shadow sm:bottom-7 sm:left-7 sm:text-[9px] sm:tracking-[0.16em]">
-              Orélia fine jewelry
-            </span>
           </div>
-          <div className="flex min-h-[250px] flex-col items-center justify-center px-2 py-5 text-center sm:px-8 sm:py-12 lg:min-h-[450px] lg:px-[12%] lg:py-16">
+          <div className="relative z-[2] flex min-h-[250px] flex-col items-center justify-center px-2 py-5 text-center sm:px-8 sm:py-12 lg:min-h-[450px] lg:px-[12%] lg:py-16">
             <p className="orelia-eyebrow text-[7px] text-[#8c7043] sm:text-[10px]">
               The Orélia collection
             </p>
@@ -172,11 +182,14 @@ export function ProductsPage({
             <p className="mx-auto mt-2 max-w-[430px] font-serif text-[9px] leading-snug text-[#5f5a51] sm:mt-5 sm:text-[16px] lg:text-[18px]">
               Thoughtful pieces, made to become part of your story.
             </p>
-            <span aria-hidden="true" className="mt-3 h-px w-8 bg-[#b99045] sm:mt-6 sm:w-14 lg:mt-8" />
+            <span
+              aria-hidden="true"
+              className="mt-3 h-px w-8 bg-[#b99045] sm:mt-6 sm:w-14 lg:mt-8"
+            />
           </div>
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 left-[38%] z-[2] hidden w-[24%] bg-gradient-to-r from-transparent via-[#eee7dc]/75 to-[#eee7dc] lg:block"
+            className="pointer-events-none absolute inset-y-0 left-1/2 z-[1] hidden w-[18%] bg-gradient-to-r from-transparent via-[#eee7dc]/75 to-[#eee7dc] lg:block"
           />
         </div>
       </section>
@@ -197,7 +210,11 @@ export function ProductsPage({
                 className="w-full justify-between border-[#cfc3ad] bg-transparent px-4 py-3 font-sans text-[11px] uppercase tracking-[0.13em] text-[#252720] hover:bg-[#eee9df]"
               >
                 Filter & sort
-                <SlidersHorizontal aria-hidden="true" className="size-4 text-[#8c7043]" strokeWidth={1.5} />
+                <SlidersHorizontal
+                  aria-hidden="true"
+                  className="size-4 text-[#8c7043]"
+                  strokeWidth={1.5}
+                />
               </Button>
             </div>
             {filtersOpen && (
@@ -434,7 +451,6 @@ export function ProductsPage({
           </div>
         </div>
       </section>
-
     </main>
   );
 }
