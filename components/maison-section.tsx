@@ -9,7 +9,7 @@ export function MaisonSection() {
       className="relative isolate flex flex-col overflow-hidden border-y border-[#bcb2a3] bg-[#07261b] text-center text-[#f7f2e8] md:grid md:aspect-[2.68/1] md:min-h-[420px] md:place-items-center md:px-10 md:py-20"
     >
       <div className="relative h-[260px] w-full sm:h-[360px] md:absolute md:inset-0 md:-z-20 md:h-auto">
-        <Image
+        <Image quality={90}
           src="/orelia-maison.webp"
           alt="A golden stone arch set into a deep emerald wall"
           fill

@@ -156,7 +156,7 @@ export function ProductsPage({
 
         <div className="collection-hero relative isolate -mx-5 grid w-auto grid-cols-[44%_56%] overflow-hidden bg-[#eee7dc] sm:-mx-[5.5%] lg:min-h-[450px] lg:grid-cols-2">
           <div className="relative min-h-[250px] overflow-hidden sm:min-h-[380px] lg:min-h-[450px]">
-            <Image
+            <Image quality={90}
               src="/orelia-collection-model-covered.webp"
               alt="Orélia model wearing gold and emerald jewelry"
               fill
@@ -362,7 +362,7 @@ export function ProductsPage({
                     const productImage = (
                       <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
                         {product.featuredImage ? (
-                          <Image
+                          <Image quality={90}
                             src={product.featuredImage.url}
                             alt={product.featuredImage.altText || product.title}
                             fill

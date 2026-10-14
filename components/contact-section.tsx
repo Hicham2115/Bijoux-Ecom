@@ -145,7 +145,7 @@ export function ContactSection() {
         </div>
 
         <div className="border-t border-dashed border-[#647267] px-7 pb-10 pt-8 sm:px-10 sm:pb-12 sm:pt-10 lg:border-l lg:border-t-0 lg:px-[8%] lg:py-10">
-          <Image
+          <Image quality={90}
             src="/orelia-contact-stamps.webp"
             alt=""
             aria-hidden="true"

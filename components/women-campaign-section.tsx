@@ -9,7 +9,7 @@ export function WomenCampaignSection() {
       aria-labelledby="women-campaign-title"
       className="relative isolate flex flex-col overflow-hidden border-y border-[#bcb2a3] bg-[#eee8dd] text-[#171512] md:min-h-[min(590px,65vw)] md:flex-row md:items-center"
     >
-      <Image
+      <Image quality={90}
         src="/orelia-womens-campaign.webp"
         alt="A model wearing Orélia gold jewelry against a warm ivory backdrop"
         fill
@@ -17,7 +17,7 @@ export function WomenCampaignSection() {
         className="-z-20 hidden object-cover object-center md:block"
       />
       <div className="relative h-[clamp(260px,62vw,420px)] w-full md:hidden">
-        <Image
+        <Image quality={90}
           src="/orelia-womens-campaign.webp"
           alt="A model wearing Orélia gold jewelry against a warm ivory backdrop"
           fill

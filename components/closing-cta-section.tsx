@@ -10,7 +10,7 @@ export function ClosingCtaSection() {
     >
       <div className="relative isolate mx-auto flex max-w-[1380px] flex-col overflow-hidden bg-[#2b1b13] text-[#fffaf2] md:min-h-[430px] md:flex-row md:items-center md:px-12 lg:px-16">
         <div className="relative h-[260px] w-full sm:h-[360px] md:absolute md:inset-0 md:-z-20 md:h-auto">
-          <Image
+          <Image quality={90}
             src="/maison-craft.webp"
             alt="An artisan setting an emerald in a gold ring"
             fill

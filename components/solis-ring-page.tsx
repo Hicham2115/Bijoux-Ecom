@@ -40,12 +40,12 @@ export function SolisRingPage() {
             <div className="order-2 flex gap-2 overflow-x-auto sm:order-1 sm:flex-col sm:gap-3">
               {gallery.map((image, index) => (
                 <button key={image.label} type="button" onClick={() => setSelectedImage(index)} aria-label={`View ${image.label}`} aria-pressed={selectedImage === index} className={`relative size-[68px] shrink-0 overflow-hidden border transition-colors sm:size-[76px] ${selectedImage === index ? "border-[#927342]" : "border-transparent hover:border-[#c9c0b1]"}`}>
-                  <Image src="/products/solis-ring.webp" alt="" fill sizes="76px" className="object-cover" />
+                  <Image quality={90} src="/products/solis-ring.webp" alt="" fill sizes="76px" className="object-cover" />
                 </button>
               ))}
             </div>
             <div className={`relative order-1 aspect-[0.94] min-h-[320px] overflow-hidden sm:order-2 sm:aspect-[0.9] lg:aspect-[0.88] ${gallery[selectedImage].className}`}>
-              <Image src="/products/solis-ring.webp" alt="Solis 18K gold ring with a vivid green emerald" fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover transition-transform duration-700 hover:scale-[1.025] motion-reduce:transition-none" />
+              <Image quality={90} src="/products/solis-ring.webp" alt="Solis 18K gold ring with a vivid green emerald" fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover transition-transform duration-700 hover:scale-[1.025] motion-reduce:transition-none" />
               <span className="absolute bottom-4 left-4 bg-[#f5f1e9]/90 px-3 py-2 font-sans text-[9px] uppercase tracking-[0.15em] text-[#39382f] sm:bottom-6 sm:left-6">Orélia fine jewelry</span>
             </div>
           </section>
@@ -115,7 +115,7 @@ export function SolisRingPage() {
             ].map((product) => (
               <Link key={product.name} href={`/products/${product.handle}`} className="group block min-w-0">
                 <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
-                  <Image src={product.image} alt={product.name} fill sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 28vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.035] motion-reduce:transition-none" />
+                  <Image quality={90} src={product.image} alt={product.name} fill sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 28vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.035] motion-reduce:transition-none" />
                 </div>
                 <div className="mt-3 flex items-start justify-between gap-2 sm:mt-4">
                   <div>

@@ -48,7 +48,7 @@ export function MaisonServicesSection() {
             className="min-w-0"
           >
             <div className="relative aspect-[1.5/1] overflow-hidden bg-[#e8e0d4]">
-              <Image
+              <Image quality={90}
                 src={service.image}
                 alt={service.alt}
                 fill

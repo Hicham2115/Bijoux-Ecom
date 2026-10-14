@@ -93,7 +93,7 @@ export function FeaturedJewelrySection({ products, catalogError }: { products: S
               <Link href={`/products/${product.handle}`} className="group block">
                 <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
                   {product.featuredImage ? (
-                    <Image
+                    <Image quality={90}
                       src={product.featuredImage.url}
                       alt={product.featuredImage.altText || product.title}
                       fill

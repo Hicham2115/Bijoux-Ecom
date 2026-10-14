@@ -82,13 +82,13 @@ export function ShopifyProductPage({
             <div className="order-2 flex gap-2 overflow-x-auto sm:order-1 sm:flex-col sm:gap-3">
               {images.map((image, index) => (
                 <button key={`${image.url}-${index}`} type="button" onClick={() => setSelectedImage(index)} aria-label={`View ${product.title}, image ${index + 1}`} aria-pressed={selectedImage === index} className={`relative size-[68px] shrink-0 overflow-hidden border transition-colors sm:size-[76px] ${selectedImage === index ? "border-[#927342]" : "border-transparent hover:border-[#c9c0b1]"}`}>
-                  <Image src={image.url} alt="" fill sizes="76px" className="object-cover" />
+                  <Image quality={90} src={image.url} alt="" fill sizes="76px" className="object-cover" />
                 </button>
               ))}
             </div>
             <div className="relative order-1 aspect-[0.94] min-h-[320px] overflow-hidden bg-[#ece8df] sm:order-2 sm:aspect-[0.9] lg:aspect-[0.88]">
               {images[selectedImage] ? (
-                <Image src={images[selectedImage].url} alt={images[selectedImage].altText || product.title} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover transition-transform duration-700 hover:scale-[1.025] motion-reduce:transition-none" />
+                <Image quality={90} src={images[selectedImage].url} alt={images[selectedImage].altText || product.title} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover transition-transform duration-700 hover:scale-[1.025] motion-reduce:transition-none" />
               ) : <div className="grid size-full place-items-center font-serif text-[15px] text-[#8c8579]">Image coming soon</div>}
               <span className="absolute bottom-4 left-4 bg-[#f5f1e9]/90 px-3 py-2 font-sans text-[9px] uppercase tracking-[0.15em] text-[#39382f] sm:bottom-6 sm:left-6">Orélia fine jewelry</span>
             </div>
@@ -160,7 +160,7 @@ export function ShopifyProductPage({
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-7 sm:mt-9 sm:grid-cols-3 sm:gap-x-6 lg:gap-x-7">
             {relatedProducts.map((related) => <Link key={related.id} href={`/products/${related.handle}`} className="group block min-w-0">
               <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
-                {related.featuredImage ? <Image src={related.featuredImage.url} alt={related.featuredImage.altText || related.title} fill sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 28vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.035] motion-reduce:transition-none" /> : <div className="grid size-full place-items-center font-serif text-[13px] text-[#8c8579]">Image coming soon</div>}
+                {related.featuredImage ? <Image quality={90} src={related.featuredImage.url} alt={related.featuredImage.altText || related.title} fill sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 28vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.035] motion-reduce:transition-none" /> : <div className="grid size-full place-items-center font-serif text-[13px] text-[#8c8579]">Image coming soon</div>}
               </div>
               <div className="mt-3 flex items-start justify-between gap-2 sm:mt-4"><div><h3 className="orelia-eyebrow text-[9px] sm:text-[10px]">{related.title}</h3><p className="mt-1.5 font-serif text-[13px] text-[#746d60] sm:text-[15px]">{related.productType || "Fine jewelry"}</p><p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:mt-3 sm:text-[17px]">{new Intl.NumberFormat("en-US", { style: "currency", currency: related.priceRange.minVariantPrice.currencyCode, maximumFractionDigits: 2 }).format(Number(related.priceRange.minVariantPrice.amount))}</p></div><span aria-hidden="true" className="mt-1 inline-flex size-10 shrink-0 items-center justify-center font-serif text-lg text-[#8c7043] transition-transform group-hover:translate-x-1">↗</span></div>
             </Link>)}

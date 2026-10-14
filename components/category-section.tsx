@@ -113,7 +113,7 @@ export function CategorySection() {
             <article key={category.name} data-scroll-reveal-item className="category-card min-w-0">
               <div className="group block">
                 <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
-                  <Image
+                  <Image quality={90}
                     src={category.image}
                     alt={category.alt}
                     fill
