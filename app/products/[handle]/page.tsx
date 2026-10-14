@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/layout/header";
@@ -10,8 +12,9 @@ export const metadata: Metadata = {
   description: "Discover fine jewelry from the Orélia collection.",
 };
 
-export default async function ProductRoute({ params }: PageProps<"/products/[handle]">) {
+async function ProductDetails({ params }: { params: PageProps<"/products/[handle]">["params"] }) {
   const { handle } = await params;
+  await connection();
   const product = await getShopifyProduct(handle);
   if (!product) notFound();
   let relatedProducts: ShopifyProduct[] = [];
@@ -23,11 +26,21 @@ export default async function ProductRoute({ params }: PageProps<"/products/[han
     // Show the product page even when related products cannot load.
   }
 
+  return <ShopifyProductPage product={product} relatedProducts={relatedProducts} />;
+}
+
+export default function ProductRoute({ params }: PageProps<"/products/[handle]">) {
   return (
     <>
-      <div id="top"><Header /></div>
-      <ShopifyProductPage product={product} relatedProducts={relatedProducts} />
-      <Footer />
+      <Suspense fallback={<div id="top" className="min-h-[110px] bg-[#080907]" />}>
+        <div id="top"><Header /></div>
+      </Suspense>
+      <Suspense fallback={<main className="min-h-[75vh] bg-[#f5f1e9]" aria-label="Loading product" />}>
+        <ProductDetails params={params} />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-[240px] bg-[#080907]" />}>
+        <Footer />
+      </Suspense>
     </>
   );
 }

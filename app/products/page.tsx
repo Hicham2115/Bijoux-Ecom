@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
+import { Suspense } from "react";
 import { ProductsPage } from "@/components/products-page";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { Footer } from "@/components/footer";
@@ -11,7 +13,8 @@ export const metadata: Metadata = {
   description: "Explore thoughtful gold jewelry from the Orélia collection, made to become part of your story.",
 };
 
-export default async function ProductsRoute() {
+async function ProductCollection() {
+  await connection();
   let products: ShopifyProduct[] = [];
   let catalogError: string | null = null;
 
@@ -21,11 +24,19 @@ export default async function ProductsRoute() {
     catalogError = "We couldn’t load the collection. Please check the Shopify connection and try again.";
   }
 
+  return <>
+    <ScrollReveal />
+    <ProductsPage products={products} catalogError={catalogError} />
+  </>;
+}
+
+export default function ProductsRoute() {
   return (
     <>
       <div id="top"><Header /></div>
-      <ScrollReveal />
-      <ProductsPage products={products} catalogError={catalogError} />
+      <Suspense fallback={<main className="min-h-[70vh] bg-[#f5f1e9]" aria-label="Loading jewelry collection" />}>
+        <ProductCollection />
+      </Suspense>
       <Footer />
     </>
   );
