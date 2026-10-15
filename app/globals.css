@@ -1,11 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "lenis/dist/lenis.css";
 
 html {
   scrollbar-color: #aa874b #eee8df;
   scrollbar-width: thin;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 html::-webkit-scrollbar {
