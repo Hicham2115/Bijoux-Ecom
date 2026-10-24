@@ -50,7 +50,7 @@ export function FaqSection() {
             Retrouvez les informations utiles ou laissez notre équipe vous conseiller.
           </p>
           <a
-            href="#services"
+            href="#contact"
             className="orelia-action mt-7 inline-flex min-h-11 items-center border-b border-[#aa874b] text-[#25241f] transition-colors hover:text-[#8b7042]"
           >
             Parler à une spécialiste

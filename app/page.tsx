@@ -4,7 +4,6 @@ import { FeaturedJewelrySection } from "@/components/featured-jewelry-section";
 import { MenCampaignSection } from "@/components/men-campaign-section";
 import { WomenCampaignSection } from "@/components/women-campaign-section";
 import { MaisonSection } from "@/components/maison-section";
-import { MaisonServicesSection } from "@/components/maison-services-section";
 import { FaqSection } from "@/components/faq-section";
 import { ContactSection } from "@/components/contact-section";
 import { ClosingCtaSection } from "@/components/closing-cta-section";
@@ -27,7 +26,6 @@ export default function Home() {
         <WomenCampaignSection />
         <CategorySection />
         <MaisonSection />
-        <MaisonServicesSection />
         <ReviewsSection />
         <FaqSection />
         <ContactSection />

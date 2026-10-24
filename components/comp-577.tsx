@@ -34,7 +34,7 @@ const navigationLinks = [
   { href: "#  categories", label: "Catégories" },
   { href: "/products", label: "Collections" },
   { href: "#maison", label: "La Maison" },
-  { href: "#services", label: "Services" },
+  { href: "#contact", label: "Services" },
   { href: "#faq", label: "FAQ" },
   { href: "#contact", label: "Contact" },
 ];

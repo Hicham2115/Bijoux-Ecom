@@ -19,7 +19,7 @@ const footerLinks = [
     links: [
       { label: "Notre histoire", href: "#maison" },
       { label: "Notre savoir-faire", href: "#craft" },
-      { label: "Nos services", href: "#services" },
+      { label: "Nos services", href: "#contact" },
       { label: "Visiter une boutique", href: "#boutique" },
     ],
   },
