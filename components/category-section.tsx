@@ -7,40 +7,46 @@ import { Button } from "@/components/ui/button";
 
 const categories = [
   {
-    name: "Bagues",
-    detail: "Des créations faites pour vous accompagner.",
-    image: "/products/solis-ring.webp",
-    alt: "Bague en or ornée d’une émeraude vert profond",
-  },
-  {
-    name: "Colliers",
-    detail: "Des chaînes délicates à porter en superposition.",
-    image: "/products/atlas-chain.webp",
-    alt: "Collier chaîne en or disposé en cercle",
-  },
-  {
-    name: "Bracelets",
-    detail: "Des formes sculpturales pour le quotidien.",
-    image: "/products/forma-cuff.webp",
-    alt: "Manchette en or poli",
+    name: "Montres",
+    detail: "Des montres élégantes pour elle et lui.",
+    image: "/categories/montres.png",
+    alt: "Montre dorée à bracelet en cuir noir sur une pierre ivoire",
   },
   {
     name: "Boucles d’oreilles",
     detail: "Une touche de lumière pour chaque occasion.",
-    image: "/products/lumiere-earrings.webp",
-    alt: "Paire de créoles en or poli",
+    image: "/categories/boucles-oreilles.png",
+    alt: "Paire de créoles dorées sur une pierre ivoire",
   },
   {
-    name: "Bijoux pour homme",
-    detail: "Des créations modernes, sans règles.",
-    image: "/orelia-mens-campaign.webp",
-    alt: "Mannequin portant des bijoux Orélia pour homme",
+    name: "Colliers",
+    detail: "Des chaînes délicates à porter en superposition.",
+    image: "/categories/colliers.png",
+    alt: "Collier chaîne en or disposé en ovale sur une pierre ivoire",
   },
   {
-    name: "Bijoux pour femme",
-    detail: "Des pièces iconiques, sous toutes leurs formes.",
-    image: "/orelia-womens-campaign.webp",
-    alt: "Mannequin portant des bijoux Orélia pour femme",
+    name: "Bracelets",
+    detail: "Des formes sculpturales pour le quotidien.",
+    image: "/categories/bracelets.png",
+    alt: "Bracelet manchette doré sur une pierre ivoire",
+  },
+  {
+    name: "Colis",
+    detail: "Un écrin prêt à offrir, pensé dans les moindres détails.",
+    image: "/categories/colis.png",
+    alt: "Coffret cadeau ivoire noué d’un ruban noir et doré",
+  },
+  {
+    name: "Bagues",
+    detail: "Des créations faites pour vous accompagner.",
+    image: "/categories/bagues.png",
+    alt: "Bague dorée sertie d’une émeraude sur une pierre ivoire",
+  },
+  {
+    name: "Ensemble",
+    detail: "Un pack assorti de boucles, bague et collier.",
+    image: "/categories/ensemble.png",
+    alt: "Ensemble de bijoux dorés pour femme",
   },
 ];
 

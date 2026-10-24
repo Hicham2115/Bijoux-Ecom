@@ -1,0 +1,16 @@
+export const localProducts = [
+  { id: "wa-blue-watch", title: "Montre cadran bleu", productType: "Montres", description: "Montre à cadran bleu et boîtier serti.", image: "/products/whatsapp/montre-cadran-bleu.png" },
+  { id: "earrings-filigree-01", title: "Boucles filigranées", productType: "Boucles d’oreilles", description: "Boucles pendantes dorées aux motifs ajourés.", image: "/products/whatsapp/boucles-filigrane-01.png" },
+  { id: "pendant-round", title: "Pendentif rond filigrané", productType: "Colliers", description: "Pendentif rond doré aux détails ciselés.", image: "/products/whatsapp/pendentif-rond.png" },
+  { id: "bracelet-filigree", title: "Bracelet filigrané", productType: "Bracelets", description: "Manchette dorée ornée d’un motif ajouré.", image: "/products/whatsapp/bracelet-filigrane.png" },
+  { id: "necklace-floral", title: "Collier floral", productType: "Colliers", description: "Collier doré avec pendentif floral.", image: "/products/whatsapp/collier-floral.png" },
+  { id: "bracelet-engraved", title: "Manchette gravée", productType: "Bracelets", description: "Bracelet large aux motifs gravés.", image: "/products/whatsapp/bracelet-manchette.png" },
+  { id: "ring-green-stone", title: "Bague pierre verte", productType: "Bagues", description: "Bague dorée ornée d’une pierre verte.", image: "/products/whatsapp/bague-pierre-verte.png" },
+  { id: "earrings-filigree-02", title: "Boucles feuille ciselée", productType: "Boucles d’oreilles", description: "Boucles pendantes dorées au motif de feuille.", image: "/products/whatsapp/boucles-filigrane-02.png" },
+  { id: "earrings-red-drop", title: "Boucles goutte rouge", productType: "Boucles d’oreilles", description: "Boucles filigranées avec pierres rouge profond.", image: "/products/whatsapp/boucles-goutte-rouge.png" },
+  { id: "necklace-curb-chain", title: "Collier maille plate", productType: "Colliers", description: "Collier doré à maillons plats.", image: "/products/whatsapp/collier-maille.png" },
+  { id: "earrings-open-hoop", title: "Boucles anneaux ciselés", productType: "Boucles d’oreilles", description: "Créoles dorées ornées de détails ciselés.", image: "/products/whatsapp/boucles-anneaux.png" },
+  { id: "earrings-teardrop", title: "Boucles goutte ajourée", productType: "Boucles d’oreilles", description: "Boucles pendantes dorées en forme de goutte.", image: "/products/whatsapp/boucles-goutte.png" },
+  { id: "earrings-geometric", title: "Boucles géométriques", productType: "Boucles d’oreilles", description: "Boucles pendantes dorées aux formes géométriques.", image: "/products/whatsapp/boucles-geometriques.png" },
+  { id: "pendant-filigree", title: "Pendentif poire filigrané", productType: "Colliers", description: "Pendentif doré en forme de poire, finement ajouré.", image: "/products/whatsapp/pendentif-filigrane.png" },
+] as const;

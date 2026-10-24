@@ -16,6 +16,10 @@ import { toast } from "@/components/ui/toaster";
 import type { ShopifyProduct } from "@/lib/shopify";
 import { getDefaultVariant, toCartItem, toFavoriteItem } from "@/lib/commerce";
 import { useCommerceStore } from "@/lib/commerce-store";
+import type { localProducts } from "@/lib/local-products";
+
+type LocalProduct = (typeof localProducts)[number];
+type Product = ShopifyProduct | LocalProduct;
 
 const sortOptions = [
   { value: "Featured", label: "Recommandés" },
@@ -69,10 +73,13 @@ function PlaceholderFilterGroup({
 
 function getCategory(productType: string) {
   const type = productType.toLowerCase();
+  if (type.includes("watch") || type.includes("montre")) return "Montres";
   if (type.includes("ring")) return "Bagues";
-  if (type.includes("necklace")) return "Colliers";
+  if (type.includes("necklace") || type.includes("collier")) return "Colliers";
   if (type.includes("bracelet") || type.includes("cuff")) return "Bracelets";
   if (type.includes("earring")) return "Boucles d’oreilles";
+  if (type.includes("set") || type.includes("ensemble") || type.includes("pack")) return "Ensemble";
+  if (type.includes("colis")) return "Colis";
   return productType || "Bijoux";
 }
 
@@ -80,7 +87,7 @@ export function ProductsPage({
   products,
   catalogError,
 }: {
-  products: ShopifyProduct[];
+  products: Product[];
   catalogError: string | null;
 }) {
   const [category, setCategory] = useState("Tous les bijoux");
@@ -116,16 +123,18 @@ export function ProductsPage({
     );
     if (sort === "Price: low to high") {
       return [...filtered].sort(
-        (a, b) =>
-          Number(a.priceRange.minVariantPrice.amount) -
-          Number(b.priceRange.minVariantPrice.amount),
+        (a, b) => "priceRange" in a && "priceRange" in b
+          ? Number(a.priceRange.minVariantPrice.amount) -
+            Number(b.priceRange.minVariantPrice.amount)
+          : 0,
       );
     }
     if (sort === "Price: high to low") {
       return [...filtered].sort(
-        (a, b) =>
-          Number(b.priceRange.minVariantPrice.amount) -
-          Number(a.priceRange.minVariantPrice.amount),
+        (a, b) => "priceRange" in a && "priceRange" in b
+          ? Number(b.priceRange.minVariantPrice.amount) -
+            Number(a.priceRange.minVariantPrice.amount)
+          : 0,
       );
     }
     return filtered;
@@ -358,10 +367,11 @@ export function ProductsPage({
               ) : (
                 <div className="grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 xl:grid-cols-4 xl:gap-x-7">
                   {visibleProducts.map((product) => {
-                    const variant = getDefaultVariant(product);
+                    const isLocalProduct = !("priceRange" in product);
+                    const variant = isLocalProduct ? undefined : getDefaultVariant(product);
                     const isAdded = cartItems.some((item) => item.variantId === variant?.id);
                     const isFavorite = favorites.some((item) => item.productId === product.id);
-                    const price = new Intl.NumberFormat("fr-MA", {
+                    const price = isLocalProduct ? "Prix sur demande" : new Intl.NumberFormat("fr-MA", {
                       style: "currency",
                       currency: product.priceRange.minVariantPrice.currencyCode,
                       maximumFractionDigits: 2,
@@ -370,7 +380,15 @@ export function ProductsPage({
                     );
                     const productImage = (
                       <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
-                        {product.featuredImage ? (
+                        {isLocalProduct ? (
+                          <Image quality={90}
+                            src={product.image}
+                            alt={product.title}
+                            fill
+                            sizes="(max-width: 640px) 46vw, (max-width: 1280px) 30vw, 23vw"
+                            className="object-cover transition-transform duration-700 group-hover:scale-[1.035] motion-reduce:transition-none"
+                          />
+                        ) : product.featuredImage ? (
                           <Image quality={90}
                             src={product.featuredImage.url}
                             alt={product.featuredImage.altText || product.title}
@@ -385,6 +403,19 @@ export function ProductsPage({
                         )}
                       </div>
                     );
+                    const productDetails = (
+                      <>
+                        <h2 className="orelia-eyebrow text-[9px] sm:text-[10px]">
+                          {product.title}
+                        </h2>
+                        <p className="mt-1.5 line-clamp-2 font-serif text-[13px] text-[#746d60] sm:text-[15px]">
+                          {product.description || getCategory(product.productType)}
+                        </p>
+                        <p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:mt-3 sm:text-[17px]">
+                          {price}
+                        </p>
+                      </>
+                    );
 
                     return (
                       <article
@@ -393,13 +424,8 @@ export function ProductsPage({
                         className="group min-w-0"
                       >
                         <div className="relative">
-                          <Link
-                            href={`/products/${product.handle}`}
-                            aria-label={`Voir ${product.title}`}
-                          >
-                            {productImage}
-                          </Link>
-                          <button
+                          {isLocalProduct ? <div>{productImage}</div> : <Link href={`/products/${product.handle}`} aria-label={`Voir ${product.title}`}>{productImage}</Link>}
+                          {!isLocalProduct && <button
                             type="button"
                             onClick={() => toggleFavorite(toFavoriteItem(product, variant))}
                             aria-label={isFavorite ? `Retirer ${product.title} des favoris` : `Ajouter ${product.title} aux favoris`}
@@ -407,25 +433,17 @@ export function ProductsPage({
                             className="absolute right-3 top-3 grid size-10 place-items-center rounded-full border border-[#d7cebf] bg-[#f7f3eb]/95 text-[#363a32] shadow-sm transition-colors hover:text-[#8a3e32]"
                           >
                             <Heart className="size-[18px]" fill={isFavorite ? "currentColor" : "none"} strokeWidth={1.5} />
-                          </button>
+                          </button>}
                         </div>
                         <div className="mt-3 flex items-start justify-between gap-2 sm:mt-4">
-                          <Link
-                            href={`/products/${product.handle}`}
-                            className="min-w-0"
-                          >
-                            <h2 className="orelia-eyebrow text-[9px] sm:text-[10px]">
-                              {product.title}
-                            </h2>
-                            <p className="mt-1.5 line-clamp-2 font-serif text-[13px] text-[#746d60] sm:text-[15px]">
-                              {product.description ||
-                                getCategory(product.productType)}
-                            </p>
-                            <p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:mt-3 sm:text-[17px]">
-                              {price}
-                            </p>
-                          </Link>
-                          <Button
+                          {isLocalProduct ? (
+                            <div className="min-w-0">{productDetails}</div>
+                          ) : (
+                            <Link href={`/products/${product.handle}`} className="min-w-0">
+                              {productDetails}
+                            </Link>
+                          )}
+                          {!isLocalProduct && <Button
                             type="button"
                             variant="ghost"
                             size="icon"
@@ -454,7 +472,7 @@ export function ProductsPage({
                                 strokeWidth={1.5}
                               />
                             )}
-                          </Button>
+                          </Button>}
                         </div>
                       </article>
                     );

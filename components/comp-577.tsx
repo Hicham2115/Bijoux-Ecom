@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Heart, Menu, Search, ShoppingBag, X, ArrowUpRight } from "lucide-react";
+import {
+  Heart,
+  Menu,
+  Search,
+  ShoppingBag,
+  X,
+  ArrowUpRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCommerceStore } from "@/lib/commerce-store";
 import {
@@ -23,7 +30,7 @@ import {
 const navigationLinks = [
   { href: "#women", label: "Femme" },
   { href: "#men", label: "Homme" },
-  { href: "#categories", label: "Catégories" },
+  { href: "#  categories", label: "Catégories" },
   { href: "/products", label: "Collections" },
   { href: "#maison", label: "La Maison" },
   { href: "#services", label: "Services" },
@@ -124,7 +131,10 @@ export default function Component() {
                         </span>
                         {link.label}
                       </span>
-                      <ArrowUpRight className="size-4 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" strokeWidth={1.4} />
+                      <ArrowUpRight
+                        className="size-4 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                        strokeWidth={1.4}
+                      />
                     </a>
                   </SheetClose>
                 </li>
@@ -197,7 +207,11 @@ export default function Component() {
           className="relative size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:size-8"
         >
           <Heart className="size-5" strokeWidth={1.5} />
-          {favoritesCount > 0 && <span className="absolute -right-1 -top-1 grid min-w-4 place-items-center rounded-full bg-[#d7b878] px-1 font-sans text-[9px] leading-4 text-[#171714]">{favoritesCount}</span>}
+          {favoritesCount > 0 && (
+            <span className="absolute -right-1 -top-1 grid min-w-4 place-items-center rounded-full bg-[#d7b878] px-1 font-sans text-[9px] leading-4 text-[#171714]">
+              {favoritesCount}
+            </span>
+          )}
         </Button>
         <Button
           type="button"
@@ -208,7 +222,11 @@ export default function Component() {
           className="relative size-11 text-white hover:bg-white/10 hover:text-[#e5cf9f] sm:size-8"
         >
           <ShoppingBag className="size-5" strokeWidth={1.5} />
-          {cartCount > 0 && <span className="absolute -right-1 -top-1 grid min-w-4 place-items-center rounded-full bg-[#d7b878] px-1 font-sans text-[9px] leading-4 text-[#171714]">{cartCount}</span>}
+          {cartCount > 0 && (
+            <span className="absolute -right-1 -top-1 grid min-w-4 place-items-center rounded-full bg-[#d7b878] px-1 font-sans text-[9px] leading-4 text-[#171714]">
+              {cartCount}
+            </span>
+          )}
         </Button>
       </div>
     </header>

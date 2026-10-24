@@ -8,10 +8,11 @@ export function Hero() {
     <section
       aria-labelledby="hero-title"
       data-no-scroll-reveal
-      className="relative isolate flex min-h-[640px] items-end overflow-hidden bg-[#07261b] md:min-h-[min(760px,calc(100svh-104px))] md:items-center"
+      className="relative isolate flex min-h-[640px] items-end overflow-hidden bg-[#21140f] md:min-h-[min(760px,calc(100svh-104px))] md:items-center"
     >
       <div className="absolute inset-0 -z-20">
-        <Image quality={98}
+        <Image
+          quality={98}
           src="/orelia-hero-mobile.webp"
           alt="Deux modèles portant des bijoux en or sur un fond émeraude profond"
           fill
@@ -19,7 +20,8 @@ export function Hero() {
           sizes="(max-width: 767px) 100vw, 1px"
           className="object-cover object-center md:hidden"
         />
-        <Image quality={98}
+        <Image
+          quality={98}
           src="/orelia-hero.webp"
           alt="Deux modèles portant des bijoux en or sur un fond émeraude"
           fill
@@ -28,7 +30,7 @@ export function Hero() {
           className="hidden object-cover object-[center_35%] md:block"
         />
       </div>
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,38,27,0.06)_0%,rgba(7,38,27,0.06)_28%,rgba(7,38,27,0.58)_52%,#07261b_86%)] md:bg-[linear-gradient(90deg,rgba(7,38,27,0.6)_0%,rgba(7,38,27,0.15)_50%,transparent_80%)]" />
+      {/* <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(33,20,15,0.08)_0%,rgba(33,20,15,0.12)_28%,rgba(33,20,15,0.7)_52%,#21140f_86%)] md:bg-[linear-gradient(90deg,rgba(33,20,15,0.72)_0%,rgba(33,20,15,0.2)_50%,transparent_80%)]" /> */}
       <div className="hero-enter hero-enter--1 orelia-eyebrow absolute left-6 top-8 flex items-center gap-3 text-[#e8d09e] md:hidden">
         <span className="h-px w-8 bg-[#d5ad5c]" />
         <span>Des bijoux pour chaque expression</span>
@@ -59,7 +61,7 @@ export function Hero() {
             render={<Link href="/products" />}
             nativeButton={false}
             variant="outline"
-            className="orelia-action orelia-button group mt-8 h-[54px] gap-5 rounded-none border-[#d5ad5c] bg-[#07261b]/30 px-6 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] md:mt-10 md:border-white/75 md:bg-transparent"
+            className="orelia-action orelia-button group mt-8 h-[54px] gap-5 rounded-none border-[#d5ad5c] bg-[#21140f]/30 px-6 text-white hover:border-[#e5cf9f] hover:bg-[#e5cf9f] hover:text-[#10130f] md:mt-10 md:border-white/75 md:bg-transparent"
           >
             Découvrir la collection{" "}
             <ArrowRight

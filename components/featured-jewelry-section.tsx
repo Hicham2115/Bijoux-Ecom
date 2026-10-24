@@ -2,30 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Heart, ShoppingBag } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { toast } from "@/components/ui/toaster";
-import { getDefaultVariant, toCartItem, toFavoriteItem } from "@/lib/commerce";
-import { useCommerceStore } from "@/lib/commerce-store";
-import type { ShopifyProduct } from "@/lib/shopify";
+import { localProducts } from "@/lib/local-products";
 
-export function FeaturedJewelrySection({ products, catalogError }: { products: ShopifyProduct[]; catalogError: boolean }) {
+export function FeaturedJewelrySection() {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [addedProduct, setAddedProduct] = useState<string | null>(null);
-  const cartItems = useCommerceStore((state) => state.cartItems);
-  const favorites = useCommerceStore((state) => state.favorites);
-  const addToCart = useCommerceStore((state) => state.addToCart);
-  const toggleFavorite = useCommerceStore((state) => state.toggleFavorite);
-
-  useEffect(() => {
-    if (catalogError) {
-      toast({
-        title: "Collection indisponible",
-        description: "Nous n’avons pas pu charger la collection. Veuillez réessayer plus tard.",
-      });
-    }
-  }, [catalogError]);
 
   function scrollProducts(direction: -1 | 1) {
     const carousel = carouselRef.current;
@@ -45,6 +28,7 @@ export function FeaturedJewelrySection({ products, catalogError }: { products: S
     <section
       id="collection"
       aria-labelledby="featured-jewelry-title"
+      data-no-scroll-reveal
       className="bg-[#f5f1e9] py-11 text-[#171714] sm:py-14"
     >
       <div className="mx-auto w-full px-5 sm:px-[3.6%]">
@@ -58,7 +42,7 @@ export function FeaturedJewelrySection({ products, catalogError }: { products: S
               id="featured-jewelry-title"
               className="orelia-eyebrow max-[360px]:tracking-[0.14em]"
             >
-              Nos bijoux à découvrir
+              Nos meilleures ventes
             </h2>
           </div>
 
@@ -84,91 +68,35 @@ export function FeaturedJewelrySection({ products, catalogError }: { products: S
           </div>
         </div>
 
-        {products.length > 0 ? <div
+        <div
           ref={carouselRef}
           className="featured-jewelry-carousel flex gap-4 overflow-x-auto pb-3 sm:gap-5"
-          aria-label="Sélection de bijoux"
+          aria-label="Nos meilleures ventes"
         >
-          {products.map((product) => {
-            const variant = getDefaultVariant(product);
-            const isAdded = cartItems.some((item) => item.variantId === variant?.id);
-            const isFavorite = favorites.some((item) => item.productId === product.id);
-
-            return (
+          {localProducts.map((product) => (
             <article
               key={product.id}
-              data-scroll-reveal-item
               className="category-card featured-jewelry-card min-w-0"
             >
-              <div className="relative">
-                <Link href={`/products/${product.handle}`} className="group block">
-                  <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
-                    {product.featuredImage ? (
-                      <Image quality={90}
-                        src={product.featuredImage.url}
-                        alt={product.featuredImage.altText || product.title}
-                        fill
-                        sizes="(max-width: 640px) 72vw, (max-width: 1024px) 30vw, 16vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transition-none"
-                      />
-                    ) : <div className="grid size-full place-items-center font-serif text-[13px] text-[#8c8579]">Image bientôt disponible</div>}
-                  </div>
+              <div className="group">
+                <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
+                  <Image
+                    quality={90}
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    sizes="(max-width: 640px) 72vw, (max-width: 1024px) 30vw, 16vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transition-none"
+                  />
+                </div>
                 <h3 className="orelia-eyebrow mt-3 sm:mt-4">{product.title}</h3>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => toggleFavorite(toFavoriteItem(product, variant))}
-                  aria-label={isFavorite ? `Retirer ${product.title} des favoris` : `Ajouter ${product.title} aux favoris`}
-                  aria-pressed={isFavorite}
-                  className="absolute right-3 top-3 grid size-10 place-items-center rounded-full border border-[#d7cebf] bg-[#f7f3eb]/95 text-[#363a32] shadow-sm transition-colors hover:text-[#8a3e32]"
-                >
-                  <Heart className="size-[18px]" fill={isFavorite ? "currentColor" : "none"} strokeWidth={1.5} />
-                </button>
-              </div>
-              <Link href={`/products/${product.handle}`} className="mt-1 block font-serif text-[13px] leading-[1.5] text-[#5f5a51] hover:text-[#927342] sm:text-[14px]">
-                {product.description || product.productType || "Joaillerie"}
-              </Link>
-              <div className="mt-2 flex items-center justify-between gap-2 sm:mt-3">
-                <Link href={`/products/${product.handle}`} className="text-[14px] font-semibold hover:text-[#927342] sm:text-[16px]">
-                  {new Intl.NumberFormat("fr-MA", {
-                    style: "currency",
-                    currency: product.priceRange.minVariantPrice.currencyCode,
-                    maximumFractionDigits: 2,
-                  }).format(Number(product.priceRange.minVariantPrice.amount))}
-                </Link>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label={
-                    isAdded
-                      ? `${product.title} est dans votre panier`
-                      : `Ajouter ${product.title} au panier`
-                  }
-                  aria-pressed={isAdded}
-                  disabled={!variant}
-                  onClick={() => {
-                    if (!variant) return;
-                    addToCart(toCartItem(product, variant));
-                    setAddedProduct(product.id);
-                  }}
-                  className="size-11 shrink-0 rounded-full transition-colors hover:bg-[#07261b] hover:text-white disabled:opacity-40 sm:size-8"
-                >
-                  {isAdded ? (
-                    <Check className="size-[18px]" strokeWidth={1.5} />
-                  ) : (
-                    <ShoppingBag className="size-[18px]" strokeWidth={1.5} />
-                  )}
-                </Button>
+                <p className="mt-1 block font-serif text-[13px] leading-[1.5] text-[#5f5a51] sm:text-[14px]">
+                  {product.description}
+                </p>
               </div>
             </article>
-            );
-          })}
-        </div> : catalogError ? null : <p className="py-10 text-center font-serif text-[16px] text-[#746d60]">Notre collection se prépare.</p>}
-        <p className="sr-only" role="status" aria-live="polite">
-          {addedProduct
-            ? `${products.find((product) => product.id === addedProduct)?.title ?? "Article"} ajouté à votre panier.`
-            : ""}
-        </p>
+          ))}
+        </div>
         <div className="mt-5 flex justify-end">
           <Link
             href="/products"

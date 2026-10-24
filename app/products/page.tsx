@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { connection } from "next/server";
 import { Suspense } from "react";
 import { ProductsPage } from "@/components/products-page";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { Footer } from "@/components/footer";
 import { Header } from "@/layout/header";
-import { getShopifyProducts } from "@/lib/shopify";
-import type { ShopifyProduct } from "@/lib/shopify";
+import { localProducts } from "@/lib/local-products";
 
 export const metadata: Metadata = {
   title: "Joaillerie | Orélia",
@@ -15,21 +13,10 @@ export const metadata: Metadata = {
 };
 
 async function ProductCollection() {
-  await connection();
-  let products: ShopifyProduct[] = [];
-  let catalogError: string | null = null;
-
-  try {
-    products = await getShopifyProducts();
-  } catch {
-    catalogError =
-      "Impossible de charger la collection. Vérifiez la connexion à Shopify et réessayez.";
-  }
-
   return (
     <>
       <ScrollReveal />
-      <ProductsPage products={products} catalogError={catalogError} />
+      <ProductsPage products={localProducts} catalogError={null} />
     </>
   );
 }
