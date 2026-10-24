@@ -87,7 +87,7 @@ export function ProductsPage({
   products,
   catalogError,
 }: {
-  products: Product[];
+  products: readonly Product[];
   catalogError: string | null;
 }) {
   const [category, setCategory] = useState("Tous les bijoux");
