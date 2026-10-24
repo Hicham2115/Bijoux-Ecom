@@ -94,7 +94,7 @@ export function CategorySection() {
               size="icon"
               aria-label="Voir les catégories précédentes"
               onClick={() => scrollCategories(-1)}
-              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#07261b] hover:text-white"
+              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#3b2a1c] hover:text-white"
             >
               <ArrowLeft className="size-4" strokeWidth={1.5} />
             </Button>
@@ -103,7 +103,7 @@ export function CategorySection() {
               size="icon"
               aria-label="Voir plus de catégories"
               onClick={() => scrollCategories(1)}
-              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#07261b] hover:text-white"
+              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#3b2a1c] hover:text-white"
             >
               <ArrowRight className="size-4" strokeWidth={1.5} />
             </Button>

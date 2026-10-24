@@ -38,7 +38,7 @@ export function Footer() {
   const sectionHref = (href: string) =>
     href.startsWith("/") || pathname === "/" ? href : `/${href}`;
   return (
-    <footer className="overflow-hidden bg-[#07261b] text-[#f4f0e7]">
+    <footer className="overflow-hidden bg-[#24170f] text-[#f4f0e7]">
       <div className="mx-auto max-w-[1500px] px-6 pt-12 sm:px-[5.5%] sm:pt-20">
         <div className="h-px w-full bg-[#c4a56c]/55" />
 
@@ -114,7 +114,7 @@ export function Footer() {
 
       <div
         aria-hidden="true"
-        className="mx-auto mt-9 max-w-[1800px] select-none overflow-hidden text-center font-serif text-[clamp(7rem,24vw,25rem)] leading-[0.74] tracking-[-0.075em] text-[#b7d0ba]/[0.12] sm:mt-14"
+        className="mx-auto mt-9 max-w-[1800px] select-none overflow-hidden text-center font-serif text-[clamp(7rem,24vw,25rem)] leading-[0.74] tracking-[-0.075em] text-[#d7b878]/[0.12] sm:mt-14"
       >
         ORÉLIA
       </div>

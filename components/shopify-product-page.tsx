@@ -123,9 +123,9 @@ export function ShopifyProductPage({
 
           <section aria-labelledby="product-title" className="flex flex-col lg:sticky lg:top-8 lg:self-start">
             <p className="orelia-eyebrow text-[#8c7043]">La collection {product.title.split(" ")[0]}</p>
-            <h1 id="product-title" className="orelia-heading mt-3 text-[clamp(2.35rem,4.2vw,4.25rem)] text-[#101710]">{product.title}</h1>
+            <h1 id="product-title" className="orelia-heading mt-3 text-[clamp(2.35rem,4.2vw,4.25rem)] text-[#211b14]">{product.title}</h1>
             {product.description && <p className="mt-3 font-serif text-[16px] leading-relaxed text-[#625d53] sm:text-[18px]">{product.description}</p>}
-            <p className="mt-6 font-sans text-[14px] font-medium tracking-[0.04em] text-[#242721] sm:mt-8 sm:text-[15px]">{price}</p>
+            <p className="mt-6 font-sans text-[14px] font-medium tracking-[0.04em] text-[#29231c] sm:mt-8 sm:text-[15px]">{price}</p>
             <p className="mt-1 font-sans text-[11px] text-[#746d60]">{product.availableForSale ? "Taxes incluses · Livraison offerte" : "Actuellement indisponible"}</p>
 
             {optionGroups.map((group) => {
@@ -134,7 +134,7 @@ export function ShopifyProductPage({
               return <div key={group.name} id={isRing && isSizeOption ? "size-guide" : undefined} className="mt-7 border-t border-[#d7cebf] pt-6 sm:mt-8">
                 <div className="flex items-center justify-between">
                   <span className="orelia-eyebrow text-[#4b493f]">{label}</span>
-                  {isRing && isSizeOption && <a href="#size-guide" className="inline-flex min-h-10 items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#07261b]">Trouver ma taille</a>}
+                  {isRing && isSizeOption && <a href="#size-guide" className="inline-flex min-h-10 items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#3b2a1c]">Trouver ma taille</a>}
                 </div>
                 <div className={`mt-3 grid gap-2 ${group.values.length > 5 ? "grid-cols-3 sm:grid-cols-5" : ""}`} style={group.values.length <= 5 ? { gridTemplateColumns: `repeat(${group.values.length}, minmax(0, 1fr))` } : undefined} role="group" aria-label={`Choisir : ${label.toLowerCase()}`}>
                   {group.values.map((value) => {
@@ -144,7 +144,7 @@ export function ShopifyProductPage({
                     );
                     const unavailable = product.variants.nodes.length > 0 && matchingVariants.length > 0 && !matchingVariants.some((variant) => variant.availableForSale);
                     const selected = selectedOptions[group.name] === value;
-                    return <button key={value} type="button" disabled={unavailable} onClick={() => setSelectedOptions((current) => ({ ...current, [group.name]: value }))} aria-pressed={selected} className={`min-h-12 border font-serif text-[15px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] disabled:cursor-not-allowed disabled:opacity-40 ${selected ? "border-[#07261b] bg-[#07261b] text-white" : "border-[#c9c0b1] hover:border-[#927342]"}`}>{value}</button>;
+                    return <button key={value} type="button" disabled={unavailable} onClick={() => setSelectedOptions((current) => ({ ...current, [group.name]: value }))} aria-pressed={selected} className={`min-h-12 border font-serif text-[15px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] disabled:cursor-not-allowed disabled:opacity-40 ${selected ? "border-[#3b2a1c] bg-[#3b2a1c] text-white" : "border-[#c9c0b1] hover:border-[#927342]"}`}>{value}</button>;
                   })}
                 </div>
               </div>;
@@ -156,7 +156,7 @@ export function ShopifyProductPage({
                 <span className="min-w-6 text-center font-sans text-[13px]" aria-live="polite">{quantity}</span>
                 <button type="button" onClick={() => setQuantity((current) => Math.min(9, current + 1))} aria-label="Augmenter la quantité" className="grid size-11 place-items-center text-[#49463f] hover:text-[#927342]"><Plus className="size-4" /></button>
               </div>
-              <button type="button" disabled={!product.availableForSale || !selectedVariant} onClick={() => selectedVariant && addToCart(toCartItem(product, selectedVariant), quantity)} className="orelia-button inline-flex min-h-14 flex-1 items-center justify-center gap-3 bg-[#07261b] px-5 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-white hover:bg-[#123b2d] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a98442]">
+              <button type="button" disabled={!product.availableForSale || !selectedVariant} onClick={() => selectedVariant && addToCart(toCartItem(product, selectedVariant), quantity)} className="orelia-button inline-flex min-h-14 flex-1 items-center justify-center gap-3 bg-[#3b2a1c] px-5 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-white hover:bg-[#594027] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a98442]">
                 {added ? <><Check className="size-4" /> Ajouté au panier</> : <><ShoppingBag className="size-4" strokeWidth={1.5} /> Ajouter au panier</>}
               </button>
               <button type="button" onClick={() => toggleFavorite(toFavoriteItem(product, selectedVariant))} aria-label={saved ? "Retirer des favoris" : "Ajouter aux favoris"} aria-pressed={saved} className={`grid size-14 shrink-0 place-items-center border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] ${saved ? "border-[#927342] text-[#927342]" : "border-[#c9c0b1] hover:border-[#927342] hover:text-[#927342]"}`}><Heart className="size-5" strokeWidth={1.4} fill={saved ? "currentColor" : "none"} /></button>
@@ -181,18 +181,18 @@ export function ShopifyProductPage({
 
         {relatedProducts.length > 0 && <section aria-labelledby="related-products-title" className="mt-16 border-t border-[#d7cebf] pt-10 sm:mt-24 sm:pt-14">
           <div className="flex items-end justify-between gap-4">
-            <div><p className="orelia-eyebrow text-[#8c7043]">Choisi pour vous</p><h2 id="related-products-title" className="orelia-heading mt-3 text-[clamp(2rem,4vw,3.5rem)] text-[#101710]">Vous aimerez peut-être aussi</h2></div>
-            <Link href="/products" className="hidden min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#07261b] transition-colors hover:text-[#927342] sm:inline-flex">Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span></Link>
+            <div><p className="orelia-eyebrow text-[#8c7043]">Choisi pour vous</p><h2 id="related-products-title" className="orelia-heading mt-3 text-[clamp(2rem,4vw,3.5rem)] text-[#211b14]">Vous aimerez peut-être aussi</h2></div>
+            <Link href="/products" className="hidden min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3b2a1c] transition-colors hover:text-[#927342] sm:inline-flex">Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span></Link>
           </div>
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-7 sm:mt-9 sm:grid-cols-3 sm:gap-x-6 lg:gap-x-7">
             {relatedProducts.map((related) => <Link key={related.id} href={`/products/${related.handle}`} className="group block min-w-0">
               <div className="relative aspect-square overflow-hidden bg-[#eee9e0]">
                 {related.featuredImage ? <Image quality={90} src={related.featuredImage.url} alt={related.featuredImage.altText || related.title} fill sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 28vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.035] motion-reduce:transition-none" /> : <div className="grid size-full place-items-center font-serif text-[13px] text-[#8c8579]">Image bientôt disponible</div>}
               </div>
-              <div className="mt-3 flex items-start justify-between gap-2 sm:mt-4"><div><h3 className="orelia-eyebrow text-[9px] sm:text-[10px]">{related.title}</h3><p className="mt-1.5 font-serif text-[13px] text-[#746d60] sm:text-[15px]">{related.productType || "Joaillerie"}</p><p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:mt-3 sm:text-[17px]">{new Intl.NumberFormat("fr-MA", { style: "currency", currency: related.priceRange.minVariantPrice.currencyCode, maximumFractionDigits: 2 }).format(Number(related.priceRange.minVariantPrice.amount))}</p></div><span aria-hidden="true" className="mt-1 inline-flex size-10 shrink-0 items-center justify-center font-serif text-lg text-[#8c7043] transition-transform group-hover:translate-x-1">↗</span></div>
+              <div className="mt-3 flex items-start justify-between gap-2 sm:mt-4"><div><h3 className="orelia-eyebrow text-[9px] sm:text-[10px]">{related.title}</h3><p className="mt-1.5 font-serif text-[13px] text-[#746d60] sm:text-[15px]">{related.productType || "Joaillerie"}</p><p className="mt-2 font-serif text-[15px] font-semibold text-[#3b2a1c] sm:mt-3 sm:text-[17px]">{new Intl.NumberFormat("fr-MA", { style: "currency", currency: related.priceRange.minVariantPrice.currencyCode, maximumFractionDigits: 2 }).format(Number(related.priceRange.minVariantPrice.amount))}</p></div><span aria-hidden="true" className="mt-1 inline-flex size-10 shrink-0 items-center justify-center font-serif text-lg text-[#8c7043] transition-transform group-hover:translate-x-1">↗</span></div>
             </Link>)}
           </div>
-          <Link href="/products" className="mt-6 inline-flex min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#07261b] transition-colors hover:text-[#927342] sm:hidden">Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span></Link>
+          <Link href="/products" className="mt-6 inline-flex min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3b2a1c] transition-colors hover:text-[#927342] sm:hidden">Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span></Link>
         </section>}
       </div>
     </main>

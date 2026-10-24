@@ -83,19 +83,19 @@ export function SolisRingPage({ product }: { product: ShopifyProductDetails | nu
 
           <section aria-labelledby="product-title" className="flex flex-col lg:sticky lg:top-8 lg:self-start">
             <p className="orelia-eyebrow text-[#8c7043]">La collection Solis</p>
-          <h1 id="product-title" className="orelia-heading mt-3 text-[clamp(2.35rem,4.2vw,4.25rem)] text-[#101710]">Bague émeraude Solis</h1>
+          <h1 id="product-title" className="orelia-heading mt-3 text-[clamp(2.35rem,4.2vw,4.25rem)] text-[#211b14]">Bague émeraude Solis</h1>
             <p className="mt-3 font-serif text-[16px] leading-relaxed text-[#625d53] sm:text-[18px]">Un peu de lumière, tout près de soi.</p>
-            <p className="mt-6 font-sans text-[14px] font-medium tracking-[0.04em] text-[#242721] sm:mt-8 sm:text-[15px]">{formattedPrice}</p>
+            <p className="mt-6 font-sans text-[14px] font-medium tracking-[0.04em] text-[#29231c] sm:mt-8 sm:text-[15px]">{formattedPrice}</p>
             <p className="mt-1 font-sans text-[11px] text-[#746d60]">Taxes incluses · Livraison offerte</p>
 
             <div className="mt-7 border-t border-[#d7cebf] pt-6 sm:mt-8">
               <div className="flex items-center justify-between">
                 <label className="orelia-eyebrow text-[#4b493f]" htmlFor="ring-size">Taille de bague</label>
-                <a href="#ring-size" className="min-h-10 inline-flex items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#07261b]">Trouver ma taille</a>
+                <a href="#ring-size" className="min-h-10 inline-flex items-center font-serif text-[13px] text-[#746d60] underline decoration-[#b9a783] underline-offset-4 hover:text-[#3b2a1c]">Trouver ma taille</a>
               </div>
               <div id="ring-size" className="mt-3 grid grid-cols-5 gap-2" role="group" aria-label="Choisir la taille de bague">
                 {sizeOptions.map((size) => (
-                  <button key={size} type="button" onClick={() => setSelectedSize(size)} aria-pressed={selectedSize === size} className={`min-h-12 border font-serif text-[15px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] ${selectedSize === size ? "border-[#07261b] bg-[#07261b] text-white" : "border-[#c9c0b1] hover:border-[#927342]"}`}>{size}</button>
+                  <button key={size} type="button" onClick={() => setSelectedSize(size)} aria-pressed={selectedSize === size} className={`min-h-12 border font-serif text-[15px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] ${selectedSize === size ? "border-[#3b2a1c] bg-[#3b2a1c] text-white" : "border-[#c9c0b1] hover:border-[#927342]"}`}>{size}</button>
                 ))}
               </div>
             </div>
@@ -106,7 +106,7 @@ export function SolisRingPage({ product }: { product: ShopifyProductDetails | nu
                 <span className="min-w-6 text-center font-sans text-[13px]" aria-live="polite">{quantity}</span>
                 <button type="button" onClick={() => setQuantity((current) => Math.min(9, current + 1))} aria-label="Augmenter la quantité" className="grid size-11 place-items-center text-[#49463f] hover:text-[#927342]"><Plus className="size-4" /></button>
               </div>
-              <button type="button" disabled={!selectedVariant} onClick={() => selectedVariant && product && addToCart(toCartItem(product, selectedVariant), quantity)} className="orelia-button inline-flex min-h-14 flex-1 items-center justify-center gap-3 bg-[#07261b] px-5 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-white hover:bg-[#123b2d] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a98442]">
+              <button type="button" disabled={!selectedVariant} onClick={() => selectedVariant && product && addToCart(toCartItem(product, selectedVariant), quantity)} className="orelia-button inline-flex min-h-14 flex-1 items-center justify-center gap-3 bg-[#3b2a1c] px-5 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-white hover:bg-[#594027] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a98442]">
                 {added ? <><Check className="size-4" /> Ajouté au panier</> : <><ShoppingBag className="size-4" strokeWidth={1.5} /> Ajouter au panier</>}
               </button>
               <button type="button" onClick={() => toggleFavorite(favoriteItem)} aria-label={saved ? "Retirer des favoris" : "Ajouter aux favoris"} aria-pressed={saved} className={`grid size-14 shrink-0 place-items-center border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442] ${saved ? "border-[#927342] text-[#927342]" : "border-[#c9c0b1] hover:border-[#927342] hover:text-[#927342]"}`}><Heart className="size-5" strokeWidth={1.4} fill={saved ? "currentColor" : "none"} /></button>
@@ -134,9 +134,9 @@ export function SolisRingPage({ product }: { product: ShopifyProductDetails | nu
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="orelia-eyebrow text-[#8c7043]">Choisi pour vous</p>
-              <h2 id="related-products-title" className="orelia-heading mt-3 text-[clamp(2rem,4vw,3.5rem)] text-[#101710]">Vous aimerez peut-être aussi</h2>
+              <h2 id="related-products-title" className="orelia-heading mt-3 text-[clamp(2rem,4vw,3.5rem)] text-[#211b14]">Vous aimerez peut-être aussi</h2>
             </div>
-            <Link href="/products" className="hidden min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#07261b] transition-colors hover:text-[#927342] sm:inline-flex">Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span></Link>
+            <Link href="/products" className="hidden min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3b2a1c] transition-colors hover:text-[#927342] sm:inline-flex">Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span></Link>
           </div>
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-7 sm:mt-9 sm:grid-cols-3 sm:gap-x-6 lg:gap-x-7">
             {[
@@ -152,14 +152,14 @@ export function SolisRingPage({ product }: { product: ShopifyProductDetails | nu
                   <div>
                     <h3 className="orelia-eyebrow text-[9px] sm:text-[10px]">{product.name}</h3>
                     <p className="mt-1.5 font-serif text-[13px] text-[#746d60] sm:text-[15px]">{product.detail}</p>
-                    <p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:mt-3 sm:text-[17px]">{product.price}</p>
+                    <p className="mt-2 font-serif text-[15px] font-semibold text-[#3b2a1c] sm:mt-3 sm:text-[17px]">{product.price}</p>
                   </div>
                   <span aria-hidden="true" className="mt-1 inline-flex size-10 shrink-0 items-center justify-center font-serif text-lg text-[#8c7043] transition-transform group-hover:translate-x-1">↗</span>
                 </div>
               </Link>
             ))}
           </div>
-          <Link href="/products" className="mt-6 inline-flex min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#07261b] transition-colors hover:text-[#927342] sm:hidden">Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span></Link>
+          <Link href="/products" className="mt-6 inline-flex min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3b2a1c] transition-colors hover:text-[#927342] sm:hidden">Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span></Link>
         </section>
       </div>
     </main>

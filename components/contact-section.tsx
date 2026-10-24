@@ -13,8 +13,8 @@ const paperStyle = {
 };
 
 const fieldStyle = {
-  color: "#07261b",
-  borderBottom: "1px solid #788478",
+  color: "#3b2a1c",
+  borderBottom: "1px solid #9a8767",
 };
 
 const contactSchema = z.object({
@@ -63,11 +63,11 @@ export function ContactSection() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="bg-[#07261b] px-3 py-10 sm:px-[4%] sm:py-16"
+      className="bg-[#3b2a1c] px-3 py-10 sm:px-[4%] sm:py-16"
     >
       <div
         style={paperStyle}
-        className="contact-paper mx-auto grid max-w-[1380px] overflow-hidden rounded-[18px] border border-[#e2d5bf] text-[#07261b] shadow-[0_24px_70px_rgba(0,0,0,0.18)] lg:grid-cols-[1.15fr_0.85fr]"
+        className="contact-paper mx-auto grid max-w-[1380px] overflow-hidden rounded-[18px] border border-[#e2d5bf] text-[#3b2a1c] shadow-[0_24px_70px_rgba(0,0,0,0.18)] lg:grid-cols-[1.15fr_0.85fr]"
       >
         <div className="flex flex-col px-7 py-10 sm:px-12 sm:py-12 lg:min-h-[660px] lg:justify-between lg:px-[8%] lg:py-14">
           <div className="mx-auto max-w-[700px] text-center lg:mt-10">
@@ -76,13 +76,13 @@ export function ContactSection() {
                 fontFamily:
                   '"Snell Roundhand", "Apple Chancery", "URW Chancery L", "Brush Script MT", cursive',
               }}
-              className="contact-script relative z-10 text-[clamp(3.6rem,6.4vw,7rem)] leading-[0.95] text-[#2c8b91]"
+              className="contact-script relative z-10 text-[clamp(3.6rem,6.4vw,7rem)] leading-[0.95] text-[#aa874b]"
             >
               Un mot pour notre Maison
             </p>
             <h2
               id="contact-title"
-              className="orelia-heading -mt-1 text-[clamp(2.2rem,3.8vw,4.15rem)] leading-[1.04] text-[#07261b]"
+              className="orelia-heading -mt-1 text-[clamp(2.2rem,3.8vw,4.15rem)] leading-[1.04] text-[#3b2a1c]"
             >
               Nous serions ravis d’échanger avec vous.
             </h2>
@@ -120,7 +120,7 @@ export function ContactSection() {
                     strokeWidth={1.4}
                   />
                   <span>
-                    <span className="block font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-[#31463a]">
+                    <span className="block font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-[#514332]">
                       {title}
                     </span>
                     <span className="mt-1 block font-serif text-[13px] leading-snug text-[#6d685d]">
@@ -138,13 +138,13 @@ export function ContactSection() {
           </div>
           <div className="mt-14 border-t border-[#9b845d]/45 pt-5 lg:mt-0">
             <p className="orelia-eyebrow text-[#927342]">La promesse Orélia</p>
-            <p className="mt-3 font-serif text-[clamp(1.15rem,1.7vw,1.55rem)] italic leading-snug text-[#52665a]">
+            <p className="mt-3 font-serif text-[clamp(1.15rem,1.7vw,1.55rem)] italic leading-snug text-[#745d3e]">
               Une attention particulière, à chaque étape.
             </p>
           </div>
         </div>
 
-        <div className="border-t border-dashed border-[#647267] px-7 pb-10 pt-8 sm:px-10 sm:pb-12 sm:pt-10 lg:border-l lg:border-t-0 lg:px-[8%] lg:py-10">
+        <div className="border-t border-dashed border-[#9a8767] px-7 pb-10 pt-8 sm:px-10 sm:pb-12 sm:pt-10 lg:border-l lg:border-t-0 lg:px-[8%] lg:py-10">
           <Image quality={90}
             src="/orelia-contact-stamps.webp"
             alt=""
@@ -170,7 +170,7 @@ export function ContactSection() {
                   <div>
                     <label
                       htmlFor={field.name}
-                      className="block font-sans text-[15px] text-[#31463a]"
+                      className="block font-sans text-[15px] text-[#514332]"
                     >
                       Prénom <span aria-hidden="true">*</span>
                     </label>
@@ -211,7 +211,7 @@ export function ContactSection() {
                   <div>
                     <label
                       htmlFor={field.name}
-                      className="block font-sans text-[15px] text-[#31463a]"
+                      className="block font-sans text-[15px] text-[#514332]"
                     >
                       Nom
                     </label>
@@ -251,7 +251,7 @@ export function ContactSection() {
                   <div>
                     <label
                       htmlFor={field.name}
-                      className="block font-sans text-[15px] text-[#31463a]"
+                      className="block font-sans text-[15px] text-[#514332]"
                     >
                       E-mail <span aria-hidden="true">*</span>
                     </label>
@@ -292,7 +292,7 @@ export function ContactSection() {
                   <div>
                     <label
                       htmlFor={field.name}
-                      className="block font-sans text-[15px] text-[#31463a]"
+                      className="block font-sans text-[15px] text-[#514332]"
                     >
                       Comment pouvons-nous vous aider ? <span aria-hidden="true">*</span>
                     </label>
@@ -328,11 +328,11 @@ export function ContactSection() {
             <div className="flex flex-col gap-3 pt-2 sm:items-end">
               <button
                 type="submit"
-                className="orelia-action orelia-button inline-flex h-[50px] items-center justify-center self-end rounded-[12px] border border-[#07261b] bg-transparent px-8 text-[#07261b] hover:bg-[#07261b] hover:text-[#f4eee3]"
+                className="orelia-action orelia-button inline-flex h-[50px] items-center justify-center self-end rounded-[12px] border border-[#3b2a1c] bg-transparent px-8 text-[#3b2a1c] hover:bg-[#3b2a1c] hover:text-[#f4eee3]"
               >
                 Envoyer le message
               </button>
-              <p className="text-right font-sans text-[11px] text-[#667064]">
+              <p className="text-right font-sans text-[11px] text-[#786b56]">
                 Votre application de messagerie s’ouvrira pour l’envoi.
               </p>
             </div>

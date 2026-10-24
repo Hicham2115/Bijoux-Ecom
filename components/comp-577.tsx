@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import {
@@ -180,10 +181,17 @@ export default function Component() {
 
       <a
         href={sectionHref("#top")}
-        aria-label="Accueil Orélia"
-        className="absolute left-1/2 -translate-x-1/2 font-serif text-[23px] tracking-[0.18em] text-[#e5cf9f] sm:text-[32px] sm:tracking-[0.24em]"
+        aria-label="Accueil Zinara Jewelry"
+        className="absolute left-1/2 -translate-x-1/2"
       >
-        ORÉLIA
+        <Image
+          src="/zinara-logo.png"
+          alt="Zinara Jewelry"
+          width={2171}
+          height={724}
+          priority
+          className="w-[132px] sm:w-[180px]"
+        />
       </a>
 
       <div className="flex items-center gap-1.5 sm:gap-5">

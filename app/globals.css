@@ -69,18 +69,18 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .contact-line-field {
-    @apply w-full rounded-none bg-transparent px-0 font-sans text-[16px] text-[#07261b] outline-none transition-[border-color,box-shadow] duration-200;
+    @apply w-full rounded-none bg-transparent px-0 font-sans text-[16px] text-[#3b2a1c] outline-none transition-[border-color,box-shadow] duration-200;
     border: 0;
-    border-bottom: 1px solid #788478;
+    border-bottom: 1px solid #9a8767;
   }
 
   .contact-line-field:hover {
-    border-bottom-color: #2c8b91;
+    border-bottom-color: #aa874b;
   }
 
   .contact-line-field:focus {
-    border-bottom-color: #2c8b91;
-    box-shadow: 0 1px 0 #2c8b91;
+    border-bottom-color: #aa874b;
+    box-shadow: 0 1px 0 #aa874b;
   }
 
   .header-link {
@@ -136,7 +136,7 @@ html::-webkit-scrollbar-thumb:hover {
 @media (hover: hover) {
   .orelia-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgb(7 38 27 / 18%);
+    box-shadow: 0 10px 24px rgb(59 42 28 / 18%);
   }
 }
 
@@ -238,11 +238,11 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .reviews-card--1 {
-  background: linear-gradient(135deg, #eff0e8 0%, #e2e5d9 100%);
+  background: linear-gradient(135deg, #f3ecdf 0%, #e8ddca 100%);
 }
 
 .reviews-card--2 {
-  background: linear-gradient(135deg, #edf2ed 0%, #e0e9e1 100%);
+  background: linear-gradient(135deg, #f1e8d9 0%, #e5d8c3 100%);
 }
 
 .reviews-card--3 {

@@ -23,7 +23,7 @@ export function FavoritesPage() {
       <section className="mx-auto max-w-[1600px] px-5 pb-20 pt-12 sm:px-[5.5%] sm:pb-28 sm:pt-20">
         <div className="mx-auto max-w-[760px] text-center">
           <p className="orelia-eyebrow text-[#8c7043]">Vos pièces préférées</p>
-          <h1 className="orelia-heading mt-3 text-[clamp(2.6rem,7vw,5.5rem)] text-[#172219]">
+          <h1 className="orelia-heading mt-3 text-[clamp(2.6rem,7vw,5.5rem)] text-[#2d241a]">
             Vos favoris
           </h1>
           <p className="mx-auto mt-4 max-w-[520px] font-serif text-[16px] leading-relaxed text-[#625d53] sm:text-[18px]">
@@ -36,7 +36,7 @@ export function FavoritesPage() {
             <span className="grid size-14 place-items-center rounded-full border border-[#d7cebf] text-[#8c7043]">
               <Heart className="size-5" strokeWidth={1.3} />
             </span>
-            <h2 className="orelia-heading mt-5 text-[28px] text-[#172219]">
+            <h2 className="orelia-heading mt-5 text-[28px] text-[#2d241a]">
               Gardez près de vous les bijoux qui vous touchent.
             </h2>
             <p className="mt-3 font-serif text-[15px] leading-relaxed text-[#746d60]">
@@ -44,7 +44,7 @@ export function FavoritesPage() {
             </p>
             <Link
               href="/products"
-              className="orelia-action mt-6 inline-flex min-h-12 items-center gap-3 bg-[#07261b] px-6 text-white transition-colors hover:bg-[#123b2d]"
+              className="orelia-action mt-6 inline-flex min-h-12 items-center gap-3 bg-[#3b2a1c] px-6 text-white transition-colors hover:bg-[#594027]"
             >
               Découvrir la collection <ArrowRight className="size-4" />
             </Link>
@@ -91,7 +91,7 @@ export function FavoritesPage() {
                       <p className="mt-1.5 line-clamp-2 font-serif text-[13px] text-[#746d60] sm:text-[15px]">
                         {item.productType || item.description || "Joaillerie"}
                       </p>
-                      <p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:text-[17px]">
+                      <p className="mt-2 font-serif text-[15px] font-semibold text-[#3b2a1c] sm:text-[17px]">
                         {money(item.price, item.currencyCode)}
                       </p>
                     </div>
@@ -109,14 +109,14 @@ export function FavoritesPage() {
                         currencyCode: item.currencyCode,
                         variantTitle: item.variantTitle,
                       })}
-                      className="orelia-action mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 border border-[#07261b] text-[#07261b] transition-colors hover:bg-[#07261b] hover:text-white"
+                      className="orelia-action mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 border border-[#3b2a1c] text-[#3b2a1c] transition-colors hover:bg-[#3b2a1c] hover:text-white"
                     >
                       <ShoppingBag className="size-4" /> Ajouter au panier
                     </button>
                   ) : (
                     <Link
                       href={`/products/${item.handle}`}
-                      className="orelia-action mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 border border-[#07261b] text-[#07261b] transition-colors hover:bg-[#07261b] hover:text-white"
+                      className="orelia-action mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 border border-[#3b2a1c] text-[#3b2a1c] transition-colors hover:bg-[#3b2a1c] hover:text-white"
                     >
                       Choisir les options <ArrowRight className="size-4" />
                     </Link>

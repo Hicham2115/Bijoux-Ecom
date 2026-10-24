@@ -74,7 +74,7 @@ export function CartDrawer() {
         <div className="flex items-start justify-between border-b border-[#d9d0c1] px-6 pb-5 pt-7 sm:px-8">
           <div>
             <p className="orelia-eyebrow text-[#8c7043]">Votre sélection</p>
-            <SheetTitle className="orelia-heading mt-2 text-[32px] text-[#172219]">
+            <SheetTitle className="orelia-heading mt-2 text-[32px] text-[#2d241a]">
               Panier <span className="font-sans text-sm">({quantity})</span>
             </SheetTitle>
             <SheetDescription className="sr-only">
@@ -97,7 +97,7 @@ export function CartDrawer() {
             <span className="grid size-16 place-items-center rounded-full border border-[#d7cebf] text-[#8c7043]">
               <ShoppingBag className="size-6" strokeWidth={1.2} />
             </span>
-            <h3 className="orelia-heading mt-6 text-[28px] text-[#172219]">
+            <h3 className="orelia-heading mt-6 text-[28px] text-[#2d241a]">
               Un peu de place pour une jolie trouvaille.
             </h3>
             <p className="mt-3 max-w-[290px] font-serif text-[15px] leading-relaxed text-[#746d60]">
@@ -106,7 +106,7 @@ export function CartDrawer() {
             <SheetClose asChild>
               <Link
                 href="/products"
-                className="orelia-action mt-7 inline-flex min-h-12 items-center gap-3 bg-[#07261b] px-6 text-white transition-colors hover:bg-[#123b2d]"
+                className="orelia-action mt-7 inline-flex min-h-12 items-center gap-3 bg-[#3b2a1c] px-6 text-white transition-colors hover:bg-[#594027]"
               >
                 Découvrir la collection <ArrowRight className="size-4" />
               </Link>
@@ -143,7 +143,7 @@ export function CartDrawer() {
                           <Link
                             href={`/products/${item.handle}`}
                             onClick={closeCart}
-                            className="orelia-eyebrow text-[10px] text-[#2b3028] hover:text-[#927342]"
+                            className="orelia-eyebrow text-[10px] text-[#514332] hover:text-[#927342]"
                           >
                             {item.title}
                           </Link>
@@ -168,7 +168,7 @@ export function CartDrawer() {
                             type="button"
                             onClick={() => setQuantity(item.variantId, item.quantity - 1)}
                             aria-label={`Diminuer la quantité de ${item.title}`}
-                            className="grid size-8 place-items-center text-[#45483f] hover:text-[#927342]"
+                            className="grid size-8 place-items-center text-[#514332] hover:text-[#927342]"
                           >
                             <Minus className="size-3" />
                           </button>
@@ -179,12 +179,12 @@ export function CartDrawer() {
                             type="button"
                             onClick={() => setQuantity(item.variantId, item.quantity + 1)}
                             aria-label={`Augmenter la quantité de ${item.title}`}
-                            className="grid size-8 place-items-center text-[#45483f] hover:text-[#927342]"
+                            className="grid size-8 place-items-center text-[#514332] hover:text-[#927342]"
                           >
                             <Plus className="size-3" />
                           </button>
                         </div>
-                        <p className="font-serif text-[15px] font-semibold text-[#172219]">
+                        <p className="font-serif text-[15px] font-semibold text-[#2d241a]">
                           {money(Number(item.price) * item.quantity, item.currencyCode)}
                         </p>
                       </div>
@@ -196,8 +196,8 @@ export function CartDrawer() {
 
             <div className="border-t border-[#d9d0c1] bg-[#f2ede4] px-6 pb-7 pt-5 sm:px-8">
               <div className="flex items-center justify-between">
-                <span className="orelia-eyebrow text-[#33362f]">Sous-total</span>
-                <span className="font-serif text-[19px] font-semibold text-[#172219]">
+                <span className="orelia-eyebrow text-[#514332]">Sous-total</span>
+                <span className="font-serif text-[19px] font-semibold text-[#2d241a]">
                   {money(subtotal, currencyCode)}
                 </span>
               </div>
@@ -213,7 +213,7 @@ export function CartDrawer() {
                 type="button"
                 onClick={startCheckout}
                 disabled={checkoutPending}
-                className="orelia-action mt-5 flex min-h-[54px] w-full items-center justify-center gap-3 bg-[#07261b] px-5 text-white transition-colors hover:bg-[#123b2d] disabled:cursor-wait disabled:opacity-60"
+                className="orelia-action mt-5 flex min-h-[54px] w-full items-center justify-center gap-3 bg-[#3b2a1c] px-5 text-white transition-colors hover:bg-[#594027] disabled:cursor-wait disabled:opacity-60"
               >
                 {checkoutPending ? "Connexion au paiement…" : "Passer au paiement"}
                 {!checkoutPending && <ArrowRight className="size-4" />}

@@ -6,7 +6,7 @@ export function MaisonSection() {
     <section
       id="maison"
       aria-labelledby="maison-title"
-      className="relative isolate flex flex-col overflow-hidden border-y border-[#bcb2a3] bg-[#07261b] text-center text-[#f7f2e8] md:grid md:aspect-[2.68/1] md:min-h-[420px] md:place-items-center md:px-10 md:py-20"
+      className="relative isolate flex flex-col overflow-hidden border-y border-[#bcb2a3] bg-[#3b2a1c] text-center text-[#f7f2e8] md:grid md:aspect-[2.68/1] md:min-h-[420px] md:place-items-center md:px-10 md:py-20"
     >
       <div className="relative h-[260px] w-full sm:h-[360px] md:absolute md:inset-0 md:-z-20 md:h-auto">
         <Image quality={90}
@@ -40,7 +40,7 @@ export function MaisonSection() {
           render={<a href="#maison" />}
           nativeButton={false}
           variant="outline"
-          className="orelia-action orelia-button mt-7 h-[50px] rounded-none border-white/75 bg-transparent px-6 text-white hover:border-[#d0b36f] hover:bg-[#d0b36f] hover:text-[#10251d] sm:mt-8"
+          className="orelia-action orelia-button mt-7 h-[50px] rounded-none border-white/75 bg-transparent px-6 text-white hover:border-[#d0b36f] hover:bg-[#d0b36f] hover:text-[#3b2a1c] sm:mt-8"
         >
           Nos engagements
         </Button>

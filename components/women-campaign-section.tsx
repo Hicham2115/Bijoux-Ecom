@@ -47,7 +47,7 @@ export function WomenCampaignSection() {
           <Button
             render={<a href="#collection" />}
             nativeButton={false}
-            className="orelia-action orelia-button group mt-9 h-[54px] gap-5 rounded-none border border-[#06402e] bg-[#06402e] px-6 text-white hover:border-[#0b563e] hover:bg-[#0b563e] sm:mt-10"
+            className="orelia-action orelia-button group mt-9 h-[54px] gap-5 rounded-none border border-[#5a3a20] bg-[#5a3a20] px-6 text-white hover:border-[#76522c] hover:bg-[#76522c] sm:mt-10"
           >
             Découvrir les bijoux femme{" "}
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" strokeWidth={1.5} />

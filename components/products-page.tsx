@@ -55,7 +55,7 @@ function PlaceholderFilterGroup({
             <label
               key={id}
               htmlFor={id}
-              className="flex cursor-not-allowed items-center gap-4 font-sans text-[13px] uppercase tracking-[0.08em] text-[#363832]"
+              className="flex cursor-not-allowed items-center gap-4 font-sans text-[13px] uppercase tracking-[0.08em] text-[#514332]"
             >
               <input
                 id={id}
@@ -150,19 +150,19 @@ export function ProductsPage({
           aria-label="Fil d’Ariane"
           className="-mx-5 mb-0 border-b border-[#e4ddcf] bg-[#f5f1e9] px-5 py-2.5 font-serif text-[13px] text-[#746d60] sm:-mx-[5.5%] sm:px-[5.5%] sm:py-3"
         >
-          <Link className="transition-colors hover:text-[#07261b]" href="/">
+          <Link className="transition-colors hover:text-[#3b2a1c]" href="/">
             Accueil
           </Link>
           <span className="mx-2 text-[#b99045]">›</span>
           <Link
-            className="transition-colors hover:text-[#07261b]"
+            className="transition-colors hover:text-[#3b2a1c]"
             href="/products"
           >
             Bijoux
           </Link>
           <span className="mx-2 text-[#b99045]">›</span>
           <Link
-            className="transition-colors hover:text-[#07261b]"
+            className="transition-colors hover:text-[#3b2a1c]"
             href="/products"
             aria-current="page"
           >
@@ -182,7 +182,7 @@ export function ProductsPage({
             />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-[#07261b]/20 via-transparent to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-[#3b2a1c]/20 via-transparent to-transparent"
             />
           </div>
           <div className="relative z-[2] flex min-h-[250px] flex-col items-center justify-center px-2 py-5 text-center sm:px-8 sm:py-12 lg:min-h-[450px] lg:px-[12%] lg:py-16">
@@ -191,7 +191,7 @@ export function ProductsPage({
             </p>
             <h1
               id="products-title"
-              className="orelia-heading mt-2 max-w-[620px] text-[clamp(1.05rem,4.5vw,4.25rem)] leading-[1.04] text-[#101710] sm:mt-4 sm:text-[clamp(2rem,4vw,4.25rem)]"
+              className="orelia-heading mt-2 max-w-[620px] text-[clamp(1.05rem,4.5vw,4.25rem)] leading-[1.04] text-[#211b14] sm:mt-4 sm:text-[clamp(2rem,4vw,4.25rem)]"
             >
               Des bijoux précieux, pour chaque expression
             </h1>
@@ -223,7 +223,7 @@ export function ProductsPage({
                 aria-expanded={filtersOpen}
                 aria-controls="product-filters"
                 onClick={() => setFiltersOpen(true)}
-                className="w-full justify-between border-[#cfc3ad] bg-transparent px-4 py-3 font-sans text-[11px] uppercase tracking-[0.13em] text-[#252720] hover:bg-[#eee9df]"
+                className="w-full justify-between border-[#cfc3ad] bg-transparent px-4 py-3 font-sans text-[11px] uppercase tracking-[0.13em] text-[#29231c] hover:bg-[#eee9df]"
               >
                 Filtrer et trier
                 <SlidersHorizontal
@@ -249,14 +249,14 @@ export function ProductsPage({
               className={`${filtersOpen ? "filter-drawer-down fixed inset-x-0 top-0 z-[61] block max-h-[88dvh] w-full overflow-y-auto rounded-b-2xl bg-[#f5f1e9] px-5 pt-5 shadow-2xl" : "hidden"} border-b border-[#d7cebf] pb-7 lg:relative lg:inset-auto lg:z-auto lg:block lg:w-auto lg:overflow-visible lg:rounded-none lg:border-b-0 lg:border-r lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-0 lg:shadow-none lg:pr-8`}
             >
               <div className="mb-4 flex items-center justify-between border-b border-[#d7cebf] pb-4 lg:hidden">
-                <h2 className="orelia-eyebrow text-[#252720]">Filtrer et trier</h2>
+                <h2 className="orelia-eyebrow text-[#29231c]">Filtrer et trier</h2>
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon"
                   aria-label="Fermer les filtres"
                   onClick={() => setFiltersOpen(false)}
-                  className="size-10 text-[#252720] hover:bg-[#eee9df]"
+                  className="size-10 text-[#29231c] hover:bg-[#eee9df]"
                 >
                   <X aria-hidden="true" className="size-5" strokeWidth={1.5} />
                 </Button>
@@ -281,7 +281,7 @@ export function ProductsPage({
                           value={option.value}
                           checked={sort === option.value}
                           onChange={() => setSort(option.value)}
-                          className="size-[17px] shrink-0 appearance-none rounded-full border border-[#353630] checked:border-[5px] checked:border-[#07261b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442]"
+                          className="size-[17px] shrink-0 appearance-none rounded-full border border-[#353630] checked:border-[5px] checked:border-[#3b2a1c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442]"
                         />
                         {option.label}
                       </label>
@@ -307,7 +307,7 @@ export function ProductsPage({
                       <label
                         key={item}
                         htmlFor={id}
-                        className="flex cursor-pointer items-center gap-4 font-sans text-[13px] uppercase tracking-[0.08em] text-[#363832]"
+                        className="flex cursor-pointer items-center gap-4 font-sans text-[13px] uppercase tracking-[0.08em] text-[#514332]"
                       >
                         <input
                           id={id}
@@ -316,7 +316,7 @@ export function ProductsPage({
                           value={item}
                           checked={category === item}
                           onChange={() => setCategory(item)}
-                          className="size-[17px] shrink-0 appearance-none rounded-full border border-[#353630] checked:border-[5px] checked:border-[#07261b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442]"
+                          className="size-[17px] shrink-0 appearance-none rounded-full border border-[#353630] checked:border-[5px] checked:border-[#3b2a1c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a98442]"
                         />
                         {item}
                       </label>
@@ -411,7 +411,7 @@ export function ProductsPage({
                         <p className="mt-1.5 line-clamp-2 font-serif text-[13px] text-[#746d60] sm:text-[15px]">
                           {product.description || getCategory(product.productType)}
                         </p>
-                        <p className="mt-2 font-serif text-[15px] font-semibold text-[#07261b] sm:mt-3 sm:text-[17px]">
+                        <p className="mt-2 font-serif text-[15px] font-semibold text-[#3b2a1c] sm:mt-3 sm:text-[17px]">
                           {price}
                         </p>
                       </>
@@ -430,7 +430,7 @@ export function ProductsPage({
                             onClick={() => toggleFavorite(toFavoriteItem(product, variant))}
                             aria-label={isFavorite ? `Retirer ${product.title} des favoris` : `Ajouter ${product.title} aux favoris`}
                             aria-pressed={isFavorite}
-                            className="absolute right-3 top-3 grid size-10 place-items-center rounded-full border border-[#d7cebf] bg-[#f7f3eb]/95 text-[#363a32] shadow-sm transition-colors hover:text-[#8a3e32]"
+                            className="absolute right-3 top-3 grid size-10 place-items-center rounded-full border border-[#d7cebf] bg-[#f7f3eb]/95 text-[#514332] shadow-sm transition-colors hover:text-[#8a3e32]"
                           >
                             <Heart className="size-[18px]" fill={isFavorite ? "currentColor" : "none"} strokeWidth={1.5} />
                           </button>}
@@ -459,7 +459,7 @@ export function ProductsPage({
                               addToCart(toCartItem(product, variant));
                               setLastAddedProduct(product.id);
                             }}
-                            className="-mr-2 mt-1 size-10 shrink-0 rounded-full text-[#171714] hover:bg-[#07261b] hover:text-white sm:mr-0"
+                            className="-mr-2 mt-1 size-10 shrink-0 rounded-full text-[#171714] hover:bg-[#3b2a1c] hover:text-white sm:mr-0"
                           >
                             {isAdded ? (
                               <Check

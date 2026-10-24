@@ -13,8 +13,8 @@ export function Hero() {
       <div className="absolute inset-0 -z-20">
         <Image
           quality={98}
-          src="/orelia-hero-mobile.webp"
-          alt="Deux modèles portant des bijoux en or sur un fond émeraude profond"
+          src="/orelia-hero-mobile-brown.webp"
+          alt="Deux modèles portant des bijoux en or sur un fond brun profond"
           fill
           priority
           sizes="(max-width: 767px) 100vw, 1px"
@@ -22,8 +22,8 @@ export function Hero() {
         />
         <Image
           quality={98}
-          src="/orelia-hero.webp"
-          alt="Deux modèles portant des bijoux en or sur un fond émeraude"
+          src="/orelia-hero-brown.webp"
+          alt="Deux modèles portant des bijoux en or sur un fond brun"
           fill
           priority
           sizes="(min-width: 768px) 100vw, 1px"

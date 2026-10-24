@@ -48,7 +48,7 @@ export function ReviewsSection() {
         <p className="orelia-eyebrow text-[#8c7043]">La communauté Orélia</p>
         <h2
           id="reviews-title"
-          className="orelia-heading mt-3 text-[clamp(2rem,4vw,3.5rem)] text-[#101710]"
+          className="orelia-heading mt-3 text-[clamp(2rem,4vw,3.5rem)] text-[#211b14]"
         >
           Ce que nos clientes en pensent
         </h2>
@@ -98,7 +98,7 @@ export function ReviewsSection() {
                         {review.initials}
                       </span>
                       <div>
-                        <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-[#252720]">
+                        <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-[#29231c]">
                           {review.name}
                         </p>
                         <p className="mt-1 font-serif text-[13px] text-[#746d60]">

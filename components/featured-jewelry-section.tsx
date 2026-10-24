@@ -52,7 +52,7 @@ export function FeaturedJewelrySection() {
               size="icon"
               aria-label="Voir les bijoux précédents"
               onClick={() => scrollProducts(-1)}
-              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#07261b] hover:text-white"
+              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#3b2a1c] hover:text-white"
             >
               <ArrowLeft className="size-4" strokeWidth={1.5} />
             </Button>
@@ -61,7 +61,7 @@ export function FeaturedJewelrySection() {
               size="icon"
               aria-label="Voir plus de bijoux"
               onClick={() => scrollProducts(1)}
-              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#07261b] hover:text-white"
+              className="size-11 rounded-full border-[#c9c3b8] bg-transparent transition-colors hover:border-[#8b7042] hover:bg-[#3b2a1c] hover:text-white"
             >
               <ArrowRight className="size-4" strokeWidth={1.5} />
             </Button>
@@ -100,7 +100,7 @@ export function FeaturedJewelrySection() {
         <div className="mt-5 flex justify-end">
           <Link
             href="/products"
-            className="inline-flex min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#07261b] transition-colors hover:text-[#927342] sm:text-[11px]"
+            className="inline-flex min-h-11 items-center border-b border-[#927342] font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3b2a1c] transition-colors hover:text-[#927342] sm:text-[11px]"
           >
             Voir tous les bijoux <span aria-hidden="true" className="ml-3 text-base">↗</span>
           </Link>
